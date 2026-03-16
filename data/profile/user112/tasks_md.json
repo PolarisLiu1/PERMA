@@ -1,0 +1,365 @@
+{
+    "Task 1": {
+        "Task Description": "The user is interested in exploring new music and attending concerts or music festivals. They need assistance discovering new artists, songs, and albums based on their preferred genres and favorite bands. Additionally, the assistant should provide recommendations for upcoming music events and concerts that align with the user's music preferences and location.",
+        "User Intent": "Discover new music and artists based on your favorite genres and bands, and find upcoming concerts or music festivals that match your interests and location.",
+        "Task Goal": "The user discovers new music and artists that align with their preferences, and receives a list of recommended music events or concerts to attend based on their location and music interests.",
+        "Relevant Domains": [
+            "Music",
+            "Events"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Favorite Bands",
+            "Preferred Audio Quality",
+            "Event Type Preference",
+            "Location Preference"
+        ],
+        "task_id": "MD-task-3",
+        "situations": {
+            "Location": "Geneva, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 2": {
+        "Task Description": "The user wants to organize a movie night at home, including ordering dinner delivery and setting up calendar reminders for friends, while considering everyone's media and food preferences.",
+        "User Intent": "Plan a movie night with friends, including dinner delivery and scheduling, based on group preferences.",
+        "Task Goal": "The user selects appropriate movies, arranges food delivery, and sets up calendar invites that accommodate everyone's preferences.",
+        "Relevant Domains": [
+            "Media",
+            "Restaurants",
+            "Calendar",
+            "Messaging"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Genres (Media)",
+            "Viewing Platform Preference",
+            "Cuisine Preference",
+            "Event Type Preference",
+            "Preferred Communication Style"
+        ],
+        "task_id": "MD-task-4",
+        "situations": {
+            "Location": "Basel, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 3": {
+        "Task Description": "The user is interested in exploring new video games and needs assistance finding games that match their preferred genres, gaming platforms, and multiplayer preferences. Additionally, the assistant can provide updates on new game releases, assist with purchasing or renting games, and help manage the user's gaming schedule.",
+        "User Intent": "Discover new video games and manage your gaming schedule based on your preferred genres, gaming platforms, multiplayer preferences, and gaming habits.",
+        "Task Goal": "The user receives personalized game recommendations, can easily purchase or rent games aligned with their preferences, and has a way to manage their gaming schedule.",
+        "Relevant Domains": [
+            "Games",
+            "Shopping",
+            "Calendar"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Game Genres",
+            "Gaming Platforms",
+            "Multiplayer Preference",
+            "Gaming Frequency",
+            "Preferred Product Category",
+            "Price Range Preference",
+            "Event Type Preference"
+        ],
+        "task_id": "MD-task-6",
+        "situations": {
+            "Location": "Geneva, Switzerland",
+            "Device": "Gaming PC",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 4": {
+        "Task Description": "The user is looking to manage their finances and investments more effectively. The assistant should provide updates on stock prices and news related to the user's preferred financial sectors and companies. Additionally, the assistant can assist in setting up financial goals, tracking investments, and receiving notifications for important financial events or news.",
+        "User Intent": "Manage your finances and investments by receiving updates on stock prices and news related to your preferred financial sectors and companies, setting financial goals, and tracking investments.",
+        "Task Goal": "The user receives personalized updates on their preferred financial sectors and companies, has a way to track their investments and financial goals, and is notified about important financial events or news.",
+        "Relevant Domains": [
+            "Finance",
+            "Calendar",
+            "Messaging"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Sectors",
+            "News Sources",
+            "Financial Company",
+            "Notification Preference",
+            "Preferred Messaging Apps"
+        ],
+        "task_id": "MD-task-7",
+        "situations": {
+            "Location": "Zurich, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Morning",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 5": {
+        "Task Description": "The user wants to plan a weekend entertainment schedule, including a movie screening, dinner reservation, and a sports event viewing, requiring coordination across multiple booking platforms and consideration of timing.",
+        "User Intent": "Create an entertainment schedule for your weekend that includes watching a movie, dining at a restaurant, and catching a sports event.",
+        "Task Goal": "The user successfully books movie tickets, makes a restaurant reservation, and identifies a venue to watch their preferred sports event, all with compatible timing.",
+        "Relevant Domains": [
+            "Movies",
+            "Restaurants",
+            "Sports",
+            "Calendar"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Theater Type Preference",
+            "Cuisine Preference",
+            "Favorite Sports",
+            "Viewing Preference",
+            "Event Type Preference",
+            "Seating Preference"
+        ],
+        "task_id": "MD-task-9",
+        "situations": {
+            "Location": "Geneva, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 6": {
+        "Task Description": "The user wants to plan a gaming night with friends, including coordinating game purchases, arranging food delivery, and setting up group messaging.",
+        "User Intent": "Organize a gaming night by coordinating game purchases, food delivery, and group communication.",
+        "Task Goal": "The user successfully purchases games, arranges food delivery, and establishes group communication channels for the gaming session.",
+        "Relevant Domains": [
+            "Games",
+            "Restaurants",
+            "Messaging",
+            "Calendar"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Game Genres",
+            "Gaming Platforms",
+            "Cuisine Preference",
+            "Preferred Messaging Apps",
+            "Communication Style"
+        ],
+        "task_id": "MD-task-13",
+        "situations": {
+            "Location": "Basel, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 7": {
+        "Task Description": "The user wants to create a shopping itinerary that includes visiting multiple stores, dining options, and entertainment venues within a shopping complex.",
+        "User Intent": "Plan your shopping day with store visits, dining options, and entertainment activities at the mall.",
+        "Task Goal": "The user creates a structured shopping schedule with appropriate timing for store visits, meals, and entertainment activities.",
+        "Relevant Domains": [
+            "Shopping",
+            "Restaurants",
+            "Events",
+            "Calendar"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Product Category",
+            "Brand Preference",
+            "Cuisine Preference",
+            "Price Range",
+            "Event Type Preference"
+        ],
+        "task_id": "MD-task-15",
+        "situations": {
+            "Location": "Geneva, Switzerland",
+            "Device": "Smartphone",
+            "Time of Day": "Afternoon",
+            "Day of the Week": "Saturday",
+            "Environment": "Noisy"
+        }
+    },
+    "Task 8": {
+        "Task Description": "The user seeks to plan a music-themed evening including purchasing concert tickets, arranging dinner at a venue with live music, and creating a playlist for the car ride.",
+        "User Intent": "Organize a music-themed evening with concert tickets, dinner at a live music venue, and a travel playlist.",
+        "Task Goal": "The user successfully books concert tickets, reserves dinner at an appropriate venue, and creates a coordinated playlist for transportation.",
+        "Relevant Domains": [
+            "Music",
+            "Events",
+            "Restaurants",
+            "Calendar"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Favorite Artists",
+            "Event Type Preference",
+            "Cuisine Preference",
+            "Platform Preference"
+        ],
+        "task_id": "MD-task-16",
+        "situations": {
+            "Location": "Basel, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Friday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 9": {
+        "Task Description": "The user needs to plan a family movie night including selecting age-appropriate content, ordering dinner delivery, and coordinating viewing schedules across multiple household members.",
+        "User Intent": "Arrange a family movie night with appropriate content selection, dinner delivery, and coordinated viewing schedules.",
+        "Task Goal": "The user successfully selects suitable content, arranges meal delivery, and coordinates viewing time that accommodates all family members.",
+        "Relevant Domains": [
+            "Media",
+            "Movies",
+            "Restaurants",
+            "Calendar"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Theater Type Preference",
+            "Cuisine Preference",
+            "Viewing Time Preference",
+            "Price Range"
+        ],
+        "task_id": "MD-task-18",
+        "situations": {
+            "Location": "Basel, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 10": {
+        "Task Description": "The user is planning a sports viewing party, needing assistance with tracking game schedules, ordering food and beverages, and sending invitations to friends.",
+        "User Intent": "Organize a sports viewing party by coordinating the game schedule, food orders, and guest invitations.",
+        "Task Goal": "The user successfully plans a viewing party with confirmed game times, food delivery, and guest attendance.",
+        "Relevant Domains": [
+            "Sports",
+            "Restaurants",
+            "Messaging",
+            "Calendar"
+        ],
+        "Relevant Affinity Types": [
+            "Favorite Sports",
+            "Favorite Team",
+            "Cuisine Preference",
+            "Price Range",
+            "Communication Style",
+            "Event Type Preference"
+        ],
+        "task_id": "MD-task-20",
+        "situations": {
+            "Location": "Basel, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 11": {
+        "Task Description": "The user is planning a book club meeting and needs help selecting books, scheduling the meeting, and finding a suitable restaurant venue. The assistant should consider their literary preferences and dining requirements.",
+        "User Intent": "Organize a book club meeting by selecting books, scheduling the event, and finding a restaurant venue.",
+        "Task Goal": "The user successfully chooses books, schedules the meeting, and reserves a restaurant that accommodates the group's needs.",
+        "Relevant Domains": [
+            "Books",
+            "Calendar",
+            "Restaurants"
+        ],
+        "Relevant Affinity Types": [
+            "Genre",
+            "Reading Format",
+            "Event Type Preference",
+            "Cuisine Preference",
+            "Ambiance Preference",
+            "Group Size Preference"
+        ],
+        "task_id": "MD-task-21",
+        "situations": {
+            "Location": "Geneva, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 12": {
+        "Task Description": "The user is seeking entertainment recommendations for a rainy day at home, including movies, games, and books that match their preferences. The assistant should provide personalized suggestions across multiple media types.",
+        "User Intent": "Get entertainment recommendations for a day at home, including movies, games, and books that match your interests.",
+        "Task Goal": "The user receives a curated list of entertainment options across different media types that align with their preferences.",
+        "Relevant Domains": [
+            "Media",
+            "Games",
+            "Books"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Viewing Platform Preference",
+            "Gaming Platforms",
+            "Reading Format",
+            "Favourite Authors"
+        ],
+        "task_id": "MD-task-23",
+        "situations": {
+            "Location": "Geneva, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Afternoon",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 13": {
+        "Task Description": "The user wants to plan a reading schedule for their book club, including setting calendar reminders for meetings, coordinating through group messages, and finding new books to read. The assistant should consider reading preferences, scheduling needs, and communication requirements.",
+        "User Intent": "Organize your book club schedule, coordinate with members, and select books for upcoming meetings.",
+        "Task Goal": "The user establishes a reading schedule, sets up communication channels, and selects appropriate books for the club.",
+        "Relevant Domains": [
+            "Books",
+            "Calendar",
+            "Messaging"
+        ],
+        "Relevant Affinity Types": [
+            "Genre",
+            "Reading Format",
+            "Event Type Preference",
+            "Preferred Messaging Apps",
+            "Communication Style"
+        ],
+        "task_id": "MD-task-24",
+        "situations": {
+            "Location": "Basel, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    },
+    "Task 14": {
+        "Task Description": "The user needs to plan a romantic date night, including finding a movie or event, booking a restaurant, and creating a custom music playlist for the evening. The assistant should consider entertainment preferences, dining preferences, and music tastes.",
+        "User Intent": "Plan a romantic evening with entertainment, dinner, and a custom music playlist.",
+        "Task Goal": "The user successfully arranges all components of the date night according to preferences.",
+        "Relevant Domains": [
+            "Movies",
+            "Restaurants",
+            "Music",
+            "Events"
+        ],
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Cuisine Preference",
+            "Preferred Genres (Music)",
+            "Ambiance Preference",
+            "Event Type Preference"
+        ],
+        "task_id": "MD-task-25",
+        "situations": {
+            "Location": "Geneva, Switzerland",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        }
+    }
+}

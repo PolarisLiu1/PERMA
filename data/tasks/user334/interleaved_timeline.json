@@ -1,0 +1,812 @@
+[
+    {
+        "date": "2023-01-15 Evening",
+        "event_type": "preference_emergence",
+        "description": "The user first engages with the assistant to explore educational and networking events in his local area. He requests recommendations for weekday evening panel discussions, lectures, or conferences related to his field of work, expressing interest in events priced under $100. This marks his initial interest in attending tech conferences and networking mixers.",
+        "task_goal": "Discover and attend educational and networking events.",
+        "relevant_domain": "Events",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Events)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-03-10 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "Following his initial interest in educational events, the user develops a keen interest in art exhibitions. He begins asking for recommendations on thought-provoking installations or gallery openings, valuing detailed event descriptions to make informed decisions. This supplements his existing preference for tech conferences, showing a broadened interest in cultural events.",
+        "task_goal": "Explore art exhibitions and cultural events.",
+        "relevant_domain": "Events",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Events)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-03-11 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first engages with the assistant to discover new restaurants, specifically focusing on finding dairy-free and nut-free options near his workplace or residential area. This marks the initial interest in utilizing the assistant for dining suggestions.",
+        "task_goal": "Find suitable dining options with dietary restrictions in mind.",
+        "relevant_domain": "Restaurants",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Restaurants)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-04-01 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user initially interacts with the assistant to set up a weekday morning alarm, expressing a preference for gentle, nature-inspired sounds over traditional alarm tones. He explores various options with the assistant, such as bird songs, ocean waves, and rainforest ambiance, and ultimately selects a soothing stream sound as his preferred alarm tone.",
+        "task_goal": "Set up a weekday morning alarm with a nature-inspired sound",
+        "relevant_domain": "Alarm",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Alarm)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-04-02 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user begins to explore more diverse neighborhoods and expresses interest in unique dining experiences. He requests suggestions for hidden gem restaurants offering authentic regional specialties or innovative fusion concepts within his preferred Asian cuisines.",
+        "task_goal": "Discover unique dining experiences and hidden gem restaurants.",
+        "relevant_domain": "Restaurants",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Restaurants)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-04-15 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first explored the potential of messaging apps for social coordination. He discovered the utility of WhatsApp for setting up group chats with friends to organize social gatherings and share photos from outings.",
+        "task_goal": "Set up group chats on WhatsApp for social gatherings.",
+        "relevant_domain": "Messaging",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Messaging)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-05 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user sought advice on maintaining a professional yet casual tone in work-related communications on Facebook Messenger. He aimed to balance formality and friendliness in interactions with colleagues.",
+        "task_goal": "Improve work communication on Messenger.",
+        "relevant_domain": "Messaging",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Messaging)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-20 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user enhanced his Discord experience by managing notifications and customizing server settings. This was driven by his active participation in gaming-related discussions with friends.",
+        "task_goal": "Optimize Discord settings for gaming discussions.",
+        "relevant_domain": "Messaging",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Messaging)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-21 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user emphasizes the importance of personalized recommendations that consider his dietary needs and preferences for ambiance and service quality. He provides feedback on restaurants, highlighting those with attentive staff, fresh ingredients, and a lively yet relaxed atmosphere.",
+        "task_goal": "Receive personalized restaurant recommendations with a focus on ambiance and service quality.",
+        "relevant_domain": "Restaurants",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Restaurants)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-22 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user seeks advice on special occasion dining, such as romantic date night spots or upscale venues for celebrating professional milestones. He appreciates tailored lists with diverse options, complete with detailed descriptions, pricing information, and user reviews.",
+        "task_goal": "Find special occasion dining options with comprehensive details.",
+        "relevant_domain": "Restaurants",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Restaurants)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-23 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user begins exploring travel options for solo trips to major cities like New York, Tokyo, and Paris. He is interested in curated itineraries that balance iconic attractions with hidden gems, focusing on Spring and Fall travel.",
+        "task_goal": "Seek recommendations for solo trips to major cities with a focus on iconic attractions and hidden gems.",
+        "relevant_domain": "Travel",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Travel)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-24 Morning",
+        "event_type": "preference_supplement",
+        "description": "Over time, the user fine-tunes his alarm preferences. He occasionally adjusts the alarm volume or snooze duration based on his sleep patterns or workload. The assistant remembers his settings, allowing him to make minor tweaks without having to reconfigure everything from scratch.",
+        "task_goal": "Adjust alarm volume and snooze duration based on personal needs",
+        "relevant_domain": "Alarm",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Alarm)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-25 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user initially discovers the calendar assistant's capabilities for scheduling work meetings, social gatherings, and personal appointments. He appreciates the assistant's efficiency in capturing and confirming event details accurately, which aligns with his need for managing a busy professional and social life.",
+        "task_goal": "Schedule work meetings and social events efficiently.",
+        "relevant_domain": "Calendar",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Calendar)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-26 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user, a working professional in Canada, first engages with the virtual assistant to explore the domain of finance. He shows an initial interest in tracking the performance of large technology companies such as Apple, Microsoft, and Amazon, as well as established pharmaceutical firms like Pfizer and Johnson & Johnson. This marks his first step into actively monitoring stock market trends.",
+        "task_goal": "Gather initial information on major tech and pharmaceutical companies.",
+        "relevant_domain": "Finance",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Finance)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-27 Evening",
+        "event_type": "preference_emergence",
+        "description": "The user, a 35-44 year old Asian-Canadian male working professional, first expresses a strong interest in immersive role-playing games (RPGs). He seeks recommendations for new RPG releases, demonstrating an affinity for games with rich narratives and exploration opportunities. This initial interaction is centered around his fondness for The Elder Scrolls V: Skyrim, leading to suggestions such as Elden Ring and Horizon Forbidden West.",
+        "task_goal": "Explore new RPG releases and receive recommendations based on previous gaming preferences.",
+        "relevant_domain": "Games",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Games)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-06-15 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "Building on his initial interest in RPGs, the user delves deeper into the Grand Theft Auto franchise, particularly Grand Theft Auto V. He inquires about the latest updates, mods, and online multiplayer experiences, indicating a growing interest in open-world sandbox games and community engagement. The assistant provides guidance on joining active online communities and accessing user-created content.",
+        "task_goal": "Engage with the Grand Theft Auto V community and explore online multiplayer features.",
+        "relevant_domain": "Games",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Games)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-06-16 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user, a busy professional, first engaged with the virtual assistant to explore upscale hotel options for an upcoming business trip. He expressed a preference for well-known hotel chains like Marriott and Hilton, emphasizing the importance of a central location in the business district. This initial interaction highlighted his interest in 4 or 5-star hotels with amenities such as complimentary WiFi and on-site gyms.",
+        "task_goal": "Identify upscale hotel accommodations for a business trip.",
+        "relevant_domain": "Hotels",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Hotels)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-06-17 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first explores Apple products, showing interest in the latest iPhone models and MacBooks. He appreciates the assistant's detailed product specifications and comparative analyses.",
+        "task_goal": "Discover and compare Apple products",
+        "relevant_domain": "Shopping",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Shopping)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-06-18 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user seeks guidance on selecting the right treadmill or exercise bike for home workouts, preferring reputable brands like Nike and Peloton. He values insights on durability and performance.",
+        "task_goal": "Select fitness equipment for home workouts",
+        "relevant_domain": "Shopping",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Shopping)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-20 Evening",
+        "event_type": "preference_supplement",
+        "description": "Exploring musical instruments, the user looks into various guitar models, amplifiers, and recording equipment from brands like Fender and Yamaha. He appreciates the assistant's knowledge of sound quality and ease of use.",
+        "task_goal": "Explore musical instruments and recording equipment",
+        "relevant_domain": "Shopping",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Shopping)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-21 Evening",
+        "event_type": "preference_emergence",
+        "description": "The user, an avid reader with a strong affinity for fiction, discovers the works of Michael Crichton, Dan Brown, and Arthur C. Clarke. He seeks recommendations for books similar in style and subject matter to classics like 'Jurassic Park,' 'The Andromeda Strain,' and 'Rendezvous with Rama.'",
+        "task_goal": "Explore new book recommendations in the thriller, science-fiction, and speculative genres.",
+        "relevant_domain": "Books",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Books)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-22 Evening",
+        "event_type": "preference_emergence",
+        "description": "The user first engages with the virtual assistant to explore critically acclaimed foreign language films. Intrigued by the global storytelling perspectives, he requests a curated list of top-rated foreign films available on Netflix, leading to discussions about movies like Parasite and Roma.",
+        "task_goal": "Discover new foreign films and gain insights into global cinema.",
+        "relevant_domain": "Media",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Media)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-23 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "Building on his interest in foreign films, the user seeks guidance in navigating documentaries on Amazon Prime. He expresses a particular interest in thought-provoking and investigative works, looking for documentaries that dive deep into social issues and historical events.",
+        "task_goal": "Expand viewing preferences to include documentaries that offer investigative insights.",
+        "relevant_domain": "Media",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Media)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-24 Morning",
+        "event_type": "preference_supplement",
+        "description": "With a growing trust in the assistant's recommendations, the user begins to explore lesser-known independent films. He requests suggestions for underrated gems across various genres, aiming to create curated watchlists for specific occasions, such as a 'mind-bending sci-fi' list for a movie marathon with friends.",
+        "task_goal": "Discover and watch underrated independent films and create themed watchlists.",
+        "relevant_domain": "Media",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Media)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-25 Evening",
+        "event_type": "preference_emergence",
+        "description": "The user first engages with the assistant to explore the domain of movies, expressing a keen interest in thought-provoking and critically acclaimed films. He seeks reviews and analyses of works by directors like Christopher Nolan and Bong Joon-ho, marking the beginning of his journey into cinematic exploration.",
+        "task_goal": "Discover new critically acclaimed films and directors",
+        "relevant_domain": "Movies",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Movies)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-26 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first engages with the assistant to explore his passion for music, particularly focusing on discovering new songs and albums. His initial interest is sparked by seeking recommendations based on his favorite artists such as Daft Punk, Jamiroquai, and Radiohead. He expresses a desire to find lesser-known tracks or B-sides from these artists.",
+        "task_goal": "Discover new music and artists similar to his favorites.",
+        "relevant_domain": "Music",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Music)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-27 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "Building on his initial exploration, the user requests the creation of personalized playlists tailored to specific activities. He emphasizes the importance of high-quality audio and asks for playlists suitable for workouts and productivity. This marks a deepening of his engagement with the music domain as he integrates music into various aspects of his daily life.",
+        "task_goal": "Create curated playlists for different activities with a focus on audio quality.",
+        "relevant_domain": "Music",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Music)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-20 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user's interest in music evolves further as he engages in more in-depth discussions about music theory, production techniques, and the cultural impact of artists. He also expresses a keen interest in attending live concerts or music festivals, seeking recommendations for upcoming events in his area. This signifies a broadening of his musical preferences to include live experiences.",
+        "task_goal": "Explore deeper musical knowledge and attend live music events.",
+        "relevant_domain": "Music",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Music)",
+        "dependencies": "Events"
+    },
+    {
+        "date": "2023-08-21 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first engaged with the virtual assistant to book a rental car for an upcoming business trip. He expressed an interest in SUVs and high-end luxury vehicles, specifically mentioning brands such as Lexus, Mercedes-Benz, and BMW, indicating his preference for premium automotive experiences.",
+        "task_goal": "Book a luxury SUV for a business trip",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-22 Evening",
+        "event_type": "preference_emergence",
+        "description": "The user first explores booking appointments for haircuts using the assistant. He appreciates the convenience of selecting available time slots and receiving reminders.",
+        "task_goal": "Book a monthly haircut appointment at a chain salon near his home.",
+        "relevant_domain": "Services",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Services)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-23 Evening",
+        "event_type": "preference_emergence",
+        "description": "The user first discovers his passion for hockey by requesting real-time updates on Toronto Maple Leafs games. He shows interest in live scores, penalty minutes, and individual player stats, marking his initial engagement with the sports domain.",
+        "task_goal": "Receive real-time updates on Toronto Maple Leafs games",
+        "relevant_domain": "Sports",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Sports)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-24 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user supplements his preference by seeking comparisons between the Maple Leafs' performance and their top rivals. He is interested in insights into potential playoff matchups and areas for improvement, indicating a deepening interest in team analytics.",
+        "task_goal": "Analyze Maple Leafs' performance against rivals",
+        "relevant_domain": "Sports",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Sports)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-25 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user expresses interest in exploring new culinary experiences beyond his usual preferences, occasionally requesting recommendations for unique fusion cuisines or trendy dining concepts. He remains cautious about dietary restrictions and prefers detailed allergen information.",
+        "task_goal": "Explore new culinary experiences while ensuring dietary needs are met.",
+        "relevant_domain": "Restaurants",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Restaurants)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-26 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user deepens his interest in science-fiction by engaging in discussions about 'The Expanse' series by James S.A. Corey, focusing on intricate world-building, character arcs, and scientific plausibility. He also expresses a desire to revisit Ray Bradbury's 'The Martian Chronicles' for a fresh perspective.",
+        "task_goal": "Engage in discussions about 'The Expanse' series and revisit classic science-fiction works.",
+        "relevant_domain": "Books",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Books)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-27 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user expressed a desire to explore new messaging apps and features. He focused on privacy settings, file-sharing capabilities, and cross-platform messaging to enhance his communication.",
+        "task_goal": "Explore new messaging apps with advanced features.",
+        "relevant_domain": "Messaging",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Messaging)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-28 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "Building on his initial interest, the user requests comparisons between different movies and directors, aiming to deepen his understanding of cinematic techniques and storytelling styles. This interaction highlights his growing desire for analytical discussions about the artistic merits and cultural impact of films.",
+        "task_goal": "Engage in substantive discussions about films",
+        "relevant_domain": "Movies",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Movies)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-29 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user further refines his preferences, opting for late-night or weekend viewings at theaters with reclining seats. He appreciates reminders for new releases and occasionally seeks guidance on purchasing advanced tickets for highly anticipated films, demonstrating his commitment to immersive cinematic experiences.",
+        "task_goal": "Plan theater visits and purchase advanced tickets",
+        "relevant_domain": "Movies",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Movies)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-30 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "Building on his initial preference, the user refined his rental car requirements by requesting additional features like built-in GPS navigation systems and sunroofs. He also specified a preference for gasoline-powered vehicles over hybrid or electric options, emphasizing his desire for a traditional driving experience.",
+        "task_goal": "Enhance rental car features for a leisure trip",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-31 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user provided feedback on his previous rental experiences, highlighting the importance of vehicle availability and pricing comparisons. He began to appreciate the assistant's ability to remember his preferences, which streamlined the booking process and allowed for more efficient planning.",
+        "task_goal": "Provide feedback and refine booking preferences",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-01 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user started to inquire about negotiating upgrades or discounts, showing an increased interest in maximizing value for his rental car bookings. He requested visual aids or brochures to better understand the features of recommended vehicles, indicating a desire for clear communication and informed decision-making.",
+        "task_goal": "Negotiate upgrades and request detailed vehicle information",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-02 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user supplements his preference by seeking dental check-up appointments every six months. He values the assistant's recommendations for reputable chain dental clinics near his workplace or home.",
+        "task_goal": "Schedule a dental check-up at a conveniently located clinic with good ratings.",
+        "relevant_domain": "Services",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Services)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-03 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user deepens his interaction with the assistant by requesting medical consultation appointments, preferring evening or weekend slots. He seeks reminders for annual check-ups and routine screenings.",
+        "task_goal": "Identify highly-rated clinics or doctors for medical consultations and set reminders for check-ups.",
+        "relevant_domain": "Services",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Services)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-04 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user further supplements his preferences by expressing a strong inclination towards chain service providers due to their consistent quality and reliability.",
+        "task_goal": "Save preferences for chain providers to ensure consistent service quality.",
+        "relevant_domain": "Services",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Services)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-05 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user deepens his travel preferences by requesting personalized recommendations that cater to his interests in food, culture, and history. He asks for guidance on navigating public transportation and finding affordable dining options, aiming to maximize his time in each destination.",
+        "task_goal": "Receive personalized travel recommendations that focus on food, culture, and history, along with practical tips for navigating cities.",
+        "relevant_domain": "Travel",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Travel)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-06 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user expands his travel interests to include longer trips, expressing a desire to immerse himself in local cultures over 3-4 weeks. He requests advice on planning extended stays, including short-term rental accommodations and balancing structured activities with free time.",
+        "task_goal": "Plan extended trips for cultural immersion, including accommodation and activity suggestions.",
+        "relevant_domain": "Travel",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Travel)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-07 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "As the user becomes more familiar with the calendar assistant, he develops a preference for receiving event notifications 30 minutes prior. This allows him to prepare adequately and transition smoothly between different activities.",
+        "task_goal": "Receive timely notifications to prepare for events.",
+        "relevant_domain": "Calendar",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Calendar)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-08 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "Building on his initial interest, the user requests real-time stock quotes and company news from reputable financial sources. He begins valuing concise updates on quarterly earnings, product launches, and market forecasts, which could impact the stock performance of his preferred companies.",
+        "task_goal": "Receive real-time and comprehensive updates on selected companies.",
+        "relevant_domain": "Finance",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Finance)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-09 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user further deepens his engagement by appreciating the assistant's ability to synthesize information from diverse sources. He frequently seeks insights into emerging trends, such as the impact of technological advancements on healthcare and the performance of consumer goods during economic fluctuations.",
+        "task_goal": "Gain insights into emerging trends affecting his preferred sectors.",
+        "relevant_domain": "Finance",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Finance)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-10 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user expresses interest in personalized dashboards with visualized data to easily compare the weekly performance of his preferred companies. He also requests stock price alerts for potential investment opportunities, particularly in the technology sector, reflecting his growing sophistication in financial planning.",
+        "task_goal": "Set up personalized dashboards and alerts for stock performance monitoring.",
+        "relevant_domain": "Finance",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Finance)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-11 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "As the user continued to travel for work, he refined his hotel preferences to include additional amenities like on-site restaurants and bars/lounges, which offer convenience after a long day of meetings. He also began providing feedback on past stays, using this information to guide his future bookings and ensuring the assistant could better tailor recommendations to his evolving needs.",
+        "task_goal": "Refine hotel preferences to include more amenities for convenience.",
+        "relevant_domain": "Hotels",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Hotels)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-12 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user, now familiar with the assistant's capabilities, inquired about loyalty programs and potential discounts or upgrades available through the assistant. This demonstrated his growing reliance on the assistant not only for booking accommodations but also for maximizing the value of his stays. His preference for efficiency led to providing preferences upfront to streamline the booking process.",
+        "task_goal": "Explore loyalty programs and maximize value through discounts or upgrades.",
+        "relevant_domain": "Hotels",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Hotels)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-13 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user showed interest in integrating emerging trends like AI assistants and voice messaging into his routine. He aimed to streamline his messaging experience with efficient navigation options.",
+        "task_goal": "Incorporate AI and voice messaging into daily use.",
+        "relevant_domain": "Messaging",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Messaging)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-14 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user expands his sports interests by closely following the Canadian National Soccer Team. He requests match schedules, lineup information, and post-game analyses, especially during major tournaments like the World Cup.",
+        "task_goal": "Follow Canadian National Soccer Team during major tournaments",
+        "relevant_domain": "Sports",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Sports)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-15 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user occasionally explores badminton tournaments and player rankings, particularly when Canadian athletes are involved. He appreciates notifications for significant events or milestones in these sports.",
+        "task_goal": "Receive notifications for significant badminton events",
+        "relevant_domain": "Sports",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Sports)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-16 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user shows a preference for concise, easily digestible information presented in a straightforward manner. He values quick access to key stats and highlights, and occasionally seeks recommendations for sports-related podcasts or articles.",
+        "task_goal": "Access concise sports information and explore in-depth content",
+        "relevant_domain": "Sports",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Sports)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-17 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user supplements his reading habits by balancing physical and ebook formats, reading in the evenings on a weekly basis. He values concise plot summaries, character analyses, and thematic explorations provided by the assistant as a starting point for deeper discussions.",
+        "task_goal": "Balance reading formats and use assistant-provided insights for deeper discussions.",
+        "relevant_domain": "Books",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Books)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-18 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user requests assistance in creating personalized reading lists, organizing his book collection, and setting up alerts for new releases from favorite authors. He appreciates tailored suggestions based on his preferences and enjoys discovering lesser-known works that align with his interests.",
+        "task_goal": "Create personalized reading lists and set up alerts for new book releases.",
+        "relevant_domain": "Books",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Books)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-19 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user explores more advanced features of the calendar assistant, such as rescheduling events and checking availability. He appreciates the assistant's suggestions and alternatives for resolving scheduling conflicts, enhancing his ability to manage overlapping commitments.",
+        "task_goal": "Resolve scheduling conflicts with ease.",
+        "relevant_domain": "Calendar",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Calendar)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-20 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user's love for adventure and exploration games is further supplemented by his interest in The Legend of Zelda: Breath of the Wild. He seeks assistance in uncovering hidden secrets, solving intricate puzzles, and mastering combat mechanics, showing a preference for games that offer complex challenges and immersive worlds.",
+        "task_goal": "Enhance gameplay experience in The Legend of Zelda: Breath of the Wild by uncovering secrets and mastering mechanics.",
+        "relevant_domain": "Games",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Games)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-21 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user requests detailed product comparisons, user reviews, and pricing information from multiple retailers. He relies on the assistant's ability to provide concise summaries and visually appealing product presentations.",
+        "task_goal": "Compare products across multiple retailers",
+        "relevant_domain": "Shopping",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Shopping)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-22 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user expresses interest in integrating his calendar with other productivity tools, such as task managers and note-taking applications. This integration allows him to access contextual information, such as directions and relevant documents, enhancing his productivity.",
+        "task_goal": "Integrate calendar with productivity tools for enhanced efficiency.",
+        "relevant_domain": "Calendar",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Calendar)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-23 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user's gaming preferences have evolved to include a keen interest in accessing early game demos, pre-ordering upcoming titles, and exploring recommendations for gaming peripherals or hardware upgrades. This indicates a desire to enhance his overall gaming experience through improved gameplay depth, replayability, and technological advancements.",
+        "task_goal": "Acquire early access to game demos and upgrade gaming hardware for an enhanced experience.",
+        "relevant_domain": "Games",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Games)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-24 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user sought recommendations for scenic driving routes or local attractions to enhance his rental car experiences. This reflects his interest in not only the vehicle itself but also the overall travel experience, combining luxury with leisurely exploration.",
+        "task_goal": "Enhance travel experience with scenic routes and attractions",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-25 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user expands his reliance on the assistant by exploring additional services such as pet grooming and home maintenance, indicating trust in the assistant's recommendations.",
+        "task_goal": "Explore and book additional services like pet grooming and home maintenance.",
+        "relevant_domain": "Services",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Services)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-30 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user expresses interest in smart home technologies, seeking recommendations for devices and systems that integrate seamlessly with his existing electronics setup.",
+        "task_goal": "Explore smart home technologies",
+        "relevant_domain": "Shopping",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Shopping)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-01 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first interacted with the assistant to manage his bus travel needs, focusing on finding Greyhound and local city transit routes. He compared schedules and purchased tickets, showing a preference for morning or afternoon departures to align with his work commitments.",
+        "task_goal": "Find and compare bus schedules for local and regional travel.",
+        "relevant_domain": "Buses",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Buses)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-02 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first engages with the assistant to book a flight for a business trip. He expresses a preference for Air Canada and Cathay Pacific Airways, requesting business class seats with aisle access. He prioritizes non-stop flights departing in the morning for efficiency.",
+        "task_goal": "Book a business class flight with preferred airlines and seating arrangements.",
+        "relevant_domain": "Flights",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Flights)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-03 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user occasionally requests one-time alarms for specific dates or events, such as early morning flights or important meetings. He values the assistant's flexibility in accommodating these ad-hoc requests while maintaining his preferred alarm sound and volume settings.",
+        "task_goal": "Set one-time alarms for special events while maintaining preferred settings",
+        "relevant_domain": "Alarm",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Alarm)",
+        "dependencies": "Flights"
+    },
+    {
+        "date": "2023-10-04 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user's interactions with the assistant are typically straightforward and efficient, reflecting his busy lifestyle. He appreciates the assistant's reliable alarm management capabilities, allowing him to focus on his daily routine without worrying about oversleeping or missing important commitments.",
+        "task_goal": "Ensure efficient and reliable alarm management to support busy lifestyle",
+        "relevant_domain": "Alarm",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Alarm)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-05 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first engages with the assistant to book a train journey, discovering the convenience of first-class accommodations. He appreciates the amenities such as power outlets and WiFi, which cater to his needs as a working professional.",
+        "task_goal": "Book a train journey with first-class accommodations",
+        "relevant_domain": "Train",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Train)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-06 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user requested assistance in finding the most efficient bus route from his office to a client's location. He prioritized minimal transfers and travel time, indicating a need for tailored recommendations based on real-time traffic data.",
+        "task_goal": "Optimize bus route for minimal transfers and travel time.",
+        "relevant_domain": "Buses",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Buses)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-07 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user supplements his preferences by requesting the assistant to compare flight options based on total travel time and layover duration. He emphasizes the importance of convenience and efficiency, sharing feedback on previous flight experiences to refine the assistant's recommendations.",
+        "task_goal": "Compare flight options and refine recommendations based on past experiences.",
+        "relevant_domain": "Flights",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Flights)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-08 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user supplements his travel preferences by expressing a desire to travel during morning or afternoon hours, avoiding late-night departures. He appreciates the assistant's detailed information on train routes and schedules.",
+        "task_goal": "Select train journeys with preferred departure times",
+        "relevant_domain": "Train",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Train)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-09 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user seeks personalized recommendations from the assistant, focusing on efficient routes and concise summaries of travel options. He values journey duration and transfer times to optimize his travel experience.",
+        "task_goal": "Receive personalized route recommendations",
+        "relevant_domain": "Train",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Train)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-10 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user expressed interest in exploring eco-friendly transportation options. He was introduced to hybrid or electric bus services and requested educational or self-improvement podcasts or audiobooks to accompany his journeys.",
+        "task_goal": "Explore eco-friendly bus services and find suitable audio content.",
+        "relevant_domain": "Buses",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Buses)",
+        "dependencies": "Media"
+    },
+    {
+        "date": "2023-10-11 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user further supplements his preferences by asking the assistant to manage his frequent flyer accounts and track flight status updates for an upcoming international trip. He values concise summaries of flight details and potential disruptions.",
+        "task_goal": "Manage frequent flyer accounts and provide flight status updates.",
+        "relevant_domain": "Flights",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Flights)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-12 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user appreciated the assistant's ability to provide comprehensive travel itineraries, including estimated arrival times and service alerts. He occasionally sought assistance with rescheduling or canceling tickets due to unexpected changes.",
+        "task_goal": "Receive detailed travel itineraries and manage ticket changes.",
+        "relevant_domain": "Buses",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Buses)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-13 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user seeks guidance from the assistant on navigating complex travel policies and regulations. He appreciates the assistant's professional communication style and accurate information, enhancing his travel planning experience.",
+        "task_goal": "Provide guidance on travel policies and regulations.",
+        "relevant_domain": "Flights",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Flights)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-14 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user expands his travel plans by booking round-trip tickets for leisure travel within Canada and occasionally to the United States. He appreciates the assistant's ability to remember his preferences and provide seamless booking experiences.",
+        "task_goal": "Book round-trip tickets for leisure travel",
+        "relevant_domain": "Train",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Train)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-15 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user shows interest in exploring loyalty programs and discounts offered by train operators. He appreciates the assistant's proactive approach in suggesting relevant promotions based on his travel history.",
+        "task_goal": "Explore loyalty programs and discounts",
+        "relevant_domain": "Train",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Train)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-16 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user showed a preference for interactive features like real-time bus tracking and mobile ticketing. He requested the assistant to store his frequent routes and payment information for future convenience.",
+        "task_goal": "Use interactive bus features and streamline future bookings.",
+        "relevant_domain": "Buses",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Buses)",
+        "dependencies": "None"
+    }
+]

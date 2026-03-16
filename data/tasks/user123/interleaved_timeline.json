@@ -1,0 +1,852 @@
+[
+    {
+        "date": "2023-01-15 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first expressed interest in finding local service providers, specifically looking for nearby salons, dentists, and doctors. She emphasized her preference for female service providers and requested morning or afternoon appointments within walking distance.",
+        "task_goal": "Identify and book appointments with local female service providers for various personal care needs.",
+        "relevant_domain": "Services",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Services)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-02-05 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "Building on her initial interest, the user specifically asked for recommendations for a reliable hair salon for her weekly appointments. The assistant provided a list of local salons with experienced female stylists, which the user appreciated and booked an appointment.",
+        "task_goal": "Find and book a weekly hair appointment at a local salon with female stylists.",
+        "relevant_domain": "Services",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Services)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-04-15 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user, a 65-year-old Finnish woman, first interacts with the assistant to book a hotel room for a leisure trip within Finland. She expresses a preference for communication in Finnish and begins exploring options for well-known hotel chains like Best Western and Radisson.",
+        "task_goal": "Discover hotel booking options in Finland",
+        "relevant_domain": "Hotels",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Hotels)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-04-16 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user continued to rely on the assistant for her monthly dental check-ups, requesting a female dentist near her neighborhood. The assistant suggested a well-reviewed clinic with flexible slots, meeting the user's preferences for convenience and female practitioners.",
+        "task_goal": "Schedule monthly dental check-ups with a nearby female dentist.",
+        "relevant_domain": "Services",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Services)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-04-17 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first expressed interest in drama, romance, and historical fiction films. She explored new releases and sought recommendations for critically acclaimed movies featuring her favorite actors like Meryl Streep or directed by renowned filmmakers such as Ingmar Bergman and Akira Kurosawa.",
+        "task_goal": "Discover new drama and romance films featuring favorite actors.",
+        "relevant_domain": "Movies",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Movies)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-02 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user sought showtimes and ticket purchasing assistance for a limited release foreign language drama at a local theater. She preferred matinee and weekday evening screenings and appreciated the assistant's help in booking aisle seats with reclining chairs.",
+        "task_goal": "Attend a foreign language drama screening with personalized seating preferences.",
+        "relevant_domain": "Movies",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Movies)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-20 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user began relying on the assistant for personalized movie suggestions based on her viewing history. She particularly appreciated recommendations for thought-provoking period dramas or romantic films with strong female leads.",
+        "task_goal": "Receive personalized movie suggestions tailored to viewing history.",
+        "relevant_domain": "Movies",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Movies)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-21 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first discovers the convenience of using the assistant to book train journeys within Finland. She appreciates the straightforward communication and the ability to secure tickets for standard class travel during her preferred morning hours.",
+        "task_goal": "Book a train ticket for a morning journey with a window seat and quiet coach.",
+        "relevant_domain": "Train",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Train)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-22 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user supplements her preference by seeking assistance to find the most convenient route from her hometown to Helsinki. She specifies her preference for minimal transfers and appreciates the assistant's ability to highlight options that meet her travel time and amenity preferences.",
+        "task_goal": "Identify the optimal train route with minimal transfers for an afternoon departure.",
+        "relevant_domain": "Train",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Train)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-23 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user expanded her use of the assistant to include scheduling routine health check-ups with local female doctors. The assistant provided options that matched her location and time preferences, ensuring a seamless booking experience.",
+        "task_goal": "Arrange routine health check-ups with local female doctors.",
+        "relevant_domain": "Services",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Services)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-24 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user, a 65-year-old woman from Finland, first interacted with the assistant to set up a recurring alarm for weekdays. She expressed her preference for waking up at 7:00 AM to a gentle nature sound, marking her initial interest in managing her daily alarm routine.",
+        "task_goal": "Set up a recurring weekday alarm with a nature sound at 7:00 AM.",
+        "relevant_domain": "Alarm",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Alarm)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-25 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first discovers the convenience of using the assistant to manage her calendar. She starts by adding church events and community gatherings, reflecting her Christian faith and social involvement. Initially, she encounters some challenges due to her intermediate English proficiency but appreciates the assistant's straightforward communication.",
+        "task_goal": "Add church events and community gatherings to the calendar.",
+        "relevant_domain": "Calendar",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Calendar)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-26 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first expressed her interest in classical music by requesting information about Finnish composer Jean Sibelius, particularly his iconic piece 'Finlandia.' She was curious about his symphonies and tone poems and sought curated playlists featuring his works.",
+        "task_goal": "Discover and listen to Jean Sibelius's compositions.",
+        "relevant_domain": "Music",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Music)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-05-27 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first engages with the shopping assistant to find affordable and practical clothing suitable for her age. She discovers loose-fitting tops and stretchy pants with adjustable waistbands that cater to her comfort needs.",
+        "task_goal": "Find comfortable clothing options",
+        "relevant_domain": "Shopping",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Shopping)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-06-15 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user supplements her clothing preferences by exploring supportive shoes made from natural fabrics. She appreciates the assistant's recommendations for shoes that offer both comfort and style.",
+        "task_goal": "Discover comfortable and stylish shoes",
+        "relevant_domain": "Shopping",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Shopping)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-06-16 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user supplements her preferences by specifying a strong desire for amenities such as free WiFi, complimentary breakfast, and free parking. She also prefers a standard double room and emphasizes the importance of a 24-hour front desk.",
+        "task_goal": "Refine hotel search criteria with specific amenities",
+        "relevant_domain": "Hotels",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Hotels)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-06-17 Afternoon",
+        "event_type": "preference_emergence",
+        "description": "The user first interacted with the assistant to seek recommendations for books by her favorite authors, such as Tove Jansson and Mika Waltari. This marked the beginning of her journey in exploring non-fiction, biographies, and historical works.",
+        "task_goal": "Discover new book titles by favorite authors.",
+        "relevant_domain": "Books",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Books)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-06-18 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user expressed a preference for physical books and inquired about the availability of specific titles in local bookstores or libraries. She enjoys reading in the afternoons and evenings, which aligns with her part-time work schedule.",
+        "task_goal": "Find physical copies of books in local stores or libraries.",
+        "relevant_domain": "Books",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Books)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-05 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user requested a list of recently published biographies of notable historical figures, showing her growing interest in learning about influential personalities. This interaction led to a curated selection that sparked her curiosity.",
+        "task_goal": "Explore recent biographies of historical figures.",
+        "relevant_domain": "Books",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Books)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-06 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user explores local weekend events and discovers her interest in attending concerts featuring Finnish artists and traditional music genres. She seeks recommendations for affordable options, indicating a preference for events under $50 or free admission.",
+        "task_goal": "Identify affordable local concerts featuring Finnish artists.",
+        "relevant_domain": "Events",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Events)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-07 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first expressed interest in managing her investments and staying informed about financial markets. She began by tracking stock prices and news updates for well-established multinational corporations and local Finnish companies.",
+        "task_goal": "To stay updated on financial markets and manage her investments effectively.",
+        "relevant_domain": "Finance",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Finance)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-08 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user requested translations of financial news articles and company reports into Finnish, indicating a need for more accessible information due to her intermediate English proficiency. She valued concise summaries of key financial information.",
+        "task_goal": "To access financial information in Finnish and understand key details despite language barriers.",
+        "relevant_domain": "Finance",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Finance)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-09 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user developed a preference for visualized data, such as charts and graphs, to easily compare stock performance across her portfolio. She frequently asked for updates on specific companies, seeking insights into their financial health and market positioning.",
+        "task_goal": "To efficiently compare stock performance and gain insights into company health.",
+        "relevant_domain": "Finance",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Finance)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-10 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first expressed interest in exploring films featuring her favorite actors, Ingrid Bergman and Meryl Streep. She requested detailed analyses and behind-the-scenes information on Ingmar Bergman's films, marking the beginning of her deep appreciation for quality cinema.",
+        "task_goal": "Discover films featuring Ingrid Bergman and Meryl Streep, with a focus on Ingmar Bergman's works.",
+        "relevant_domain": "Media",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Media)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-11 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first expressed interest in using WhatsApp for group communication to coordinate family gatherings. She requested assistance in setting up group chats to share updates with her children and grandchildren.",
+        "task_goal": "Set up WhatsApp group chats for family coordination",
+        "relevant_domain": "Messaging",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Messaging)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-12 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user began using voice messages and calls more frequently, finding them more personal and convenient than typing. She asked the assistant for guidance on sending voice messages to friends.",
+        "task_goal": "Send voice messages to friends",
+        "relevant_domain": "Messaging",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Messaging)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-13 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user explored new features in messaging apps, such as sharing her location with family members. She appreciated the assistant's step-by-step guidance due to the challenges she faced with new technology.",
+        "task_goal": "Share location with family members",
+        "relevant_domain": "Messaging",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Messaging)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-14 Afternoon",
+        "event_type": "preference_emergence",
+        "description": "The user initiates her exploration of dining options by expressing interest in traditional Finnish and Scandinavian cuisine. She seeks recommendations for casual, quiet restaurants that offer gluten-free options within a budget-friendly to moderate price range.",
+        "task_goal": "Find suitable restaurants offering traditional Finnish and Scandinavian cuisine with gluten-free options.",
+        "relevant_domain": "Restaurants",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Restaurants)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-15 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first expresses interest in planning a cultural and historical travel experience to rural Italy. She seeks recommendations for a 2-week trip focusing on small villages, vineyards, and historical sites off the beaten path.",
+        "task_goal": "Create a curated itinerary that balances cultural immersion with scenic drives and countryside walks.",
+        "relevant_domain": "Travel",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Travel)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-16 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user further refines her hotel preferences by requesting options in suburban or quiet residential areas, ideally near public transportation hubs. She gravitates towards 3-star and 4-star properties, balancing comfort and affordability.",
+        "task_goal": "Identify hotel locations that offer tranquility and accessibility",
+        "relevant_domain": "Hotels",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Hotels)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-20 Morning",
+        "event_type": "preference_supplement",
+        "description": "The assistant proactively suggests hotels that align with the user's preferences, including detailed information about amenities, nearby attractions, and transportation options. The user appreciates the assistant's attentiveness and efficiency in providing tailored recommendations.",
+        "task_goal": "Receive personalized hotel recommendations efficiently",
+        "relevant_domain": "Hotels",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Hotels)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-21 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user develops a habit of double-checking her bookings with the assistant, ensuring her chosen train meets her requirements for comfort. She values concise yet comprehensive information about train amenities and any potential disruptions.",
+        "task_goal": "Confirm train booking details and amenities for a morning journey.",
+        "relevant_domain": "Train",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Train)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-22 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user supplements her interest by exploring theater productions with English subtitles. She requests information about upcoming shows, aiming to accommodate her language preference while enjoying cultural performances.",
+        "task_goal": "Find theater productions with English subtitles.",
+        "relevant_domain": "Events",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Events)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-23 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user expanded her interest to explore the works of Akira Kurosawa, leading to a discussion about his unique visual storytelling techniques. Her curiosity about biopics was piqued, resulting in her enjoyment of The Iron Lady.",
+        "task_goal": "Explore Akira Kurosawa's films and biopics like The Iron Lady.",
+        "relevant_domain": "Media",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Media)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-07-24 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user, despite having intermediate English proficiency, developed a preference for subtitled foreign films to better appreciate the nuances of original languages. She sought assistance in finding reliable sources for high-quality subtitles, particularly for older or lesser-known films.",
+        "task_goal": "Find reliable sources for high-quality subtitles for foreign films.",
+        "relevant_domain": "Media",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Media)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-20 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "Over time, the user developed a preference for streaming platforms like Netflix and BBC iPlayer. She frequently asked for recommendations tailored to their offerings and valued concise plot summaries and content advisories.",
+        "task_goal": "Receive tailored recommendations for Netflix and BBC iPlayer with concise plot summaries.",
+        "relevant_domain": "Media",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Media)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-21 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user occasionally sought clarification on plot summaries or reviews due to her intermediate English proficiency. She valued the assistant's ability to provide concise explanations and inquired about upcoming film festivals showcasing works by favorite directors.",
+        "task_goal": "Clarify plot summaries and learn about upcoming film festivals.",
+        "relevant_domain": "Movies",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Movies)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-22 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user started exploring lesser-known independent films and foreign cinema, stepping outside her usual preferences. She appreciated the assistant's willingness to expand her horizons while still catering to her core affinities for character-driven narratives and thought-provoking themes.",
+        "task_goal": "Explore independent films and foreign cinema.",
+        "relevant_domain": "Movies",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Movies)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-23 Evening",
+        "event_type": "preference_supplement",
+        "description": "Building on her initial interest, the user requests assistance in finding a cozy Finnish restaurant in Helsinki that can accommodate her gluten intolerance. She receives a list of establishments with detailed menus and ambiance descriptions, enhancing her understanding and appreciation of authentic Finnish fare.",
+        "task_goal": "Locate a cozy Finnish restaurant in Helsinki with gluten-free options.",
+        "relevant_domain": "Restaurants",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Restaurants)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-24 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user expands her culinary exploration to include Russian cuisine, specifically seeking gluten-free dining options. She receives curated restaurant recommendations along with insights into traditional Russian dishes and ingredients, allowing her to make informed dining choices.",
+        "task_goal": "Discover gluten-free Russian restaurants and understand traditional Russian cuisine.",
+        "relevant_domain": "Restaurants",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Restaurants)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-25 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user expresses a desire for more adventurous culinary experiences while maintaining her dietary restrictions. She is introduced to a fusion restaurant that combines Scandinavian and Russian influences, offering a unique twist on familiar flavors, which aligns with her evolving taste preferences.",
+        "task_goal": "Explore fusion cuisine combining Scandinavian and Russian influences.",
+        "relevant_domain": "Restaurants",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Restaurants)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-26 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user supplements her travel preferences by requesting a mix of city exploration and outdoor activities for a 3-week journey through Sweden and Norway. She is interested in hiking, visiting traditional fishing villages, and attending local festivals.",
+        "task_goal": "Suggest local festivals, museums, and guided tours to enhance understanding of Scandinavian culture and history.",
+        "relevant_domain": "Travel",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Travel)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-27 Evening",
+        "event_type": "preference_supplement",
+        "description": "Over time, the user develops a preference for detailed itineraries with a moderate pace, allowing ample time to savor each destination. She requests recommendations for authentic local experiences, such as cooking classes and artisan workshops.",
+        "task_goal": "Provide suggestions for immersive cultural experiences and stays in traditional accommodations.",
+        "relevant_domain": "Travel",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Travel)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-28 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "As the user's work schedule occasionally changed, she interacted with the assistant to adjust her alarm settings. She appreciated the assistant's patience and clear instructions, ensuring she understood how to modify the alarm time and sound as needed.",
+        "task_goal": "Adjust alarm settings due to changes in work schedule.",
+        "relevant_domain": "Alarm",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Alarm)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-29 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user requested the assistant to remind her of her active alarm settings after weekends or vacations. She valued the concise summaries provided by the assistant, confirming her alarm configuration, including time, sound, and recurrence pattern.",
+        "task_goal": "Receive reminders of active alarm settings after breaks.",
+        "relevant_domain": "Alarm",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Alarm)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-30 Evening",
+        "event_type": "preference_supplement",
+        "description": "Occasionally, the user inquired about setting one-time alarms for specific dates, such as medical appointments or social engagements. The assistant accommodated these requests, ensuring she could set and confirm alarms for particular events.",
+        "task_goal": "Set one-time alarms for specific events.",
+        "relevant_domain": "Alarm",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Alarm)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-08-31 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "As the user becomes more comfortable with the assistant, she starts requesting reminders for events one day in advance. This adjustment helps her prepare for upcoming activities, and she appreciates receiving notifications in Finnish, which enhances her user experience.",
+        "task_goal": "Set reminders for events one day in advance in Finnish.",
+        "relevant_domain": "Calendar",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Calendar)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-01 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user's trust in the assistant grows, leading her to explore more advanced features. She begins to request detailed event information, such as addresses and contact information, to be included in calendar entries. Additionally, she starts setting recurring events and sharing her calendar with family members, further integrating the assistant into her daily life.",
+        "task_goal": "Include detailed event information and set recurring events, sharing them with family.",
+        "relevant_domain": "Calendar",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Calendar)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-02 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user expanded her musical interests by exploring the catalogs of Edith Piaf and Ella Fitzgerald. She requested recommendations for lesser-known albums and live recordings, showing a deepening of her appreciation for jazz and folk music.",
+        "task_goal": "Explore and enjoy lesser-known works of Edith Piaf and Ella Fitzgerald.",
+        "relevant_domain": "Music",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Music)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-03 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user developed a preference for relaxing instrumental playlists, which she listened to while working or unwinding at home. She appreciated the assistant's ability to create customized playlists blending soothing folk melodies and jazz standards from the 1950s and 1960s.",
+        "task_goal": "Listen to relaxing instrumental playlists for work and relaxation.",
+        "relevant_domain": "Music",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Music)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-10 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user began exploring new genres adjacent to her preferences, such as world music and blues, demonstrating her willingness to broaden her musical horizons while maintaining a connection to her nostalgic favorites. She occasionally requested YouTube Music links for rare or obscure recordings.",
+        "task_goal": "Broaden musical horizons by exploring world music and blues.",
+        "relevant_domain": "Music",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Music)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-11 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user deepens her cultural engagement by attending small-group guided tours at art exhibitions. She seeks insights into the cultural significance and historical context of the artworks, reflecting her desire to connect with her heritage.",
+        "task_goal": "Participate in guided tours of art exhibitions.",
+        "relevant_domain": "Events",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Events)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-12 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user enhances her event experiences by providing feedback on performances and venues. She seeks guidance on navigating public transportation or parking options near event locations, ensuring a seamless experience.",
+        "task_goal": "Provide feedback and seek transportation guidance for events.",
+        "relevant_domain": "Events",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Events)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-13 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user expands her interest in home goods by seeking durable cotton bedsheets and sturdy kitchenware. She values the assistant's guidance in finding long-lasting items within her budget.",
+        "task_goal": "Find durable home goods",
+        "relevant_domain": "Shopping",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Shopping)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-14 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user shows interest in exploring new places during her travels by requesting recommendations for local attractions and dining options near her destination train stations. She appreciates practical suggestions tailored to her preferences and budget.",
+        "task_goal": "Find local attractions and dining options near train stations for an afternoon arrival.",
+        "relevant_domain": "Train",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Train)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-15 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user deepens her gardening interest by requesting affordable gardening tools and seeds for easy-to-grow vegetables and flowers. She appreciates the assistant's tips on creating a low-maintenance garden.",
+        "task_goal": "Enhance gardening skills and tools",
+        "relevant_domain": "Shopping",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Shopping)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-16 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "After experiencing frustration with a hotel's slow WiFi, the user emphasizes the importance of reliable internet connectivity in future recommendations. She also occasionally requests accessible room options due to mobility concerns.",
+        "task_goal": "Ensure reliable internet and accessible room options in hotel bookings",
+        "relevant_domain": "Hotels",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Hotels)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-17 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user sought guidance on book club discussion prompts and summaries as she joined a local reading group. She appreciated the assistant's ability to provide concise analyses, enhancing her engagement in discussions.",
+        "task_goal": "Engage in meaningful book club discussions with insights.",
+        "relevant_domain": "Books",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Books)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-18 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user showed a particular interest in the healthcare sector, often requesting news and analyses on pharmaceutical companies and healthcare service providers. She appreciated the assistant's ability to explain complex financial concepts in simple terms.",
+        "task_goal": "To gain a deeper understanding of the healthcare sector and its financial implications.",
+        "relevant_domain": "Finance",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Finance)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-19 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user expressed interest in learning how to use video calling apps to stay connected with family abroad. She valued the assistant's recommendations for user-friendly apps and tutorials suited to her English proficiency level.",
+        "task_goal": "Learn to use video calling apps for family communication",
+        "relevant_domain": "Messaging",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Messaging)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-20 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user expresses interest in sustainable tourism practices and seeks eco-friendly accommodation options. She appreciates clear communication and gives positive feedback on tailored recommendations for Spring and Fall travel.",
+        "task_goal": "Offer practical advice on navigating transportation, local customs, and accessibility considerations, with a focus on sustainable options.",
+        "relevant_domain": "Travel",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Travel)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-21 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user appreciated the assistant's ability to provide historical and cultural context for films and shows recommended. She sought guidance in navigating streaming platform interfaces and setting up watchlists for future viewing.",
+        "task_goal": "Navigate streaming platform interfaces and set up watchlists for future viewing.",
+        "relevant_domain": "Media",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Media)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-22 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user develops a preference for personalized recommendations based on her previous purchases. She appreciates suggestions for complementary items and alternatives to out-of-stock products.",
+        "task_goal": "Receive personalized shopping recommendations",
+        "relevant_domain": "Shopping",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Shopping)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-23 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first interacts with the assistant to book a flight, showing initial interest in personal travel. She expresses a preference for economy class tickets on Finnair, SAS Scandinavian Airlines, and KLM, with a specific request for non-stop flights departing in the morning or afternoon. Aisle seats are preferred, and she seeks assistance in finding the most affordable fares.",
+        "task_goal": "Book an economy class flight with preferred airlines and seat selection.",
+        "relevant_domain": "Flights",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Flights)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-24 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first explored the rental car domain, showing an interest in renting vehicles for her travel needs. She was particularly drawn to intermediate or premium cars from reputable companies like Hertz and Avis. Her initial preference was for reliable brands such as Volvo, Toyota, and Mercedes-Benz, with a focus on gasoline-powered vehicles for rental durations of 1-2 weeks.",
+        "task_goal": "To reserve a rental car for upcoming travel plans.",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-25 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first expressed interest in classic puzzle and card games, such as Solitaire, Mahjong, and Sudoku. She sought recommendations for the best mobile versions of these games, emphasizing the need for user-friendly interfaces and optional in-app purchases.",
+        "task_goal": "Find mobile versions of classic puzzle and card games with user-friendly interfaces.",
+        "relevant_domain": "Games",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Games)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-26 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user, a 65+ year old woman from Finland, first began exploring bus travel options to manage her transport needs. She expressed an interest in booking window seats and requested information on morning and afternoon departures, showcasing an initial preference for clear and simple guidance in purchasing tickets.",
+        "task_goal": "To find affordable bus travel options with window seats for morning or afternoon trips.",
+        "relevant_domain": "Buses",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Buses)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-27 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user further refines her preferences by booking a roundtrip flight from Helsinki to Copenhagen for a weekend getaway. She reviews multiple options provided by the assistant, focusing on non-stop flights and aisle seat availability. This interaction solidifies her preference for morning departures on Finnair and afternoon returns on SAS.",
+        "task_goal": "Select a roundtrip flight with specific departure and return times.",
+        "relevant_domain": "Flights",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Flights)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-28 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user planned a family trip to Lapland and sought a rental car that offered both space and comfort. She requested a vehicle with GPS and the option to add an additional driver, emphasizing the need for convenience during her travels.",
+        "task_goal": "To find a suitable rental car for a family trip, prioritizing comfort and convenience.",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-29 Evening",
+        "event_type": "preference_supplement",
+        "description": "Following a frustrating experience with an outdated GPS system in a rental car, the user expressed her dissatisfaction. This led her to prioritize up-to-date navigation systems in future rentals, ensuring a smoother travel experience.",
+        "task_goal": "To avoid outdated GPS systems in future rentals, ensuring reliable navigation.",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-09-30 Morning",
+        "event_type": "preference_emergence",
+        "description": "The user first discovers her interest in following the Finnish National Soccer Team's matches. She requests real-time updates on their games, including live scores and player substitutions.",
+        "task_goal": "Access live scores and updates for Finnish National Soccer Team matches.",
+        "relevant_domain": "Sports",
+        "checkpoint": false,
+        "task_id": "event_1_preference_emergence (Sports)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-01 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "Building on her initial preferences, the user began to appreciate the assistant's ability to suggest personalized routes and departure times. She now relies on the assistant for proactive recommendations that align with her typical travel patterns, enhancing her travel planning experience.",
+        "task_goal": "To receive personalized bus travel recommendations that fit her schedule and preferences.",
+        "relevant_domain": "Buses",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Buses)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-02 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user deepens her interest by requesting detailed breakdowns of key moments in the Finnish National Soccer Team's matches, including goals scored and controversial referee decisions.",
+        "task_goal": "Obtain detailed analysis and breakdowns of key match moments.",
+        "relevant_domain": "Sports",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Sports)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-03 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user developed an interest in word-based games, particularly digital versions of Scrabble. She requested assistance in finding games that support local multiplayer sessions with friends or family, emphasizing the importance of clear instructions and adjustable difficulty levels.",
+        "task_goal": "Discover digital word-based games suitable for local multiplayer play.",
+        "relevant_domain": "Games",
+        "checkpoint": false,
+        "task_id": "event_2_preference_supplement (Games)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-04 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user's interest expanded to digital board games, with a focus on chess. She requested beginner-friendly chess apps that include interactive tutorials and the option to play against computer opponents of varying skill levels.",
+        "task_goal": "Explore beginner-friendly digital chess games with interactive tutorials.",
+        "relevant_domain": "Games",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Games)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-05 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user expressed a preference for games that support the Finnish language or have simple, intuitive interfaces. She emphasized the need for clear communication with minimal technical jargon, given her intermediate English proficiency.",
+        "task_goal": "Find games with Finnish language support or intuitive interfaces.",
+        "relevant_domain": "Games",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Games)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-06 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "During this interaction, the user seeks assistance in booking a one-way flight from Helsinki to Stockholm for a family visit. The assistant suggests several non-stop options, reinforcing her preference for Finnair and SAS. She also emphasizes her consistent choice of mid-afternoon departures on Finnair.",
+        "task_goal": "Book a one-way flight with an emphasis on preferred airline and departure time.",
+        "relevant_domain": "Flights",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Flights)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-07 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "The user expresses appreciation for the assistant's ability to provide concise flight details and clarify unfamiliar terminology. She inquires about potential flight upgrades or alternative routing options but remains focused on finding economical fares. This interaction highlights her growing comfort with the assistant's services.",
+        "task_goal": "Explore flight upgrade options while maintaining economical fare preferences.",
+        "relevant_domain": "Flights",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Flights)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-08 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user appreciated the assistant's ability to remember her preferences and provide personalized suggestions. She frequently sought confirmation on rental details, such as pick-up and drop-off locations, valuing the assistant's patience and clear communication.",
+        "task_goal": "To confirm rental details and receive personalized recommendations.",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-09 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user supplements her sports interests by following her local swimming club's performance. She requests meet schedules, event results, and individual swimmer rankings.",
+        "task_goal": "Track local swimming club's performance and event results.",
+        "relevant_domain": "Sports",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Sports)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-10 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user expands her sports interests further by tracking major international table tennis tournaments and the rankings of top Finnish players.",
+        "task_goal": "Follow international table tennis tournaments and Finnish player rankings.",
+        "relevant_domain": "Sports",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Sports)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-11 Afternoon",
+        "event_type": "preference_supplement",
+        "description": "With growing confidence in communicating her needs in English, the user continued to engage with the assistant, providing feedback and refining her rental preferences. The assistant adapted to her communication style, ensuring clarity and simplicity.",
+        "task_goal": "To effectively communicate rental preferences and receive tailored suggestions.",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_5_preference_supplement (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-12 Morning",
+        "event_type": "preference_supplement",
+        "description": "The user sought assistance in understanding bus travel terms and policies, indicating a growing need for detailed explanations. This reflects her preference for straightforward communication and the occasional use of Finnish for complex queries.",
+        "task_goal": "To gain clarity on bus travel terms and policies through straightforward and patient explanations.",
+        "relevant_domain": "Buses",
+        "checkpoint": false,
+        "task_id": "event_3_preference_supplement (Buses)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-13 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user expressed interest in exploring electric or hybrid rental options, indicating an awareness of environmental concerns. The assistant responded by presenting eco-friendly alternatives from her preferred brands, aligning with her evolving preferences.",
+        "task_goal": "To explore eco-friendly rental car options while maintaining brand preferences.",
+        "relevant_domain": "Rental Cars",
+        "checkpoint": false,
+        "task_id": "event_6_preference_supplement (Rental Cars)",
+        "dependencies": "None"
+    },
+    {
+        "date": "2023-10-14 Evening",
+        "event_type": "preference_supplement",
+        "description": "The user expressed interest in accessible seating options and discounts available for seniors or part-time workers, further refining her travel preferences to ensure comfort and cost-effectiveness.",
+        "task_goal": "To explore accessible seating options and avail discounts for seniors or part-time workers.",
+        "relevant_domain": "Buses",
+        "checkpoint": false,
+        "task_id": "event_4_preference_supplement (Buses)",
+        "dependencies": "None"
+    }
+]

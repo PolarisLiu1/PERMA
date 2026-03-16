@@ -1,0 +1,1402 @@
+{
+    "Task 1": {
+        "Task Description": "The user needs to set a new alarm for the next morning based on their preferred wake-up time. The assistant should guide them through the process, allowing them to choose their desired alarm sound and set it as a recurring alarm if needed.",
+        "User Intent": "Set a new alarm for tomorrow morning at your preferred wake-up time, with your favorite alarm sound, and make it recurring if you'd like.",
+        "Task Goal": "The user successfully sets a new alarm with their preferred wake-up time, alarm sound, and recurrence pattern (if applicable).",
+        "Relevant Affinity Types": [
+            "Alarm Time Preference",
+            "Alarm Sound Preference",
+            "Alarm Recurring Preference"
+        ],
+        "task_id": "SD-Alarm-task-1",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Sunday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Alarm"
+        ]
+    },
+    "Task 2": {
+        "Task Description": "The user wants to review and potentially modify their existing alarm settings. The assistant should display their current alarm details and allow them to update the time, sound, or recurrence pattern based on their preferences.",
+        "User Intent": "Review your existing alarm settings and make any desired changes to the time, sound, or recurrence pattern according to your preferences.",
+        "Task Goal": "The user's existing alarm settings are updated to match their current preferences for wake-up time, alarm sound, and recurrence pattern.",
+        "Relevant Affinity Types": [
+            "Alarm Time Preference",
+            "Alarm Sound Preference",
+            "Alarm Recurring Preference"
+        ],
+        "task_id": "SD-Alarm-task-2",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Morning",
+            "Day of the Week": "Monday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Alarm"
+        ]
+    },
+    "Task 3": {
+        "Task Description": "The user is going on a trip and needs to temporarily disable their regular alarm. The assistant should guide them through turning off their existing alarm and setting a new one-time alarm for their return date, considering their preferred wake-up time.",
+        "User Intent": "Disable your regular alarm and set a one-time alarm for when you return from your trip, based on your preferred wake-up time.",
+        "Task Goal": "The user's regular alarm is disabled, and a new one-time alarm is set for their return date, aligned with their preferred wake-up time.",
+        "Relevant Affinity Types": [
+            "Alarm Time Preference"
+        ],
+        "task_id": "SD-Alarm-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Friday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Alarm"
+        ]
+    },
+    "Task 4": {
+        "Task Description": "The user wants to explore different alarm sound options and choose a new one that suits their preferences. The assistant should present a variety of alarm sound choices and allow the user to preview and select a new sound.",
+        "User Intent": "Explore different alarm sound options and choose a new one that you find pleasant or suitable for your preferences.",
+        "Task Goal": "The user selects a new alarm sound that aligns with their preferences after previewing various options.",
+        "Relevant Affinity Types": [
+            "Alarm Sound Preference"
+        ],
+        "task_id": "SD-Alarm-task-4",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Sunday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Alarm"
+        ]
+    },
+    "Task 5": {
+        "Task Description": "The user is looking for new book recommendations based on their preferred genres, favorite authors, and previously enjoyed books or series. The assistant should suggest titles that align with these preferences.",
+        "User Intent": "Find new book recommendations tailored to your preferred genres, favorite authors, and books or series you've enjoyed in the past.",
+        "Task Goal": "The user receives a personalized list of book recommendations that match their reading interests and preferences.",
+        "Relevant Affinity Types": [
+            "Genre",
+            "Favorite Authors",
+            "Favorite Books",
+            "Favorite Book Series"
+        ],
+        "task_id": "SD-Books-task-1",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Tablet",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Books"
+        ]
+    },
+    "Task 6": {
+        "Task Description": "The user is planning to start a new book series and wants suggestions for highly-rated series within their preferred genre. The assistant should provide options based on the user's genre preferences and reading format (e.g., physical books, ebooks, audiobooks).",
+        "User Intent": "Get recommendations for popular and highly-rated book series within your preferred genre and in your preferred reading format (e.g., physical, ebook, audiobook).",
+        "Task Goal": "The user receives a curated list of acclaimed book series options that match their genre and format preferences.",
+        "Relevant Affinity Types": [
+            "Genre",
+            "Reading Format"
+        ],
+        "task_id": "SD-Books-task-2",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Tablet",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Books"
+        ]
+    },
+    "Task 7": {
+        "Task Description": "The user is looking for a quick, engaging read to enjoy during their limited free time. The assistant should recommend short books or novellas based on the user's genre preferences and typical reading frequency or available reading time.",
+        "User Intent": "Find recommendations for short, engaging books or novellas that fit your preferred genres and the amount of time you typically have available for reading.",
+        "Task Goal": "The user receives suggestions for compelling yet concise reading options tailored to their interests and reading habits.",
+        "Relevant Affinity Types": [
+            "Genre",
+            "Reading Time Preference",
+            "Reading Frequency"
+        ],
+        "task_id": "SD-Books-task-3",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Books"
+        ]
+    },
+    "Task 8": {
+        "Task Description": "The user is interested in exploring a new genre and wants guidance on popular titles or authors to start with. The assistant should provide recommendations based on the user's existing genre preferences and reading format.",
+        "User Intent": "Discover popular titles or authors to help you explore a new genre, based on the genres you currently enjoy and your preferred reading format.",
+        "Task Goal": "The user receives a curated list of well-regarded books or authors within a new genre, making it easier to venture into unfamiliar territory.",
+        "Relevant Affinity Types": [
+            "Genre",
+            "Reading Format"
+        ],
+        "task_id": "SD-Books-task-4",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Books"
+        ]
+    },
+    "Task 9": {
+        "Task Description": "The user is looking for book recommendations suitable for a long travel period, such as a cross-country trip or extended vacation. The assistant should suggest engaging, lengthy books or series based on the user's genre preferences and typical reading frequency.",
+        "User Intent": "Find recommendations for engaging, lengthy books or book series that would be suitable for an upcoming extended travel period, based on your preferred genres and typical reading habits.",
+        "Task Goal": "The user receives suggestions for immersive, substantial reading material tailored to their interests and reading habits, ideal for a long journey.",
+        "Relevant Affinity Types": [
+            "Genre",
+            "Reading Frequency"
+        ],
+        "task_id": "SD-Books-task-5",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Books"
+        ]
+    },
+    "Task 10": {
+        "Task Description": "The user needs to schedule an upcoming event (e.g., meeting, appointment, social gathering) and wants assistance from the virtual assistant in finding a suitable time slot based on their preferences and existing calendar commitments.",
+        "User Intent": "Schedule an upcoming event by finding a suitable time slot that fits your preferences and existing calendar commitments.",
+        "Task Goal": "The user successfully schedules the event at a convenient time, considering their preferred event types and notification preferences.",
+        "Relevant Affinity Types": [
+            "Event Type Preference",
+            "Notification Preference"
+        ],
+        "task_id": "SD-Calendar-task-1",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Friday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Calendar"
+        ]
+    },
+    "Task 11": {
+        "Task Description": "The user is planning a trip and needs to block off time on their calendar for travel and activities. The assistant should help identify available dates based on the user's existing schedule and preferred event types.",
+        "User Intent": "Block off time on your calendar for an upcoming trip, considering your existing schedule and preferences for different event types.",
+        "Task Goal": "The user's calendar is updated with blocked-off dates for their trip, accommodating their preferred event types.",
+        "Relevant Affinity Types": [
+            "Event Type Preference",
+            "Timezone"
+        ],
+        "task_id": "SD-Calendar-task-2",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Calendar"
+        ]
+    },
+    "Task 12": {
+        "Task Description": "The user wants to review their upcoming schedule for a specific time period (e.g., next week, next month) and receive reminders or notifications for important events based on their preferences.",
+        "User Intent": "Review your upcoming schedule for a specific time period and set reminders or notifications for important events based on your preferences.",
+        "Task Goal": "The user receives a summary of their upcoming schedule, with reminders or notifications set according to their preferred event types and notification preferences.",
+        "Relevant Affinity Types": [
+            "Event Type Preference",
+            "Notification Preference"
+        ],
+        "task_id": "SD-Calendar-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Morning",
+            "Day of the Week": "Monday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Calendar"
+        ]
+    },
+    "Task 13": {
+        "Task Description": "The user needs to reschedule or cancel an existing event on their calendar due to a conflict or change in plans. The assistant should assist in finding alternative times or handling the cancellation based on the user's preferences.",
+        "User Intent": "Reschedule or cancel an existing event on your calendar due to a conflict or change in plans, considering your preferences.",
+        "Task Goal": "The user successfully reschedules the event at a suitable alternative time or cancels it, based on their preferences and existing schedule.",
+        "Relevant Affinity Types": [
+            "Event Type Preference",
+            "Notification Preference",
+            "Timezone"
+        ],
+        "task_id": "SD-Calendar-task-4",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Morning",
+            "Day of the Week": "Monday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Calendar"
+        ]
+    },
+    "Task 14": {
+        "Task Description": "The user is looking for upcoming events in their area that match their interests and preferences. The assistant should provide tailored event recommendations based on the user's preferred event types, price range, and group size.",
+        "User Intent": "Find upcoming events in your area that match your interests, considering your preferred event types, price range, and typical group size.",
+        "Task Goal": "The user receives a curated list of local event recommendations that align with their affinities, making it easier to discover and attend appealing events.",
+        "Relevant Affinity Types": [
+            "Event Type Preference",
+            "Price Range",
+            "Group Size Preference"
+        ],
+        "task_id": "SD-Events-task-1",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Friday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Events"
+        ]
+    },
+    "Task 15": {
+        "Task Description": "The user wants to purchase tickets for a specific event but needs assistance finding the best seating options based on their preferences and budget. The assistant should explore available seating choices and provide recommendations tailored to the user's seating preferences and price range.",
+        "User Intent": "Purchase tickets for an upcoming event, considering your seating preferences (e.g., front row, aisle seats) and budget constraints to find the best available options.",
+        "Task Goal": "The user secures event tickets with seating that matches their preferences while staying within their desired price range.",
+        "Relevant Affinity Types": [
+            "Seating Preference",
+            "Price Range"
+        ],
+        "task_id": "SD-Events-task-2",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Noisy"
+        },
+        "Relevant Domains": [
+            "Events"
+        ]
+    },
+    "Task 16": {
+        "Task Description": "The user is planning a weekend activity and is open to suggestions for events happening on specific days. The assistant should recommend events based on the user's preferred event types and the days of the week they are most interested in attending.",
+        "User Intent": "Discover interesting events happening this weekend that align with your preferred event types and the days you're available to attend.",
+        "Task Goal": "The user receives a list of appealing weekend event options that fit their interests and availability, making it easier to plan their weekend activities.",
+        "Relevant Affinity Types": [
+            "Event Type Preference",
+            "Days of Week Preference"
+        ],
+        "task_id": "SD-Events-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Friday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Events"
+        ]
+    },
+    "Task 17": {
+        "Task Description": "The user is visiting a new city and wants to explore the local event scene. The assistant should provide event recommendations based on the user's interests, group size, and preferred price range for activities in the area.",
+        "User Intent": "Discover interesting events happening in the city you're visiting, tailored to your preferred event types, typical group size, and budget.",
+        "Task Goal": "The user receives a curated list of local events that match their affinities, allowing them to experience the city's offerings aligned with their preferences.",
+        "Relevant Affinity Types": [
+            "Event Type Preference",
+            "Group Size Preference",
+            "Price Range"
+        ],
+        "task_id": "SD-Events-task-4",
+        "situations": {
+            "Location": "Guanajuato, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Noisy"
+        },
+        "Relevant Domains": [
+            "Events"
+        ]
+    },
+    "Task 18": {
+        "Task Description": "The user wants to stay updated on the latest news and stock price movements for companies in their preferred financial sectors. The assistant should provide tailored news updates and stock tracking based on the user's sector interests.",
+        "User Intent": "Get the latest news and stock price updates for companies in your preferred financial sectors.",
+        "Task Goal": "The user receives a curated news feed and stock tracking for their preferred sectors, keeping them informed about relevant developments.",
+        "Relevant Affinity Types": [
+            "Preferred Sectors",
+            "News Sources"
+        ],
+        "task_id": "SD-Finance-task-1",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Morning",
+            "Day of the Week": "Monday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Finance"
+        ]
+    },
+    "Task 19": {
+        "Task Description": "The user is interested in researching and comparing the performance of specific companies they are considering investing in. The assistant should provide detailed analysis and insights tailored to the user's companies of interest.",
+        "User Intent": "Research and compare the performance of specific companies you are interested in investing in.",
+        "Task Goal": "The user receives in-depth analysis and insights on the companies they specified, informing their investment decisions.",
+        "Relevant Affinity Types": [
+            "Financial Company"
+        ],
+        "task_id": "SD-Finance-task-2",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Finance"
+        ]
+    },
+    "Task 20": {
+        "Task Description": "The user wants to stay informed about market trends and expert opinions within their preferred financial sectors. The assistant should curate relevant news articles, analyst reports, and commentary from trusted sources based on the user's sector interests.",
+        "User Intent": "Stay informed about market trends and expert opinions within your preferred financial sectors.",
+        "Task Goal": "The user receives a tailored selection of news, reports, and commentary from trusted sources related to their preferred sectors.",
+        "Relevant Affinity Types": [
+            "Preferred Sectors",
+            "News Sources"
+        ],
+        "task_id": "SD-Finance-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Morning",
+            "Day of the Week": "Monday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Finance"
+        ]
+    },
+    "Task 21": {
+        "Task Description": "The user is interested in setting up portfolio tracking and receiving periodic updates on the performance of their investments. The assistant should configure portfolio monitoring based on the user's specific holdings and preferred update frequency.",
+        "User Intent": "Set up portfolio tracking and receive periodic updates on the performance of your investments.",
+        "Task Goal": "The user's investment portfolio is successfully tracked, and they receive regular updates on its performance based on their preferred frequency.",
+        "Relevant Affinity Types": [
+            "Financial Company"
+        ],
+        "task_id": "SD-Finance-task-4",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Finance"
+        ]
+    },
+    "Task 22": {
+        "Task Description": "The user wants to explore potential investment opportunities in new financial sectors. The assistant should provide an overview of different sectors, their performance trends, and key players, tailored to the user's risk tolerance and investment goals.",
+        "User Intent": "Explore potential investment opportunities in new financial sectors based on your risk tolerance and investment goals.",
+        "Task Goal": "The user receives a comprehensive overview of different financial sectors, their performance, and key companies, aligned with their risk tolerance and investment objectives.",
+        "Relevant Affinity Types": [
+            "Preferred Sectors"
+        ],
+        "task_id": "SD-Finance-task-5",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Finance"
+        ]
+    },
+    "Task 23": {
+        "Task Description": "The user is interested in finding a new game to purchase that aligns with their preferred game genres and gaming platforms. The assistant should provide personalized recommendations based on these preferences.",
+        "User Intent": "Find a new game to purchase that matches your preferred genres and gaming platforms.",
+        "Task Goal": "The user receives a curated list of game recommendations tailored to their genre and platform preferences, helping them discover a new game to enjoy.",
+        "Relevant Affinity Types": [
+            "Preferred Game Genres",
+            "Gaming Platforms"
+        ],
+        "task_id": "SD-Games-task-1",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Games"
+        ]
+    },
+    "Task 24": {
+        "Task Description": "The user is looking to join an online multiplayer game and needs assistance in finding a suitable option that matches their preferred game genres, multiplayer preferences (e.g., cooperative or competitive), and gaming frequency.",
+        "User Intent": "Find an online multiplayer game that aligns with your preferred genres, multiplayer preferences, and gaming frequency.",
+        "Task Goal": "The user receives recommendations for online multiplayer games that fit their preferences, enabling them to join a community and play with others.",
+        "Relevant Affinity Types": [
+            "Preferred Game Genres",
+            "Multiplayer Preference",
+            "Gaming Frequency"
+        ],
+        "task_id": "SD-Games-task-2",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Gaming PC",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Games"
+        ]
+    },
+    "Task 25": {
+        "Task Description": "The user is seeking information about an upcoming game release and wants to know if it aligns with their interests based on their preferred game genres, gaming platforms, and any specific game titles they enjoy.",
+        "User Intent": "Get information about an upcoming game release and whether it matches your interests based on your preferred genres, platforms, and favorite game titles.",
+        "Task Goal": "The user receives an analysis of the upcoming game release, including how well it aligns with their preferences, to help them decide if they want to purchase or follow the game.",
+        "Relevant Affinity Types": [
+            "Preferred Game Genres",
+            "Gaming Platforms",
+            "Preferred Game Name"
+        ],
+        "task_id": "SD-Games-task-3",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Games"
+        ]
+    },
+    "Task 26": {
+        "Task Description": "The user is looking for a casual game to play during short breaks or commutes and needs recommendations based on their preferred game genres, gaming platforms, and gaming frequency.",
+        "User Intent": "Find a casual game to play during short breaks or commutes, based on your preferred genres, platforms, and how often you play games.",
+        "Task Goal": "The user receives a list of casual game recommendations that fit their preferences and can be easily accessed and played in short bursts.",
+        "Relevant Affinity Types": [
+            "Preferred Game Genres",
+            "Gaming Platforms",
+            "Gaming Frequency"
+        ],
+        "task_id": "SD-Games-task-4",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Afternoon",
+            "Day of the Week": "Wednesday",
+            "Environment": "Noisy"
+        },
+        "Relevant Domains": [
+            "Games"
+        ]
+    },
+    "Task 27": {
+        "Task Description": "The user needs to book a hotel for an upcoming trip and wants recommendations that align with their preferences for hotel chains, desired amenities (e.g., pool, gym, free breakfast), location (city center, near attractions), star rating, and preferred room type.",
+        "User Intent": "Find and book a hotel for your upcoming trip that matches your preferences for hotel chains, desired amenities, location, star rating, and preferred room type.",
+        "Task Goal": "The user successfully books a hotel that meets their specific preferences across multiple affinity types.",
+        "Relevant Affinity Types": [
+            "Hotel Chains Preference",
+            "Amenity Preference",
+            "Location Preference",
+            "Star Rating Preference",
+            "Room Type Preference"
+        ],
+        "task_id": "SD-Hotels-task-1",
+        "situations": {
+            "Location": "Cabo San Lucas, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Wednesday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Hotels"
+        ]
+    },
+    "Task 28": {
+        "Task Description": "The user is looking for a hotel in a specific location and wants options that offer their preferred amenities, such as a pool or spa facilities. The assistant should provide recommendations tailored to the user's amenity preferences and desired location.",
+        "User Intent": "Find hotels in your desired location that offer the amenities you prefer, such as a pool or spa facilities.",
+        "Task Goal": "The user receives a curated list of hotel options in their preferred location with the amenities they value most.",
+        "Relevant Affinity Types": [
+            "Amenity Preference",
+            "Location Preference"
+        ],
+        "task_id": "SD-Hotels-task-2",
+        "situations": {
+            "Location": "Cancun, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Hotels"
+        ]
+    },
+    "Task 29": {
+        "Task Description": "The user has a preferred hotel chain and wants to find properties within that chain in a certain city or area. The assistant should suggest options from the user's preferred chain that meet any additional criteria, such as star rating or room type.",
+        "User Intent": "Locate hotels from your preferred chain in the city or area you want to visit, considering any additional preferences for star rating or room type.",
+        "Task Goal": "The user identifies suitable hotel options from their preferred chain that also meet their other criteria.",
+        "Relevant Affinity Types": [
+            "Hotel Chains Preference",
+            "Location Preference",
+            "Star Rating Preference",
+            "Room Type Preference"
+        ],
+        "task_id": "SD-Hotels-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Wednesday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Hotels"
+        ]
+    },
+    "Task 30": {
+        "Task Description": "The user is looking for an extended-stay hotel or apartment-style accommodation for a longer trip and wants options that offer amenities suitable for longer stays, such as kitchenettes or laundry facilities. The assistant should recommend options based on the user's preferences.",
+        "User Intent": "Find extended-stay hotels or apartment-style accommodations suitable for your longer trip, with amenities like kitchenettes or laundry facilities that you prefer.",
+        "Task Goal": "The user receives recommendations for longer-stay accommodations that meet their needs and preferred amenities.",
+        "Relevant Affinity Types": [
+            "Amenity Preference",
+            "Room Type Preference"
+        ],
+        "task_id": "SD-Hotels-task-4",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Hotels"
+        ]
+    },
+    "Task 31": {
+        "Task Description": "The user wants to find new shows or movies to watch based on their preferred genres, favorite actors/directors, and viewing platform. The assistant should provide tailored recommendations that match these preferences.",
+        "User Intent": "Discover new shows or movies that align with your preferred genres, favorite actors/directors, and preferred viewing platform.",
+        "Task Goal": "The user receives a curated list of personalized media recommendations to explore based on their stated preferences.",
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Favorite Actors and Directors",
+            "Viewing Platform Preference"
+        ],
+        "task_id": "SD-Media-task-1",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Media"
+        ]
+    },
+    "Task 32": {
+        "Task Description": "The user is looking for a specific movie or show to rent or purchase but can't recall the exact title. The assistant should help identify the desired media based on details like genre, plot, cast, or other distinguishing factors provided by the user.",
+        "User Intent": "Find and obtain a specific movie or show you want to watch, based on details like genre, plot, cast, or other distinguishing factors you can provide.",
+        "Task Goal": "The user successfully identifies and locates the desired movie or show for rental or purchase.",
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Favorite Actors and Directors",
+            "Favorite Media"
+        ],
+        "task_id": "SD-Media-task-2",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smart TV",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Media"
+        ]
+    },
+    "Task 33": {
+        "Task Description": "The user wants to stay updated on new releases or upcoming seasons of their favorite shows. The assistant should set up notifications or provide a watchlist for the user's preferred media.",
+        "User Intent": "Stay informed about new releases or upcoming seasons of your favorite shows by setting up notifications or a watchlist.",
+        "Task Goal": "The user has a personalized system in place to receive timely updates on new content related to their media preferences.",
+        "Relevant Affinity Types": [
+            "Favorite Media"
+        ],
+        "task_id": "SD-Media-task-3",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Media"
+        ]
+    },
+    "Task 34": {
+        "Task Description": "The user is looking for family-friendly movie or show recommendations suitable for co-viewing with children of a specific age group. The assistant should suggest options that are age-appropriate and align with the user's genre preferences.",
+        "User Intent": "Find family-friendly movie or show recommendations suitable for co-viewing with children of a specific age group, while considering your preferred genres.",
+        "Task Goal": "The user receives a list of age-appropriate media recommendations that balance family-friendly content with their personal genre interests.",
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Viewing Platform Preference"
+        ],
+        "task_id": "SD-Media-task-4",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smart TV",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Media"
+        ]
+    },
+    "Task 35": {
+        "Task Description": "The user wants to explore media from a specific country or culture, perhaps to learn more about that region or practice a language. The assistant should recommend shows, movies, or documentaries that provide cultural exposure aligned with the user's interests.",
+        "User Intent": "Discover shows, movies, or documentaries that offer exposure to a specific country or culture, aligning with your interests and preferences.",
+        "Task Goal": "The user receives a curated selection of media that provides cultural insights while catering to their personal tastes and affinities.",
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Favorite Media"
+        ],
+        "task_id": "SD-Media-task-5",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Media"
+        ]
+    },
+    "Task 36": {
+        "Task Description": "The user needs to send a message to a friend or family member but is unsure which messaging app or communication style would be most appropriate based on the recipient's preferences. The assistant should recommend the best way to reach out.",
+        "User Intent": "Send a message to a friend or family member using the most suitable messaging app and communication style based on their preferences.",
+        "Task Goal": "The user successfully sends the message through the recommended channel, ensuring effective communication tailored to the recipient's preferences.",
+        "Relevant Affinity Types": [
+            "Preferred Messaging Apps",
+            "Communication Style",
+            "Frequent Contact"
+        ],
+        "task_id": "SD-Messaging-task-1",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Messaging"
+        ]
+    },
+    "Task 37": {
+        "Task Description": "The user needs to share their current location with someone, but wants to do so discreetly without causing unnecessary disruptions. The assistant should guide them on how to share their location while respecting the recipient's preferred communication style.",
+        "User Intent": "Share your current location with someone in a discreet manner that aligns with their preferred communication style.",
+        "Task Goal": "The user's location is successfully shared with the intended recipient through an appropriate channel and method based on their preferences.",
+        "Relevant Affinity Types": [
+            "Preferred Messaging Apps",
+            "Communication Style"
+        ],
+        "task_id": "SD-Messaging-task-2",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Messaging"
+        ]
+    },
+    "Task 38": {
+        "Task Description": "The user is part of a group chat and wants to mute or leave the conversation temporarily without causing offense. The assistant should recommend the best approach based on the group's typical communication style and the user's relationship with the participants.",
+        "User Intent": "Temporarily mute or leave a group chat while considering the group's communication style and your relationship with the participants.",
+        "Task Goal": "The user successfully manages their involvement in the group chat without disrupting the conversation or offending others, based on the recommended approach.",
+        "Relevant Affinity Types": [
+            "Communication Style",
+            "Frequent Contact"
+        ],
+        "task_id": "SD-Messaging-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Messaging"
+        ]
+    },
+    "Task 39": {
+        "Task Description": "The user needs to send a time-sensitive message to someone but is unsure of the best way to ensure it is noticed promptly. The assistant should suggest the most effective messaging app and communication style based on the recipient's preferences and the urgency of the message.",
+        "User Intent": "Send a time-sensitive message in a way that ensures it is noticed promptly, considering the recipient's preferred messaging app and communication style.",
+        "Task Goal": "The user successfully delivers the time-sensitive message through the recommended channel, increasing the likelihood of a timely response from the recipient.",
+        "Relevant Affinity Types": [
+            "Preferred Messaging Apps",
+            "Communication Style",
+            "Frequent Contact"
+        ],
+        "task_id": "SD-Messaging-task-4",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Afternoon",
+            "Day of the Week": "Wednesday",
+            "Environment": "Noisy"
+        },
+        "Relevant Domains": [
+            "Messaging"
+        ]
+    },
+    "Task 40": {
+        "Task Description": "The user wants to find a movie to watch this weekend and is looking for recommendations based on their preferred genres, favorite actors/directors, and ideal viewing time (e.g., matinee, evening).",
+        "User Intent": "Find a movie recommendation to watch this weekend that matches your preferred genres, favorite actors/directors, and ideal viewing time.",
+        "Task Goal": "The user receives a tailored movie recommendation that aligns with their stated preferences, making it easier to choose a film they're likely to enjoy.",
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Favorite Actors and Directors",
+            "Viewing Time Preference"
+        ],
+        "task_id": "SD-Movies-task-1",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Friday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Movies"
+        ]
+    },
+    "Task 41": {
+        "Task Description": "The user is planning a movie outing and needs assistance finding suitable showtimes and theaters based on their location, preferred theater type (e.g., IMAX, luxury), and desired seat type (e.g., recliners).",
+        "User Intent": "Plan a movie outing by finding suitable showtimes and theaters based on your location, preferred theater type, and desired seat type.",
+        "Task Goal": "The user receives a list of theater options with showtimes that match their preferences, streamlining the process of selecting a convenient viewing experience.",
+        "Relevant Affinity Types": [
+            "Theater Type Preference",
+            "Seat Type Preference"
+        ],
+        "task_id": "SD-Movies-task-2",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Movies"
+        ]
+    },
+    "Task 42": {
+        "Task Description": "The user is looking for recommendations on new movie releases that align with their taste in genres and favorite actors/directors. They may also want to consider critic reviews.",
+        "User Intent": "Get recommendations on new movie releases that match your preferred genres and favorite actors/directors, potentially considering critic reviews.",
+        "Task Goal": "The user receives a curated list of newly released movies that cater to their genre and filmmaker preferences, along with critical acclaim information to aid their decision.",
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Favorite Actors and Directors"
+        ],
+        "task_id": "SD-Movies-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Movies"
+        ]
+    },
+    "Task 43": {
+        "Task Description": "The user wants to purchase movie tickets in advance for an upcoming date night or family outing. They need assistance finding suitable showtimes, theaters, and seating options based on their preferences.",
+        "User Intent": "Purchase movie tickets in advance for an upcoming event, finding suitable showtimes, theaters, and seating based on your preferences.",
+        "Task Goal": "The user successfully books tickets for a movie screening that meets their criteria for theater type, seating, and viewing time, ensuring an enjoyable experience.",
+        "Relevant Affinity Types": [
+            "Theater Type Preference",
+            "Seat Type Preference",
+            "Viewing Time Preference"
+        ],
+        "task_id": "SD-Movies-task-4",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Movies"
+        ]
+    },
+    "Task 44": {
+        "Task Description": "The user wants to discover new music that aligns with their preferred genres and favorite artists/bands. The assistant should provide personalized song and album recommendations based on these preferences.",
+        "User Intent": "Discover new music that matches your preferred genres and favorite artists/bands, with personalized song and album recommendations.",
+        "Task Goal": "The user receives a curated list of new music recommendations tailored to their genre and artist preferences.",
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Favorite Artists",
+            "Favorite Bands"
+        ],
+        "task_id": "SD-Music-task-1",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Music"
+        ]
+    },
+    "Task 45": {
+        "Task Description": "The user is creating a playlist for a specific occasion or activity (e.g., workout, party, road trip) and needs assistance in finding suitable songs that match their music tastes and the desired vibe.",
+        "User Intent": "Create a playlist for [occasion/activity] by finding songs that match your music preferences and the desired vibe.",
+        "Task Goal": "The user has a personalized playlist tailored to their music tastes and the intended occasion/activity.",
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Playlist Preference"
+        ],
+        "task_id": "SD-Music-task-2",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Music"
+        ]
+    },
+    "Task 46": {
+        "Task Description": "The user wants to explore an unfamiliar music genre and needs guidance on popular albums or artists to start with, based on their existing preferences.",
+        "User Intent": "Explore a new music genre by getting recommendations for popular albums or artists to start with, based on your current music preferences.",
+        "Task Goal": "The user receives a selection of entry-point albums/artists for the new genre, tailored to ease their transition.",
+        "Relevant Affinity Types": [
+            "Preferred Genres",
+            "Favorite Artists",
+            "Favorite Bands",
+            "Favorite Albums"
+        ],
+        "task_id": "SD-Music-task-3",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Music"
+        ]
+    },
+    "Task 47": {
+        "Task Description": "The user is an audiophile seeking high-quality audio sources for their favorite albums, taking into account their preferred audio quality and platform preferences.",
+        "User Intent": "Find high-quality audio sources for your favorite albums that meet your preferred audio quality standards and platform preferences.",
+        "Task Goal": "The user can access their favorite albums in their desired audio quality format on their preferred platform.",
+        "Relevant Affinity Types": [
+            "Favorite Albums",
+            "Preferred Audio Quality",
+            "Platform Preference"
+        ],
+        "task_id": "SD-Music-task-4",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Music"
+        ]
+    },
+    "Task 48": {
+        "Task Description": "The user needs to rent a car for an upcoming trip and wants recommendations that align with their preferences for car type, rental company, preferred brand, rental duration, additional features (e.g., navigation system, child seats), and fuel type.",
+        "User Intent": "Find rental car recommendations that match your preferences for car type, rental company, preferred brand, rental duration, additional features, and fuel type for an upcoming trip.",
+        "Task Goal": "The user receives a list of rental car options that closely match their stated preferences, simplifying the selection process.",
+        "Relevant Affinity Types": [
+            "Car Type Preference",
+            "Preferred Rental Company",
+            "Preferred Car Brand",
+            "Rental Duration Preference",
+            "Additional Feature Preference",
+            "Preferred Fuel Type"
+        ],
+        "task_id": "SD-Rental Cars-task-1",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Wednesday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Rental Cars"
+        ]
+    },
+    "Task 49": {
+        "Task Description": "The user is looking for a rental car for a day trip or short weekend getaway. The assistant should suggest compact or economy car options from the user's preferred rental companies and brands, considering any fuel efficiency preferences.",
+        "User Intent": "Recommend compact or economy rental cars from your preferred companies and brands for a day trip or short weekend getaway, considering your fuel efficiency preferences.",
+        "Task Goal": "The user receives rental car recommendations tailored to their preferences for short trips, making it easy to find an affordable and efficient option.",
+        "Relevant Affinity Types": [
+            "Car Type Preference",
+            "Preferred Rental Company",
+            "Preferred Car Brand",
+            "Preferred Fuel Type"
+        ],
+        "task_id": "SD-Rental Cars-task-2",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Morning",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Rental Cars"
+        ]
+    },
+    "Task 50": {
+        "Task Description": "The user needs to rent a larger vehicle to accommodate a group or family for an extended trip. The assistant should provide options from preferred rental companies, considering the user's preferences for vehicle type, brand, and any additional feature needs.",
+        "User Intent": "Find rental options for a larger vehicle to accommodate your group or family for an extended trip, from your preferred rental companies, considering your preferences for vehicle type, brand, and any additional feature needs.",
+        "Task Goal": "The user receives a curated list of rental car options suitable for group travel that align with their stated preferences.",
+        "Relevant Affinity Types": [
+            "Car Type Preference",
+            "Preferred Rental Company",
+            "Preferred Car Brand",
+            "Additional Feature Preference"
+        ],
+        "task_id": "SD-Rental Cars-task-3",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Friday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Rental Cars"
+        ]
+    },
+    "Task 51": {
+        "Task Description": "The user is interested in renting a luxury or high-end vehicle for a special occasion. The assistant should recommend options from the user's preferred rental companies and brands, considering any preferences for specific vehicle features or amenities.",
+        "User Intent": "Recommend luxury or high-end rental car options from your preferred companies and brands for a special occasion, considering any preferences for specific vehicle features or amenities.",
+        "Task Goal": "The user receives a list of upscale rental car options that meet their preferences for a special event or occasion.",
+        "Relevant Affinity Types": [
+            "Car Type Preference",
+            "Preferred Rental Company",
+            "Preferred Car Brand",
+            "Additional Feature Preference"
+        ],
+        "task_id": "SD-Rental Cars-task-4",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Friday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Rental Cars"
+        ]
+    },
+    "Task 52": {
+        "Task Description": "The user is looking for a restaurant to visit for a special occasion. The assistant should provide personalized recommendations based on the user's preferred cuisine type, dietary restrictions (if any), desired ambiance or atmosphere, and budget range.",
+        "User Intent": "Find a restaurant recommendation for a special occasion that aligns with your preferred cuisine, dietary needs or restrictions, desired ambiance, and budget range.",
+        "Task Goal": "The user receives a curated list of restaurant options that match their preferences, making it easier to choose a suitable venue for their special occasion.",
+        "Relevant Affinity Types": [
+            "Cuisine Preference",
+            "Dietary Restrictions",
+            "Ambiance Preference",
+            "Price Range"
+        ],
+        "task_id": "SD-Restaurants-task-1",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Restaurants"
+        ]
+    },
+    "Task 53": {
+        "Task Description": "The user is visiting a new city and wants to explore the local food scene. The assistant should suggest popular or highly-rated restaurants in the area, considering the user's cuisine preferences and any dietary restrictions they may have.",
+        "User Intent": "Discover popular or highly-rated restaurants in a new city you're visiting, tailored to your preferred cuisine types and any dietary restrictions you have.",
+        "Task Goal": "The user receives a list of recommended restaurants in the new city that align with their culinary tastes and dietary needs, helping them explore the local food culture.",
+        "Relevant Affinity Types": [
+            "Cuisine Preference",
+            "Dietary Restrictions"
+        ],
+        "task_id": "SD-Restaurants-task-2",
+        "situations": {
+            "Location": "San Miguel de Allende, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Restaurants"
+        ]
+    },
+    "Task 54": {
+        "Task Description": "The user is planning a group outing and needs to find a restaurant that can accommodate diverse dietary needs and preferences within the group. The assistant should provide options that cater to various cuisine preferences, dietary restrictions, and budget ranges.",
+        "User Intent": "Find a restaurant option suitable for a group outing that can accommodate diverse dietary needs and preferences, including different cuisine preferences, dietary restrictions, and budget ranges within the group.",
+        "Task Goal": "The user receives a shortlist of restaurant options that can cater to the group's varied dietary needs and preferences, making it easier to plan an enjoyable outing for everyone.",
+        "Relevant Affinity Types": [
+            "Cuisine Preference",
+            "Dietary Restrictions",
+            "Price Range"
+        ],
+        "task_id": "SD-Restaurants-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Noisy"
+        },
+        "Relevant Domains": [
+            "Restaurants"
+        ]
+    },
+    "Task 55": {
+        "Task Description": "The user is seeking a cozy, intimate restaurant for a romantic dinner. The assistant should recommend options that match the user's preferred cuisine type and ambiance preferences, such as dimly lit, quiet, or upscale settings.",
+        "User Intent": "Find a cozy, intimate restaurant recommendation for a romantic dinner that aligns with your preferred cuisine type and desired ambiance or atmosphere.",
+        "Task Goal": "The user receives a curated list of romantic restaurant options that match their cuisine preferences and desired ambiance, helping them plan a memorable evening.",
+        "Relevant Affinity Types": [
+            "Cuisine Preference",
+            "Ambiance Preference"
+        ],
+        "task_id": "SD-Restaurants-task-4",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Restaurants"
+        ]
+    },
+    "Task 56": {
+        "Task Description": "The user needs to book an appointment with a service provider (e.g., hair salon, massage therapist, dentist) and wants recommendations that match their preferences for provider type, location, and appointment time availability.",
+        "User Intent": "Find and book an appointment with a service provider that matches your preferences for provider type (e.g., hair salon, massage therapist, dentist), preferred location, and ideal appointment times.",
+        "Task Goal": "The user successfully books an appointment with a recommended service provider that aligns with their stated preferences.",
+        "Relevant Affinity Types": [
+            "Preferred Service Provider Types",
+            "Location Preference",
+            "Appointment Time Preference"
+        ],
+        "task_id": "SD-Services-task-1",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Services"
+        ]
+    },
+    "Task 57": {
+        "Task Description": "The user is looking to establish a recurring service (e.g., monthly haircut, quarterly teeth cleaning) and needs assistance finding providers that offer their preferred service type and frequency, within a convenient location.",
+        "User Intent": "Set up a recurring service appointment (e.g., monthly haircut, quarterly teeth cleaning) with a provider that offers your preferred service type and frequency, in a location convenient for you.",
+        "Task Goal": "The user schedules a recurring service with a recommended provider that meets their service type, frequency, and location preferences.",
+        "Relevant Affinity Types": [
+            "Preferred Service Provider Types",
+            "Service Frequency Preference",
+            "Location Preference"
+        ],
+        "task_id": "SD-Services-task-2",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Services"
+        ]
+    },
+    "Task 58": {
+        "Task Description": "The user has a specific gender preference for their service provider (e.g., hair stylist, massage therapist) and needs to find suitable options in their area that meet this criteria along with their preferred provider type.",
+        "User Intent": "Discover service providers of your preferred gender (e.g., hair stylist, massage therapist) that offer the type of service you need, within your local area.",
+        "Task Goal": "The user identifies one or more service providers that match their gender preference and service type needs.",
+        "Relevant Affinity Types": [
+            "Service Provider Gender Preference",
+            "Preferred Service Provider Types",
+            "Location Preference"
+        ],
+        "task_id": "SD-Services-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Services"
+        ]
+    },
+    "Task 59": {
+        "Task Description": "The user is new to an area and needs to find reputable service providers (e.g., dentist, doctor, veterinarian) that are highly rated and offer appointments during their preferred time windows.",
+        "User Intent": "As someone new to the area, find highly rated service providers (e.g., dentist, doctor, veterinarian) that offer appointments during your preferred time windows.",
+        "Task Goal": "The user gets recommendations for well-reviewed service providers in their new location that have availability matching their schedule preferences.",
+        "Relevant Affinity Types": [
+            "Preferred Service Provider Types",
+            "Appointment Time Preference",
+            "Location Preference"
+        ],
+        "task_id": "SD-Services-task-4",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Wednesday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Services"
+        ]
+    },
+    "Task 60": {
+        "Task Description": "The user is looking to purchase a new product and needs recommendations based on their preferred product category, price range, and favorite brands. The assistant should provide personalized product suggestions that match these preferences.",
+        "User Intent": "Find recommendations for a new product within your preferred category, price range, and from your favorite brands.",
+        "Task Goal": "The user receives a curated list of product options tailored to their stated preferences, simplifying their purchase decision.",
+        "Relevant Affinity Types": [
+            "Preferred Product Category",
+            "Price Range Preference",
+            "Brand Preference"
+        ],
+        "task_id": "SD-Shopping-task-1",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Shopping"
+        ]
+    },
+    "Task 61": {
+        "Task Description": "The user is interested in exploring new product categories and wants to see top-rated options within a specific price range. The assistant should recommend highly-rated products that fit the user's budget.",
+        "User Intent": "Discover top-rated products in a new category you're interested in exploring, within your specified price range.",
+        "Task Goal": "The user receives recommendations for well-reviewed products in an unfamiliar category that align with their budget preferences.",
+        "Relevant Affinity Types": [
+            "Price Range Preference"
+        ],
+        "task_id": "SD-Shopping-task-2",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Shopping"
+        ]
+    },
+    "Task 62": {
+        "Task Description": "The user needs to purchase a gift for someone and requires suggestions based on the recipient's interests and the user's price range. The assistant should provide gift ideas tailored to the recipient's preferences while respecting the user's budget.",
+        "User Intent": "Get gift ideas for someone based on their interests, within your specified price range.",
+        "Task Goal": "The user receives a list of thoughtful gift options that match the recipient's interests and fit the user's budget.",
+        "Relevant Affinity Types": [
+            "Price Range Preference"
+        ],
+        "task_id": "SD-Shopping-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Friday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Shopping"
+        ]
+    },
+    "Task 63": {
+        "Task Description": "The user is interested in exploring sustainable or eco-friendly product options within their preferred category. The assistant should recommend products that align with the user's values and interests.",
+        "User Intent": "Find sustainable or eco-friendly product options within your preferred category that align with your values.",
+        "Task Goal": "The user receives a list of environmentally-conscious product recommendations tailored to their category preferences.",
+        "Relevant Affinity Types": [
+            "Preferred Product Category"
+        ],
+        "task_id": "SD-Shopping-task-4",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Shopping"
+        ]
+    },
+    "Task 64": {
+        "Task Description": "The user wants to stay up-to-date on the latest product releases and trends within their favorite brands. The assistant should provide information on newly launched products from the user's preferred brands.",
+        "User Intent": "Keep track of the latest product releases and trends from your favorite brands.",
+        "Task Goal": "The user receives timely updates on new product launches and trends from the brands they follow.",
+        "Relevant Affinity Types": [
+            "Brand Preference"
+        ],
+        "task_id": "SD-Shopping-task-5",
+        "situations": {
+            "Location": "Mexico City",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Shopping"
+        ]
+    },
+    "Task 65": {
+        "Task Description": "The user is planning an upcoming trip and needs help finding attractions and activities that match their travel preferences. The assistant should consider factors like preferred destination types, typical trip duration, group size, frequently visited locations, and preferred travel seasons.",
+        "User Intent": "Plan your upcoming trip by finding attractions and activities tailored to your preferred destination types, typical trip duration, group size, frequently visited locations, and ideal travel seasons.",
+        "Task Goal": "The user receives a personalized itinerary with a curated list of attractions and activities that align with their stated travel preferences.",
+        "Relevant Affinity Types": [
+            "Preferred Destination Types",
+            "Duration Preference",
+            "Group Size Preference",
+            "Frequent Travel Destination",
+            "Travel Season Preference"
+        ],
+        "task_id": "SD-Travel-task-1",
+        "situations": {
+            "Location": "Cancun, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Travel"
+        ]
+    },
+    "Task 66": {
+        "Task Description": "The user is interested in exploring a new city and wants recommendations for the top sights and hidden gems. The assistant should provide suggestions based on the user's preferences for destination type, group size, and travel season.",
+        "User Intent": "Discover the top sights and hidden gems in a new city you plan to visit, tailored to your preferred destination type, group size, and ideal travel season.",
+        "Task Goal": "The user receives a customized list of must-see attractions and off-the-beaten-path experiences that match their stated preferences.",
+        "Relevant Affinity Types": [
+            "Preferred Destination Types",
+            "Group Size Preference",
+            "Travel Season Preference"
+        ],
+        "task_id": "SD-Travel-task-2",
+        "situations": {
+            "Location": "Guanajuato, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Afternoon",
+            "Day of the Week": "Saturday",
+            "Environment": "Noisy"
+        },
+        "Relevant Domains": [
+            "Travel"
+        ]
+    },
+    "Task 67": {
+        "Task Description": "The user is looking for a quick weekend getaway within driving distance. The assistant should recommend nearby destinations based on the user's preferred destination types, typical trip duration, and frequently visited locations.",
+        "User Intent": "Find recommendations for a quick weekend getaway within driving distance, based on your preferred destination types, typical trip duration, and frequently visited locations.",
+        "Task Goal": "The user receives a shortlist of nearby destinations that align with their preferences, making it easier to plan a spontaneous trip.",
+        "Relevant Affinity Types": [
+            "Preferred Destination Types",
+            "Duration Preference",
+            "Frequent Travel Destination"
+        ],
+        "task_id": "SD-Travel-task-3",
+        "situations": {
+            "Location": "Mexico City, Mexico",
+            "Device": "Smartphone",
+            "Time of Day": "Evening",
+            "Day of the Week": "Thursday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Travel"
+        ]
+    },
+    "Task 68": {
+        "Task Description": "The user is planning a multi-generational family vacation and needs help finding a destination and activities suitable for a diverse group. The assistant should provide recommendations based on the user's preferred destination types, group size, and travel season preferences.",
+        "User Intent": "Plan a multi-generational family vacation by finding a destination and activities suitable for a diverse group, based on your preferred destination types, group size, and ideal travel season.",
+        "Task Goal": "The user receives a tailored vacation plan that accommodates the needs and interests of their multi-generational group, ensuring an enjoyable experience for all.",
+        "Relevant Affinity Types": [
+            "Preferred Destination Types",
+            "Group Size Preference",
+            "Travel Season Preference"
+        ],
+        "task_id": "SD-Travel-task-4",
+        "situations": {
+            "Location": "Guadalajara, Jalisco, Mexico",
+            "Device": "Laptop",
+            "Time of Day": "Evening",
+            "Day of the Week": "Saturday",
+            "Environment": "Quiet"
+        },
+        "Relevant Domains": [
+            "Travel"
+        ]
+    }
+}
