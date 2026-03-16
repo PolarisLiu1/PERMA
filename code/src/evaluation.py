@@ -1086,8 +1086,8 @@ def run_incremental_eval(args):
         
         if dataset_type == "standard":
             # Standard incremental data loading
-            in_path = os.path.join(DATA_ROOT, "tasks", f"user{uid}", f"input_data{version}{file_name}{style_name}.json")
-            if not os.path.exists(in_path): return
+            in_path = _resolve_input_data_path(uid, version, file_name, style_name)
+            if not in_path: return
             input_data = json.load(open(in_path, "r", encoding="utf-8"))
             
             # Load dialogue and timeline
@@ -1095,6 +1095,9 @@ def run_incremental_eval(args):
                 dialogue_path = f"{DATA_ROOT}/tasks/user{uid}/raw_dialogues_s.json"
             else:
                 dialogue_path = f"{DATA_ROOT}/tasks/user{uid}/raw_dialogues_c.json" if args.no_noise else f"{DATA_ROOT}/tasks/user{uid}/raw_dialogues_n.json"
+            if not dialogue_path or not os.path.exists(dialogue_path):
+                logger.warning(f"Dialogue file missing for user {uid}, skip")
+                return
                 
             with open(dialogue_path, 'r', encoding='utf-8') as f:
                 single_checkpoint_dataset = json.load(f)

@@ -779,7 +779,7 @@ class StyleTransferProcessor:
         self.wildchat_dir = wildchat_dir
         self.user_to_country = self._load_birth_country_info()
         self.input_filename = "raw_dialogues_c.json"
-        self.output_filename = "raw_dialogues_style_transformed.json"
+        self.output_filename = "raw_dialogues_s.json"
 
     def _load_birth_country_info(self):
         user_to_country = {}
@@ -1011,6 +1011,9 @@ Return the rewritten dialogue as a **JSON array with the same structure** as the
 
 
 def run_generation_task(output_dir: str, topic_number: int, multi_domain: bool, regenerate_no_noise: bool = False, style_transfer: bool = False, wildchat_dir: str = "WildChat-1M", **kwargs):
+    src_dir = Path(__file__).resolve().parent
+    output_dir = str((src_dir / output_dir).resolve()) if not os.path.isabs(output_dir) else output_dir
+    wildchat_dir = str((src_dir / wildchat_dir).resolve()) if not os.path.isabs(wildchat_dir) else wildchat_dir
     count_country = COUNTRY
     USER_IDS = []
     for _, indices in count_country.items():
@@ -1242,7 +1245,7 @@ def run_generation_task(output_dir: str, topic_number: int, multi_domain: bool, 
 if __name__ == "__main__":
     # Convert hyperparameters to parse implementation
     parser = argparse.ArgumentParser(description="Generate complete dataset")
-    parser.add_argument("--output_dir", type=str, default="../../data/tasks/generated_datasets_1208_FULL", help="Output directory")
+    parser.add_argument("--output_dir", type=str, default="../../data/tasks", help="Output directory")
     parser.add_argument("--topic_number", type=int, default=3, help="Number of topics selected per dialogue round")
     parser.add_argument("--multi_domain", default=True, help="Whether it is a multi-domain task")
     parser.add_argument("--test", action="store_true", help="Whether it is test mode")

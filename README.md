@@ -1,94 +1,47 @@
-## PrefEvolve: Tracking the Evolving Self in Event-Driven Persona States for Personalized Memory
-* **Supplement events**: refine or update existing preferences
+# PrefEvolve: Tracking the Evolving Self in Event-Driven Persona States for Personalized Memory
 
-### Query Variations
+Official codebase of the **PrefEvolve benchmark**, designed to evaluate whether memory-augmented agents can track, update, and apply evolving user preferences across long-horizon interactions.
 
-To better simulate realistic interactions, PrefEvolve introduces two types of variation.
+<p align="center"><img src="figure/intro.png" alt="PrefEvolve overview" width="100%"></p>
 
-#### In-Session Noise Injection
+## ✨ Why PrefEvolve
 
-Five perturbation types are used:
+PrefEvolve models preference understanding as an **event-driven temporal process**:
 
-1. **Omitted information**
-2. **Context switching**
-3. **Inconsistent preferences**
-4. **Multilingual expressions**
-5. **Colloquial language**
+- preferences are revealed gradually through user feedback rather than given explicitly
+- user constraints can conflict across sessions
+- agents must recover relevant memory under noisy, realistic dialogue
 
-These perturbations emulate real conversational ambiguity.
+## 🔍 Research Questions
 
-#### Style-Aligned Queries
+PrefEvolve focuses on three core questions:
 
-User queries are aligned with styles observed in **WildChat**, improving realism and linguistic diversity.
+1. Can a system recover user-specific preferences from long interaction histories?
+2. Can it track how preferences evolve after emergence and supplement events?
+3. Can it generate responses consistent with updated persona states in new tasks?
 
+## 🧩 Benchmark Highlights
 
-## 📊 Evaluation Protocols
+- **Event-driven personalization** through multi-session interaction timelines
+- **Implicit preference extraction** from natural task-oriented dialogue
+- **Robust query settings** with in-session perturbations and style variation
+- **Cross-framework evaluation** for memory systems under a unified protocol
 
-PrefEvolve includes two complementary protocols.
+Supported memory frameworks: `Mem0`, `MemOS`, `Memobase`, `Supermemory`, `Lightmem`, `EverMemOS`
 
-<p align="center"><img src="figure/pipeline.png" alt="" width="80%"></p>
+## 🧪 Benchmark Design
 
-### Multiple-Choice Evaluation
+<p align="center"><img src="figure/pipeline.png" alt="PrefEvolve pipeline" width="100%"></p>
 
-Responses are categorized along three dimensions:
+### 1) Event-Driven Persona Construction
 
-* **Task Completion (T)**
-* **Preference Consistency (P)**
-* **Informational Confidence (I)**
+Each user is represented by a timeline of sessions derived from persona profiles and interaction summaries. During each session, users may:
 
-The combinations of these dimensions form eight evaluation categories.
+- issue goal-oriented requests
+- provide correction feedback
+- refine constraints and preferences
 
-### Interactive Evaluation
+Preference evolution is modeled with two event types:
 
-A user simulator accesses:
-
-* ground-truth dialogue history
-* annotated preferences
-
-It then interacts with the tested model to determine whether the task objective is satisfied.
-
-Reported metrics:
-
-* **Turn-1**: solved in one response
-* **Turn-2**: solved after one clarification turn
----
-
-## ⚙️ Setup
-
-### 1) Environment
-
-* Python 3.10+
-```bash
-pip install openai python-dotenv tqdm numpy sentence-transformers tiktoken bert-score nltk json5 requests torch
-```
-Add additional backend keys as needed.
-
----
-
-## 🚀 Quick Start
-
-Run commands from `code/src`.
-
-### A) Generate Event-Driven Dialogue Data
-
-```bash
-python complete_dataset_generator.py \
-  --output_dir ../../data/tasks/generated_datasets \
-  --topic_number 3 \
-  --multi_domain True
-```
-
-Optional:
-
-```bash
-python complete_dataset_generator.py \
-  --output_dir ../../data/tasks/generated_datasets \
-  --regenerate_no_noise
-```
-
-```bash
-python complete_dataset_generator.py \
-  --output_dir ../../data/tasks/generated_datasets \
-  --style_transfer \
-  --wildchat_dir WildChat-1M
-```
+- **Emergence**: introduces a new preference signal
+- **Supplement**: updates or sharpens existing preference signals

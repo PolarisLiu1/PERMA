@@ -3,11 +3,10 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from collections import defaultdict
 from time import time
-from utils.prompts import (
-    MEM0_CONTEXT_TEMPLATE,
-    MEM0_GRAPH_CONTEXT_TEMPLATE,
-    MEMOS_CONTEXT_TEMPLATE,
-)
+
+MEM0_CONTEXT_TEMPLATE = "User {user_id} memory context:\n{memories}"
+MEM0_GRAPH_CONTEXT_TEMPLATE = "User {user_id} memory context:\n{memories}\nRelations:\n{relations}"
+MEMOS_CONTEXT_TEMPLATE = "User {user_id} memory context:\n{memories}"
 
 
 def mem0_search(client, query, user_id, top_k):
@@ -77,38 +76,38 @@ def process_user(question, frame, user_id, top_k=20, key_map_super=None):
 
 
     if "mem0" in frame:
-        from utils.client import Mem0Client
+        from function.client import Mem0Client
 
         client = Mem0Client(enable_graph="graph" in frame)
         context, duration_ms = mem0_search(client, question, user_id, top_k)
     elif frame == "memobase":
-        from utils.client import MemobaseClient
+        from function.client import MemobaseClient
 
         client = MemobaseClient()
         context, duration_ms = memobase_search(client, question, user_id, top_k)
     elif frame == "memos-api":
-        from utils.client import MemosApiClient
+        from function.client import MemosApiClient
 
         client = MemosApiClient()
         context, duration_ms = memos_search(client, question, user_id, top_k)
     elif frame == "memos-api-online":
-        from utils.client import MemosApiOnlineClient
+        from function.client import MemosApiOnlineClient
 
         client = MemosApiOnlineClient()
         context, duration_ms = memos_search(client, question, user_id, top_k)
     elif frame == "memu":
-        from utils.client import MemuClient
+        from function.client import MemuClient
 
         client = MemuClient()
         context, duration_ms = memu_search(client, question, user_id, top_k)
     elif frame == "supermemory":
-        from utils.client import SupermemoryClient
+        from function.client import SupermemoryClient
 
         client = SupermemoryClient(key_map_super)
         context, duration_ms = supermemory_search(client, question, user_id, top_k)
     
     elif frame == "lightmem":
-        from utils.client import LightMemoryClient
+        from function.client import LightMemoryClient
 
         client = LightMemoryClient(user_id)
         context, duration_ms = lightmem_search(client, question, top_k)

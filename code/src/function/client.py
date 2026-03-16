@@ -299,17 +299,17 @@ def get_timezone() -> ZoneInfo:
 
 timezone = get_timezone()
 
-def get_now_with_timezone() -> datetime.datetime:
-    return datetime.datetime.now(tz=timezone)
+def get_now_with_timezone() -> datetime:
+    return datetime.now(tz=timezone)
 
 
-def to_timezone(dt: datetime.datetime, tz: ZoneInfo = None) -> datetime.datetime:
+def to_timezone(dt: datetime, tz: ZoneInfo = None) -> datetime:
     if tz is None:
         tz = timezone
     return dt.astimezone(tz)
 
 
-def to_iso_format(dt: datetime.datetime) -> str:
+def to_iso_format(dt: datetime) -> str:
     if dt.tzinfo is None:
         dt = dt.replace(tzinfo=timezone)
     return dt.astimezone(timezone).isoformat()
