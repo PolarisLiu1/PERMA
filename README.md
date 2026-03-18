@@ -207,39 +207,6 @@ Current released artifacts in this repository include:
 - Evaluation inputs: `data/tasks/user*/input_data_*.json`
 - User profiles: `data/profile/user*/profile.json`
 
-### Example 1: Dialogue Snippet (from `raw_dialogues_c.json`)
-
-Source: `data/tasks/user123/raw_dialogues_c.json`
-
-```text
-User: Hello, I need to adjust my alarm settings because my work schedule has changed.
-Assistant: Certainly! Could you tell me what changes you'd like to make?
-User: I'd like to set the alarm for 8:00 AM instead of 7:00 AM.
-Assistant: Understood. I'll update your alarm to 8:00 AM.
-```
-
-This snippet illustrates a **supplement event**, where an existing preference is updated.
-
-### Example 2: Query Snippet (from `input_data_c.json`)
-
-Source: `data/tasks/user123/input_data_c.json`
-
-```text
-Hei, etsin hotellihuonetta lomamatkalle Suomessa.
-Voitko auttaa minua löytämään jotain Best Westernin tai Radissonin ketjuista?
-```
-
-This query tests whether the system can retrieve and apply stored hotel-chain preferences under multilingual conditions.
-
-### Example 3: Structured Task Query
-
-Source: `data/tasks/user123/input_data_c.json`
-
-```text
-Task description:
-The user needs to book a hotel for an upcoming trip and wants recommendations that align with hotel chain, amenities, location, star rating, and room type preferences.
-```
-
 ## 🏆 Leaderboard
 
 Leaderboard section is reserved for the public release.
