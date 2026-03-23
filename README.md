@@ -1,12 +1,12 @@
-# PrefEvolve: Tracking the Evolving Self in Event-Driven Persona States for Personalized Memory
+# PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments
 
-Official codebase of the **PrefEvolve benchmark**, designed to evaluate whether memory-augmented agents can track, update, and apply evolving user preferences across long-horizon interactions.
+Official codebase of the **PERMA benchmark**, designed to evaluate whether memory-augmented agents can track, update, and apply evolving user preferences across long-horizon interactions.
 
-<p align="center"><img src="figure/intro.png" alt="PrefEvolve overview" width="100%"></p>
+<p align="center"><img src="figure/intro.png" alt="PERMA overview" width="100%"></p>
 
-## ✨ Why PrefEvolve
+## ✨ Why PERMA
 
-PrefEvolve models preference understanding as an **event-driven temporal process**:
+PERMA models preference understanding as an **event-driven temporal process**:
 
 - preferences are revealed gradually through user feedback rather than given explicitly
 - user constraints can conflict across sessions
@@ -14,7 +14,7 @@ PrefEvolve models preference understanding as an **event-driven temporal process
 
 ## 🔍 Research Questions
 
-PrefEvolve focuses on three core questions:
+PERMA focuses on three core questions:
 
 1. Can a system recover user-specific preferences from long interaction histories?
 2. Can it track how preferences evolve after emergence and supplement events?
@@ -31,7 +31,7 @@ Supported memory frameworks: `Mem0`, `MemOS`, `Memobase`, `Supermemory`, `Lightm
 
 ## 🧪 Benchmark Design
 
-<p align="center"><img src="figure/pipeline.png" alt="PrefEvolve pipeline" width="100%"></p>
+<p align="center"><img src="figure/pipeline.png" alt="PERMA pipeline" width="100%"></p>
 
 ### 1) Event-Driven Persona Construction
 
@@ -49,7 +49,7 @@ Preference evolution is modeled with two event types:
 
 ### 2) Query Variations
 
-To better approximate real-world usage, PrefEvolve includes:
+To better approximate real-world usage, PERMA includes:
 
 - **In-session noise injection**
   1. Omitted information
@@ -220,12 +220,8 @@ Leaderboard section is reserved for the public release.
 If you use PrefEvolve in your research, please cite:
 
 ```bibtex
-@article{prefevolve2026,
-  title={PrefEvolve: Tracking the Evolving Self in Event-Driven Persona States for Personalized Memory},
-  author={TBD},
-  journal={TBD},
-  year={2026}
-}
+coming soon
+
 ```
 
 ## 📄 License
