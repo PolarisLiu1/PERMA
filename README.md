@@ -1,11 +1,10 @@
-# 🧠 PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments
+# PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments
 
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-red.svg)](https://arxiv.org/abs/coming_soon)
-[![Dataset](https://img.shields.io/badge/Dataset-HuggingFace-yellow.svg)](https://huggingface.co/datasets/coming_soon)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-Official codebase and dataset for the **PERMA benchmark**. PERMA is designed to systematically evaluate whether memory-augmented agents can track, update, and apply evolving user preferences across long-horizon, realistic interactions.
+Official codebase and dataset for the **PERMA benchmark**. PERMA is designed to systematically evaluate whether memory system-based agents can track, update, and apply evolving user preferences across long-horizon, realistic interactions.
 
 <p align="center"><img src="figure/intro.png" alt="PERMA overview" width="85%"></p>
 
@@ -31,7 +30,7 @@ Existing benchmarks often assume static, explicitly provided user profiles. In c
 
 - **Event-Driven Personalization**: Multi-session interaction timelines where preferences organically emerge and evolve.
 - **Realistic Query Noise**: In-session noise injection (omitted info, context switching, multilingual expressions, colloquialisms).
-- **Style-Aligned Generation**: Dialogue patterns inspired by realistic human-AI interaction datasets (e.g., WildChat).
+- **Linguistic Style-Aligned Generation**: Dialogue patterns inspired by realistic human-AI interaction datasets (e.g., WildChat).
 - **Cross-Framework Evaluation**: A unified evaluation protocol supporting various memory systems and RAG frameworks.
 
 ---
@@ -40,18 +39,6 @@ Existing benchmarks often assume static, explicitly provided user profiles. In c
 
 Here is a concrete example illustrating **Event-Driven Preference Evolution** and **Realistic Query Noise** in PERMA.
 
-### Timeline & Event Evolution
-
-| Session | Event Type | User Interaction (Simplified) | Underlying Preference State Update |
-| :--- | :--- | :--- | :--- |
-| **1** | **Emergence** | "I'm looking for a semantic search paper. I prefer **PyTorch** implementations." | `pref_framework: PyTorch` |
-| **2** | **Supplement** | "I found a great paper, but the code was JAX. Actually, I'm okay with **JAX** now if the performance is better." | `pref_framework: [PyTorch, JAX (conditional)]` |
-| **3 (Test)** | **Query w/ Noise** | "(User switches language) 我需要做语义搜索。帮我找篇最近的模型，要代码能直接用的。 (Omitted framework preference, colloquial)" | **Agent must recall adjusted framework preference from S1 & S2.** |
-
-### Targeted Output Evaluation
-
-* ❌ **Response Consistency Failure**: Recommends a TensorFlow implementation.
-* ✅ **Response Consistency Success**: Recommends a high-performance JAX implementation, acknowledging the user's updated acceptance in Session 2.
 
 ---
 
@@ -68,7 +55,7 @@ Evaluates granular cognitive capabilities across three dimensions:
 ### B. Interactive Evaluation
 A multi-turn simulated interaction between a user simulator and the tested memory system:
 - Dialogue history is visible to the simulator.
-- Core metrics include **Turn-1 Success Rate** and **Turn-2 Success Rate**.
+- Core metrics include **Turn-1** and **Turn-2 Success Rate**.
 
 ---
 
@@ -80,10 +67,6 @@ We provide baselines for prominent memory frameworks and LLM usage strategies on
 
 | Method | Memory Framework | LLM | T-Acc (↑) | P-Acc (↑) | I-Acc (↑) | **Avg. Acc** (↑) |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
-| Zero-Shot | None | GPT-4o-mini | 00.0 | 00.0 | 00.0 | 00.0 |
-| RAG | Vanilla BM25 | GPT-4o-mini | 00.0 | 00.0 | 00.0 | 00.0 |
-| LongContext | (Full History) | GPT-4o (128k) | **00.0** | 00.0 | **00.0** | 00.0 |
-| **Your-Agent**| **Mem0** | **GPT-4o-mini** | 00.0 | **00.0** | 00.0 | **00.0** |
 
 > *Note: T=Task Completion, P=Preference Consistency, I=Informational Confidence.*
 
@@ -91,9 +74,7 @@ We provide baselines for prominent memory frameworks and LLM usage strategies on
 
 | Method | Turn-1 Success Rate (↑) | Turn-2 Success Rate (↑) |
 | :--- | :---: | :---: |
-| RAG (Vanilla) | 00.0% | 00.0% |
-| LongContext (GPT-4o) | **00.0%** | 00.0% |
-| **Your-Agent (Mem0)** | 00.0% | **00.0%** |
+
 
 ---
 
@@ -175,23 +156,6 @@ python evaluation.py \
 ```
 
 *Available `--dataset_type` options: `standard`, `long`, `long_multi`.*
-
------
-
-## 📂 Dataset Structure
-
-The generated artifacts are organized as follows:
-
-```text
-data/
-├── profile/
-│   └── user*/
-│       └── profile.json                # Ground-truth user personas
-└── tasks/
-    └── user*/
-        ├── raw_dialogues_*.json        # User timelines and reconstructed sessions
-        └── input_data_*.json           # Formatted inputs for evaluation
-```
 
 -----
 
