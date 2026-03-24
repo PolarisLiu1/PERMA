@@ -48,6 +48,9 @@ A multi-turn simulated interaction between a user simulator and the tested memor
 We conduct probing evaluations at various temporal intervals along the dialogue timeline to examine how performance evolves as persona states accumulate and potentially drift. 
 
 ---
+<details>
+<summary>🏆 Experimental Results</summary>
+
 
 ## 🏆 Experimental Results
 
@@ -125,8 +128,8 @@ MCQ accuracy across three evaluation checkpoints in the Clean setting is reporte
 
 We further evaluate the MCQ Acc. performance trends of different approaches across varying segment positions in single-domain tasks under both Clean and Noisy settings.
 
-<p align="center"><img src="figure/conbined_performance_1.png" alt="PERMA pipeline" width="85%"></p>
-
+<p align="center"><img src="figure/combined_performance_1.png" alt="PERMA pipeline" width="85%"></p>
+</details>
 ---
 
 ## ⚙️ Dependencies
@@ -153,7 +156,7 @@ MEM0_API_KEY=your_mem0_key
 -----
 
 <details>
-<summary>⚙️ Quick Start</summary>
+<summary>🚀  Quick Start</summary>
 
 
 ## 🚀 Quick Start
