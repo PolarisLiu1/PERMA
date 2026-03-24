@@ -222,7 +222,6 @@ python evaluation.py \
 ## 📝 Citation
 ```bibtex
 coming soon
-}
 ```
 
 ## 📄 License
