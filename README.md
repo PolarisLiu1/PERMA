@@ -106,6 +106,13 @@ we conduct probing evaluations at various temporal intervals along the dialogue 
 | EverMemOS       | 0.713    | 0.82    | 1.98         | 3134.4           | 15847           | 0.688      | 115.2         | 0.268  | 0.573  |
 | Supermemory     | 0.656    | 0.803   | 1.72         | 92.4             | 3232.3          | 0.675      | 125.4         | 0.248  | 0.554  |
 
+<p align="center">
+  <img src="figure/large_memory_opt.png" width="47%" />
+  <img src="figure/large_memory_score.png" width="47%" />
+</p>
+
+<p align="center"><img src="figure/combined_performance_1.png" alt="PERMA pipeline" width="85%"></p>
+
 ---
 
 ## ⚙️ Installation & Setup
