@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-Official codebase and dataset for the **PERMA benchmark**. PERMA is designed to systematically evaluate whether memory system-based agents can track, update, and apply evolving user preferences across long-horizon, realistic interactions.
+Official codebase and dataset for the **PERMA benchmark**. PERMA is designed to systematically evaluate whether memory system-based agents can track and apply evolving user preferences across long-horizon, realistic interactions.
 
 <p align="center"><img src="figure/pipeline.png" alt="PERMA pipeline" width="85%"></p>
 
