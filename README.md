@@ -35,8 +35,6 @@ Here is a concrete example illustrating **Event-Driven Preference Evolution** an
 ## 📊 Evaluation Protocols
 
 ### A. Multiple-Choice Evaluation
-(i) Task Completion, indicating the fulfillment of defined goals; (ii) Preference Consistency, ensuring responses are grounded in long-term preferences without hallucinating unsupported inferences; and (iii) Informational Confidence, identifying whether the model maintains a decisive stance without uncertainty
-
 Evaluates granular cognitive capabilities across three dimensions:
 - **Task Completion (T)**, indicating the fulfillment of defined goals.
 - **Preference Consistency (P)**, ensuring responses are grounded in long-term preferences without hallucinating unsupported inferences.
@@ -50,9 +48,6 @@ A multi-turn simulated interaction between a user simulator and the tested memor
 We conduct probing evaluations at various temporal intervals along the dialogue timeline to examine how performance evolves as persona states accumulate and potentially drift. 
 
 ---
-<details>
-<summary>🏆 Experimental Results</summary>
-
 
 ## 🏆 Experimental Results
 
@@ -65,7 +60,8 @@ We analyze persona consistency across temporal depth and compare different model
 - **Search Tokens, Search Duration** — search efficiency  
 - **Completion, User Tokens, Turn = 1, Turn ≤ 2** — interactive success rates  
 
-
+<details>
+<summary>Detailed Results</summary>
 ### A. Standalone LLMs (MCQ Acc.)
 
 | Model              | Clean Single | Noise Single | Clean Multi | Noise Multi |
