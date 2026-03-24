@@ -12,7 +12,7 @@ Official codebase and dataset for the **PERMA benchmark**. PERMA is designed to 
 
 ## 🌟 Overview
 
-We propose PrefEvolve, a benchmark that shifts from static retrieval to tracking event-driven preference evolution. By testing models through both multiple-choice and interactive tasks, we evaluate persona consistency across temporally ordered, noisy interactions. Our findings reveal that while memory systems reduce costs, maintaining a coherent persona across temporal depth and domain shifts remains a major challenge.
+We propose **PrefEvolve**, a benchmark that shifts from static retrieval to tracking **event-driven preference evolution**. By testing models through both multiple-choice and interactive tasks, we evaluate persona consistency across temporally ordered, noisy interactions. Our findings reveal that while memory systems reduce costs, maintaining a coherent persona across temporal depth and domain shifts remains a major challenge.
 
 ---
 
@@ -51,7 +51,7 @@ We conduct probing evaluations at various temporal intervals along the dialogue 
 
 ## 🏆 Experimental Results
 
-The empirical performance of all evaluated models across **single-domain** and **multi-domain** tasks, under both *Clean* and *Noise* scenarios, is summarized in **Tables (clean → performance_v4)**. 
+The empirical performance of all evaluated approaches across single-domain and multi-domain tasks, under both Clean and Noise scenarios, is summarized below.
 
 We analyze persona consistency across temporal depth and compare different models and memory systems from multiple perspectives, including:
 
@@ -122,6 +122,10 @@ MCQ accuracy across three evaluation checkpoints in the Clean setting is reporte
   <img src="figure/large_memory_opt.png" width="47%" />
   <img src="figure/large_memory_score.png" width="47%" />
 </p>
+
+We further evaluate the MCQ Acc. performance trends of different approaches across varying segment positions in single-domain tasks under both Clean and Noisy settings.
+
+<p align="center"><img src="figure/conbined_performance_1.png" alt="PERMA pipeline" width="85%"></p>
 
 ---
 
