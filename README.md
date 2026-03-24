@@ -130,6 +130,8 @@ We further evaluate the MCQ Acc. performance trends of different approaches acro
 
 <p align="center"><img src="figure/combined_performance_1.png" alt="PERMA pipeline" width="85%"></p>
 </details>
+
+
 ---
 
 ## ⚙️ Dependencies
