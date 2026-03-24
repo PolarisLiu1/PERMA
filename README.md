@@ -136,7 +136,7 @@ We further evaluate the MCQ Acc. performance trends of different approaches acro
 
 **1. Clone the repository and install dependencies**
 ```bash
-git clone [https://github.com/your-username/PERMA.git](https://github.com/your-username/PERMA.git)
+git clone https://github.com/your-username/PERMA.git
 cd PERMA
 pip install -r requirements.txt
 ````
@@ -218,15 +218,8 @@ python evaluation.py \
 -----
 
 ## 📝 Citation
-
-If you find this benchmark useful in your research, please consider citing:
-
 ```bibtex
-@article{perma2024,
-  title={PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments},
-  author={Coming Soon},
-  journal={arXiv preprint arXiv:XXXX.XXXXX},
-  year={2024}
+coming soon
 }
 ```
 
