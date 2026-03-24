@@ -45,11 +45,21 @@ A multi-turn simulated interaction between a user simulator and the tested memor
 - Dialogue history is visible to the simulator.
 - Core metrics include **Turn-1** and **Turn-2 Success Rate**.
 
-we conduct probing evaluations at various temporal intervals along the dialogue timeline to examine how performance evolves as persona states accumulate and potentially drift. 
+We conduct probing evaluations at various temporal intervals along the dialogue timeline to examine how performance evolves as persona states accumulate and potentially drift. 
 
 ---
 
-## 🏆 Leaderboard (Baseline Results)
+## 🏆 Experimental Results
+
+The empirical performance of all evaluated models across **single-domain** and **multi-domain** tasks, under both *Clean* and *Noise* scenarios, is summarized in **Tables (clean → performance_v4)**. 
+
+We analyze persona consistency across temporal depth and compare different models and memory systems from multiple perspectives, including:
+
+- **MCQ Acc.** — task accuracy  
+- **BERT-F1, Memory Score** — memory fidelity  
+- **Search Tokens, Search Duration** — search efficiency  
+- **Completion, User Tokens, Turn = 1, Turn ≤ 2** — interactive success rates  
+
 
 ### A. Standalone LLMs (MCQ Acc.)
 
@@ -106,16 +116,16 @@ we conduct probing evaluations at various temporal intervals along the dialogue 
 | EverMemOS       | 0.713    | 0.82    | 1.98         | 3134.4           | 15847           | 0.688      | 115.2         | 0.268  | 0.573  |
 | Supermemory     | 0.656    | 0.803   | 1.72         | 92.4             | 3232.3          | 0.675      | 125.4         | 0.248  | 0.554  |
 
+MCQ accuracy across three evaluation checkpoints in the Clean setting is reported, where the dashed line denotes the baseline performance under information omission (Type 1), alongside Memory Scores evaluated across different event types.
+
 <p align="center">
   <img src="figure/large_memory_opt.png" width="47%" />
   <img src="figure/large_memory_score.png" width="47%" />
 </p>
 
-<p align="center"><img src="figure/combined_performance_1.png" alt="PERMA pipeline" width="85%"></p>
-
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Dependencies
 
 **1. Clone the repository and install dependencies**
 ```bash
@@ -138,7 +148,11 @@ MEM0_API_KEY=your_mem0_key
 
 -----
 
-## 🚀 Running the Benchmark
+<details>
+<summary>⚙️ Quick Start</summary>
+
+
+## 🚀 Quick Start
 
 Navigate to the source directory before running the scripts:
 
@@ -192,6 +206,7 @@ python evaluation.py \
 ```
 
 *Available `--dataset_type` options: `standard`, `long`, `long_multi`.*
+</details>
 
 -----
 
