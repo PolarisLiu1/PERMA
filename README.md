@@ -8,13 +8,9 @@ Official codebase and dataset for the **PERMA benchmark**. PERMA is designed to 
 
 <p align="center"><img src="figure/pipeline.png" alt="PERMA pipeline" width="85%"></p>
 
----
-
 ## 🌟 Overview
 
 We propose **PrefEvolve**, a benchmark that shifts from static retrieval to tracking **event-driven preference evolution**. By testing models through both multiple-choice and interactive tasks, we evaluate persona consistency across temporally ordered, noisy interactions. Our findings reveal that while memory systems reduce costs, maintaining a coherent persona across temporal depth and domain shifts remains a major challenge.
-
----
 
 ## 🎯 Benchmark Highlights
 
@@ -23,14 +19,10 @@ We propose **PrefEvolve**, a benchmark that shifts from static retrieval to trac
 - **Linguistic Style-Aligned**: Conversational patterns inspired by realistic user-assistant interaction datasets.
 - **Cross-Framework Evaluation**: A unified evaluation protocol supporting various memory systems.
 
----
-
 ## 📖 Data Examples
 
 Here is a concrete example illustrating **Event-Driven Preference Evolution** and **Realistic Query Noise** in PERMA.
 
-
----
 
 ## 📊 Evaluation Protocols
 
@@ -132,8 +124,6 @@ We further evaluate the MCQ Acc. performance trends of different approaches acro
 </details>
 
 
----
-
 ## ⚙️ Dependencies
 
 **1. Clone the repository and install dependencies**
@@ -154,9 +144,6 @@ CHAT_MODEL_BASE_URL=your_api_base_url
 MEM0_API_KEY=your_mem0_key
 # Add other backend keys based on the memory systems you intend to evaluate
 ```
-
------
-
 
 
 ## 🚀 Quick Start
@@ -218,7 +205,6 @@ python evaluation.py \
 *Available `--dataset_type` options: `standard`, `long`, `long_multi`.*
 </details>
 
------
 
 ## 📝 Citation
 ```bibtex
