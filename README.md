@@ -225,9 +225,4 @@ python evaluation.py \
 coming soon
 ```
 
-## 📄 License
-
-This project is licensed under the [Apache-2.0 License](https://www.google.com/search?q=LICENSE).
-
-
 
