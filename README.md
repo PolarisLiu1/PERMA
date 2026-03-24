@@ -143,7 +143,7 @@ CHAT_MODEL=gpt-4o-mini
 CHAT_MODEL_API_KEY=your_openai_api_key
 CHAT_MODEL_BASE_URL=your_api_base_url
 MEM0_API_KEY=your_mem0_key
-# Add other backend keys based on the memory framework you intend to evaluate
+# Add other backend keys based on the memory systems you intend to evaluate
 ```
 
 -----
