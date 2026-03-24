@@ -18,9 +18,9 @@ We propose **PrefEvolve**, a benchmark that shifts from static retrieval to trac
 
 ## 🎯 Benchmark Highlights
 
-- **Event-Driven Personalization**: Multi-session interaction timelines where preferences organically emerge and evolve.
-- **Realistic Query Noise**: In-session noise injection (omitted info, context switching, multilingual expressions, colloquialisms).
-- **Linguistic Style-Aligned Generation**: Dialogue patterns inspired by realistic human-AI interaction datasets (e.g., WildChat).
+- **Event-Driven Personalization**: Multi-session interaction timelines where preferences emerge and evolve.
+- **Realistic Query Noise**: In-session noise injection (omitted info, context switching).
+- **Linguistic Style-Aligned Generation**: Dialogue patterns inspired by realistic user-assistant interaction datasets.
 - **Cross-Framework Evaluation**: A unified evaluation protocol supporting various memory systems and RAG frameworks.
 
 ---
