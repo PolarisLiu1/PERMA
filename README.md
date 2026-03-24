@@ -35,14 +35,16 @@ Here is a concrete example illustrating **Event-Driven Preference Evolution** an
 ## 📊 Evaluation Protocols
 
 ### A. Multiple-Choice Evaluation
+(i) Task Completion, indicating the fulfillment of defined goals; (ii) Preference Consistency, ensuring responses are grounded in long-term preferences without hallucinating unsupported inferences; and (iii) Informational Confidence, identifying whether the model maintains a decisive stance without uncertainty
+
 Evaluates granular cognitive capabilities across three dimensions:
-- **Task Completion (T)**: Did the agent fulfill the primary request?
-- **Preference Consistency (P)**: Does the response align with the updated user profile?
-- **Informational Confidence (I)**: Does the agent appropriately handle uncertainty or missing data?
+- **Task Completion (T)**, indicating the fulfillment of defined goals.
+- **Preference Consistency (P)**, ensuring responses are grounded in long-term preferences without hallucinating unsupported inferences.
+- **Informational Confidence (I)**, identifying whether the model maintains a decisive stance without uncertainty
 
 ### B. Interactive Evaluation
-A multi-turn simulated interaction between a user simulator and the tested memory system:
-- Dialogue history is visible to the simulator.
+A multi-turn simulated interaction between a user simulator and the tested memory system-based agents:
+- Gold Dialogue history is visible to the simulator.
 - Core metrics include **Turn-1** and **Turn-2 Success Rate**.
 
 We conduct probing evaluations at various temporal intervals along the dialogue timeline to examine how performance evolves as persona states accumulate and potentially drift. 
