@@ -1,15 +1,5 @@
 # PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments
 
-<p align="left">
-  <a href="https://arxiv.org/abs/xxxx.xxxxx">
-    <img src="https://img.shields.io/badge/Paper-arXiv-b31b1b?style=for-the-badge" />
-  </a>
-  <a href="https://img.shields.io/badge/License-MIT-green?style=for-the-badge">
-    <img src="https://img.shields.io/badge/Chat%20Visualization-Link-84cc16?style=for-the-badge" />
-  </a>
-</p>
-
-
 Official codebase of the **PERMA benchmark**, designed to evaluate whether memory-augmented agents can track, update, and apply evolving user preferences across long-horizon interactions.
 
 <p align="center"><img src="figure/intro.png" alt="PERMA overview" width="100%"></p>
@@ -89,28 +79,6 @@ Reported interactive metrics:
 
 - **Turn-1 Success Rate**
 - **Turn-2 Success Rate**
-
-## 🗂️ Repository Structure
-
-```text
-opensource/
-├── README.md                          # Project overview, benchmark design, setup, and usage
-├── requirements.txt                   # Python dependencies for reproduction
-├── figure/
-│   ├── intro.png                      # Intro figure used in the README
-│   └── pipeline.png                   # Pipeline figure used in the README
-├── data/                              # Profiles, timelines, generated tasks, and evaluation artifacts
-└── code/
-    └── src/
-        ├── complete_dataset_generator.py   # Builds event-driven dialogue/task datasets
-        ├── evaluation.py                   # Runs baseline/RAG/longcontext/incremental evaluation
-        ├── prompt.py                       # Prompt templates used in generation/evaluation
-        ├── function/
-        │   ├── client.py                   # Memory backend client adapters
-        │   ├── ingestion.py                # Memory write/ingestion logic
-        │   └── search.py                   # Memory retrieval/search logic
-        └── utils/                          # Utility modules and integrated third-party components
-```
 
 ## ⚙️ Setup
 
