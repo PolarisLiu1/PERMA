@@ -62,6 +62,8 @@ We analyze persona consistency across temporal depth and compare different model
 
 <details>
 <summary>Detailed Results</summary>
+
+
 ### A. Standalone LLMs (MCQ Acc.)
 
 | Model              | Clean Single | Noise Single | Clean Multi | Noise Multi |
@@ -153,11 +155,12 @@ MEM0_API_KEY=your_mem0_key
 
 -----
 
-<details>
-<summary>🚀  Quick Start</summary>
 
 
 ## 🚀 Quick Start
+
+<details>
+
 
 Navigate to the source directory before running the scripts:
 
