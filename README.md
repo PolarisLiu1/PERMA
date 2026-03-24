@@ -1,5 +1,15 @@
 # PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments
 
+<p align="left">
+  <a href="https://arxiv.org/abs/xxxx.xxxxx">
+    <img src="https://img.shields.io/badge/Paper-arXiv-b31b1b?style=for-the-badge" />
+  </a>
+  <a href="https://img.shields.io/badge/License-MIT-green?style=for-the-badge">
+    <img src="https://img.shields.io/badge/Chat%20Visualization-Link-84cc16?style=for-the-badge" />
+  </a>
+</p>
+
+
 Official codebase of the **PERMA benchmark**, designed to evaluate whether memory-augmented agents can track, update, and apply evolving user preferences across long-horizon interactions.
 
 <p align="center"><img src="figure/intro.png" alt="PERMA overview" width="100%"></p>
@@ -23,11 +33,8 @@ PERMA focuses on three core questions:
 ## 🧩 Benchmark Highlights
 
 - **Event-driven personalization** through multi-session interaction timelines
-- **Implicit preference extraction** from natural task-oriented dialogue
-- **Robust query settings** with in-session perturbations and style variation
+- **Robust query settings** with in-session noise and linguistic style variation
 - **Cross-framework evaluation** for memory systems under a unified protocol
-
-Supported memory frameworks: `Mem0`, `MemOS`, `Memobase`, `Supermemory`, `Lightmem`, `EverMemOS`
 
 ## 🧪 Benchmark Design
 
@@ -206,14 +213,6 @@ Current released artifacts in this repository include:
 - Timeline & dialogues: `data/tasks/user*/raw_dialogues_*.json`
 - Evaluation inputs: `data/tasks/user*/input_data_*.json`
 - User profiles: `data/profile/user*/profile.json`
-
-## 🏆 Leaderboard
-
-Leaderboard section is reserved for the public release.
-
-| Model / Framework | MCQ Score | Turn-1 | Turn-2 | Notes |
-|---|---:|---:|---:|---|
-| Coming Soon | - | - | - | Public benchmark board |
 
 ## 📝 Citation
 
