@@ -1,115 +1,136 @@
-# PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments
+# 🧠 PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments
 
-Official codebase of the **PERMA benchmark**, designed to evaluate whether memory-augmented agents can track, update, and apply evolving user preferences across long-horizon interactions.
+[![Paper](https://img.shields.io/badge/Paper-Arxiv-red.svg)](https://arxiv.org/abs/coming_soon)
+[![Dataset](https://img.shields.io/badge/Dataset-HuggingFace-yellow.svg)](https://huggingface.co/datasets/coming_soon)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-<p align="center"><img src="figure/intro.png" alt="PERMA overview" width="100%"></p>
+Official codebase and dataset for the **PERMA benchmark**. PERMA is designed to systematically evaluate whether memory-augmented agents can track, update, and apply evolving user preferences across long-horizon, realistic interactions.
 
-## ✨ Why PERMA
+<p align="center"><img src="figure/intro.png" alt="PERMA overview" width="85%"></p>
 
-PERMA models preference understanding as an **event-driven temporal process**:
+---
 
-- preferences are revealed gradually through user feedback rather than given explicitly
-- user constraints can conflict across sessions
-- agents must recover relevant memory under noisy, realistic dialogue
+## 🌟 Overview
 
-## 🔍 Research Questions
+Existing benchmarks often assume static, explicitly provided user profiles. In contrast, **PERMA** models preference understanding as an **event-driven temporal process**, mimicking real-world complexities:
+- Preferences are revealed gradually through user feedback rather than given explicitly.
+- User constraints can evolve, supplement, or conflict across different sessions.
+- Agents must recover relevant memory under noisy, realistic dialogue scenarios.
 
-PERMA focuses on three core questions:
+### Core Research Questions
+1. **Memory Recovery**: Can a system accurately recover user-specific preferences from lengthy interaction histories?
+2. **Preference Tracking**: Can the agent track how preferences evolve after *Emergence* and *Supplement* events?
+3. **Persona Consistency**: Can the agent generate responses consistent with updated persona states in entirely new tasks?
 
-1. Can a system recover user-specific preferences from long interaction histories?
-2. Can it track how preferences evolve after emergence and supplement events?
-3. Can it generate responses consistent with updated persona states in new tasks?
+<p align="center"><img src="figure/pipeline.png" alt="PERMA pipeline" width="85%"></p>
 
-## 🧩 Benchmark Highlights
+---
 
-- **Event-driven personalization** through multi-session interaction timelines
-- **Robust query settings** with in-session noise and linguistic style variation
-- **Cross-framework evaluation** for memory systems under a unified protocol
+## 🎯 Benchmark Highlights
 
-## 🧪 Benchmark Design
+- **Event-Driven Personalization**: Multi-session interaction timelines where preferences organically emerge and evolve.
+- **Realistic Query Noise**: In-session noise injection (omitted info, context switching, multilingual expressions, colloquialisms).
+- **Style-Aligned Generation**: Dialogue patterns inspired by realistic human-AI interaction datasets (e.g., WildChat).
+- **Cross-Framework Evaluation**: A unified evaluation protocol supporting various memory systems and RAG frameworks.
 
-<p align="center"><img src="figure/pipeline.png" alt="PERMA pipeline" width="100%"></p>
+---
 
-### 1) Event-Driven Persona Construction
+## 📖 Data Examples
 
-Each user is represented by a timeline of sessions derived from persona profiles and interaction summaries. During each session, users may:
+Here is a concrete example illustrating **Event-Driven Preference Evolution** and **Realistic Query Noise** in PERMA.
 
-- issue goal-oriented requests
-- provide correction feedback
-- refine constraints and preferences
+### Timeline & Event Evolution
 
-Preference evolution is modeled with two event types:
+| Session | Event Type | User Interaction (Simplified) | Underlying Preference State Update |
+| :--- | :--- | :--- | :--- |
+| **1** | **Emergence** | "I'm looking for a semantic search paper. I prefer **PyTorch** implementations." | `pref_framework: PyTorch` |
+| **2** | **Supplement** | "I found a great paper, but the code was JAX. Actually, I'm okay with **JAX** now if the performance is better." | `pref_framework: [PyTorch, JAX (conditional)]` |
+| **3 (Test)** | **Query w/ Noise** | "(User switches language) 我需要做语义搜索。帮我找篇最近的模型，要代码能直接用的。 (Omitted framework preference, colloquial)" | **Agent must recall adjusted framework preference from S1 & S2.** |
 
-- **Emergence**: introduces a new preference signal
-- **Supplement**: updates or sharpens existing preference signals
+### Targeted Output Evaluation
 
+* ❌ **Response Consistency Failure**: Recommends a TensorFlow implementation.
+* ✅ **Response Consistency Success**: Recommends a high-performance JAX implementation, acknowledging the user's updated acceptance in Session 2.
 
-### 2) Query Variations
-
-To better approximate real-world usage, PERMA includes:
-
-- **In-session noise injection**
-  1. Omitted information
-  2. Context switching
-  3. Inconsistent preferences
-  4. Multilingual expressions
-  5. Colloquial language
-- **Style-aligned generation** inspired by WildChat conversational patterns
+---
 
 ## 📊 Evaluation Protocols
 
+PERMA evaluates memory agents using a dual-protocol approach:
+
 ### A. Multiple-Choice Evaluation
+Evaluates granular cognitive capabilities across three dimensions:
+- **Task Completion (T)**: Did the agent fulfill the primary request?
+- **Preference Consistency (P)**: Does the response align with the updated user profile?
+- **Informational Confidence (I)**: Does the agent appropriately handle uncertainty or missing data?
 
-Each sample is evaluated with three dimensions:
+### B. Interactive Evaluation
+A multi-turn simulated interaction between a user simulator and the tested memory system:
+- Dialogue history is visible to the simulator.
+- Core metrics include **Turn-1 Success Rate** and **Turn-2 Success Rate**.
 
-- **Task Completion (T)**
-- **Preference Consistency (P)**
-- **Informational Confidence (I)**
+---
 
-These dimensions form fine-grained category combinations for detailed error analysis.
+## 🏆 Leaderboard (Baseline Results)
+
+We provide baselines for prominent memory frameworks and LLM usage strategies on the PERMA **Standard** dataset. *(Note: Replace with your actual evaluation results)*
+
+### A. Multiple-Choice Evaluation (MCQ)
+
+| Method | Memory Framework | LLM | T-Acc (↑) | P-Acc (↑) | I-Acc (↑) | **Avg. Acc** (↑) |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: |
+| Zero-Shot | None | GPT-4o-mini | 00.0 | 00.0 | 00.0 | 00.0 |
+| RAG | Vanilla BM25 | GPT-4o-mini | 00.0 | 00.0 | 00.0 | 00.0 |
+| LongContext | (Full History) | GPT-4o (128k) | **00.0** | 00.0 | **00.0** | 00.0 |
+| **Your-Agent**| **Mem0** | **GPT-4o-mini** | 00.0 | **00.0** | 00.0 | **00.0** |
+
+> *Note: T=Task Completion, P=Preference Consistency, I=Informational Confidence.*
 
 ### B. Interactive Evaluation
 
-A user simulator performs multi-turn interaction with the tested system under controlled ground truth:
+| Method | Turn-1 Success Rate (↑) | Turn-2 Success Rate (↑) |
+| :--- | :---: | :---: |
+| RAG (Vanilla) | 00.0% | 00.0% |
+| LongContext (GPT-4o) | **00.0%** | 00.0% |
+| **Your-Agent (Mem0)** | 00.0% | **00.0%** |
 
-- dialogue history is accessible to the simulator
-- preference annotations are used for adjudication
+---
 
-Reported interactive metrics:
+## ⚙️ Installation & Setup
 
-- **Turn-1 Success Rate**
-- **Turn-2 Success Rate**
-
-## ⚙️ Setup
-
-### 1) Environment
-
-- Python 3.10+
-
-### 2) Install Dependencies
-
+**1. Clone the repository and install dependencies**
 ```bash
+git clone [https://github.com/your-username/PERMA.git](https://github.com/your-username/PERMA.git)
+cd PERMA
 pip install -r requirements.txt
-```
+````
 
-### 3) Configure API Keys
-
-Create `code/src/.env`:
+**2. Configure API Keys**
+Create a `.env` file in the `code/src` directory:
 
 ```env
+# code/src/.env
 CHAT_MODEL=gpt-4o-mini
-CHAT_MODEL_API_KEY=your_openai_key
-CHAT_MODEL_BASE_URL=your_api_base
+CHAT_MODEL_API_KEY=your_openai_api_key
+CHAT_MODEL_BASE_URL=your_api_base_url
 MEM0_API_KEY=your_mem0_key
+# Add other backend keys based on the memory framework you intend to evaluate
 ```
 
-Add other backend keys according to your selected memory framework.
+-----
 
-## 🚀 Quick Start
+## 🚀 Running the Benchmark
 
-Run commands from `code/src`.
+Navigate to the source directory before running the scripts:
 
-### A. Generate Benchmark Dialogues
+```bash
+cd code/src
+```
+
+### Step 1: Generate Benchmark Dialogues
+
+Generate the standard dataset with multi-domain topics:
 
 ```bash
 python complete_dataset_generator.py \
@@ -118,14 +139,16 @@ python complete_dataset_generator.py \
   --multi_domain True
 ```
 
-Optional generation modes:
+*Optional generation modes:*
 
-```bash
-python complete_dataset_generator.py --regenerate_no_noise
-python complete_dataset_generator.py --style_transfer --wildchat_dir WildChat-1M
-```
+  - `--regenerate_no_noise`: Generate clean data without injected noise.
+  - `--style_transfer --wildchat_dir WildChat-1M`: Apply WildChat conversational style.
 
-### B. Run Evaluation
+### Step 2: Run Evaluation
+
+Evaluate a memory framework (e.g., `supermemory`) on the generated data. The `--stage` argument allows you to run specific parts of the pipeline.
+
+**Standard Evaluation:**
 
 ```bash
 python evaluation.py \
@@ -137,21 +160,10 @@ python evaluation.py \
   --num_workers 2
 ```
 
-`--mode` options:
+*Available `--mode` options: `baseline`, `rag`, `longcontext`, `incremental`.*
 
-- `baseline`
-- `rag`
-- `longcontext`
-- `incremental`
-
-`--stage` options:
-
-- `add`
-- `search`
-- `answer`
-- `eval`
-
-Incremental evaluation:
+**Incremental Evaluation:**
+Evaluate how systems handle progressive updates over extended timelines:
 
 ```bash
 python evaluation.py \
@@ -162,35 +174,40 @@ python evaluation.py \
   --output_dir ../../data/evaluation
 ```
 
-`--dataset_type` options:
+*Available `--dataset_type` options: `standard`, `long`, `long_multi`.*
 
-- `standard`
-- `long`
-- `long_multi`
+-----
 
-## 🧾 Benchmark Data
+## 📂 Dataset Structure
 
-Current released artifacts in this repository include:
+The generated artifacts are organized as follows:
 
-- user timelines and reconstructed sessions
-- generated dialogue tasks
-- evaluation outputs and intermediate files
+```text
+data/
+├── profile/
+│   └── user*/
+│       └── profile.json                # Ground-truth user personas
+└── tasks/
+    └── user*/
+        ├── raw_dialogues_*.json        # User timelines and reconstructed sessions
+        └── input_data_*.json           # Formatted inputs for evaluation
+```
 
-### Data Locations
-
-- Timeline & dialogues: `data/tasks/user*/raw_dialogues_*.json`
-- Evaluation inputs: `data/tasks/user*/input_data_*.json`
-- User profiles: `data/profile/user*/profile.json`
+-----
 
 ## 📝 Citation
 
-If you use PrefEvolve in your research, please cite:
+If you find this benchmark useful in your research, please consider citing:
 
 ```bibtex
-coming soon
-
+@article{perma2024,
+  title={PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments},
+  author={Coming Soon},
+  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  year={2024}
+}
 ```
 
 ## 📄 License
 
-This project is licensed under the **Apache-2.0 License**.
+This project is licensed under the [Apache-2.0 License](https://www.google.com/search?q=LICENSE).
