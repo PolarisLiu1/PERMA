@@ -1,6 +1,6 @@
 # PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments
 
-[![Paper](https://img.shields.io/badge/Paper-Arxiv-red.svg)](https://arxiv.org/abs/coming_soon)
+[![Paper](https://img.shields.io/badge/Paper-Arxiv-red.svg)](https://arxiv.org/abs/2603.23231)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
@@ -208,7 +208,15 @@ python evaluation.py \
 
 ## 📝 Citation
 ```bibtex
-coming soon
+@misc{liu2026permabenchmarkingpersonalizedmemory,
+      title={PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments}, 
+      author={Shuochen Liu and Junyi Zhu and Long Shu and Junda Lin and Yuhao Chen and Haotian Zhang and Chao Zhang and Derong Xu and Jia Li and Bo Tang and Zhiyu Li and Feiyu Xiong and Enhong Chen and Tong Xu},
+      year={2026},
+      eprint={2603.23231},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2603.23231}, 
+}
 ```
 
 
