@@ -128,7 +128,7 @@ We further evaluate the MCQ Acc. performance trends of different approaches acro
 
 **1. Clone the repository and install dependencies**
 ```bash
-git clone https://github.com/your-username/PERMA.git
+git clone https://github.com/PolarisLiu1/PERMA
 cd PERMA
 pip install -r requirements.txt
 ````
