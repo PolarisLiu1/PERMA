@@ -19,10 +19,6 @@ We propose **PrefEvolve**, a benchmark that shifts from static retrieval to trac
 - **Linguistic Style-Aligned**: Conversational patterns inspired by realistic user-assistant interaction datasets.
 - **Cross-Framework Evaluation**: A unified evaluation protocol supporting various memory systems.
 
-## 📖 Data Examples
-
-Here is a concrete example illustrating **Event-Driven Preference Evolution** and **Realistic Query Noise** in PERMA.
-
 
 ## 📊 Evaluation Protocols
 
