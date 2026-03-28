@@ -5,36 +5,36 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-Official codebase and dataset for the **PERMA benchmark**. PERMA is designed to evaluate whether memory system-based agents can track and apply evolving user preferences across long-horizon, realistic interactions.
+Official codebase and dataset for the **PERMA benchmark**. PERMA is designed to evaluate whether memory system-based agents can identify, integrate, and maintain user preferences across long-horizon, multi-domain, and realistic interactions.
 
 <p align="center"><img src="figure/pipeline.png" alt="PERMA pipeline" width="85%"></p>
 
 ## 🌟 Overview
 
-We propose **PrefEvolve**, a benchmark that shifts from static retrieval to tracking **event-driven preference evolution**. By testing models through both multiple-choice and interactive tasks, we evaluate persona consistency across temporally ordered, noisy interactions. Our findings reveal that while memory systems reduce costs, maintaining a coherent persona across temporal depth and domain shifts remains a major challenge.
+We propose **PERMA**, a benchmark that shifts from evaluating static retrieval to **event-driven preference evolution** in realistic task environments. By testing models through both multiple-choice and interactive tasks, we evaluate persona consistency across temporally ordered, noisy interactions. Our findings reveal that while current memory systems reduce costs, maintaining a coherent persona across temporal depth and domain shifts remains a major challenge.
 
 ## 🎯 Benchmark Highlights
 
-- **Event-Driven Personalization**: Multi-session interaction timelines where preferences emerge and evolve.
+- **Event-Driven Personalization**: Multi-session and multi-domain interaction timelines where preferences emerge and evolve.
 - **Realistic Query Noise**: Text variability (omitted info, context switching).
-- **Linguistic Style-Aligned**: Conversational patterns inspired by realistic user-assistant interaction datasets.
+- **Linguistic Style-Aligned**: Individual idiolects inspired by realistic user-assistant interaction datasets.
 - **Cross-Framework Evaluation**: A unified evaluation protocol supporting various memory systems.
 
 
 ## 📊 Evaluation Protocols
 
 ### A. Multiple-Choice Evaluation
-Evaluates granular cognitive capabilities across three dimensions:
-- **Task Completion (T)**, indicating the fulfillment of defined goals.
-- **Preference Consistency (P)**, ensuring responses are grounded in long-term preferences without hallucinating unsupported inferences.
-- **Informational Confidence (I)**, identifying whether the model maintains a decisive stance without uncertainty
+Options evaluate granular cognitive capabilities across three dimensions:
+- **Task Completion**, indicating the fulfillment of defined goals.
+- **Preference Consistency**, ensuring responses are grounded in long-term preferences without hallucinating unsupported inferences.
+- **Informational Confidence**, identifying whether the model maintains a decisive stance without uncertainty
 
 ### B. Interactive Evaluation
-A multi-turn simulated interaction between a user simulator and the tested memory system-based agents:
-- Gold Dialogue history is visible to the simulator.
+An LLM-based user simulator interacts with the personalized memory agents, closing the conversation if preferences are met, or otherwise providing supplementary information to mimic a human correcting the agent:
+- Gold Dialogue history is visible to the user simulator.
 - Core metrics include **Turn-1** and **Turn-2 Success Rate**.
 
-We conduct probing evaluations at various temporal intervals along the dialogue timeline to examine how performance evolves as persona states accumulate and potentially drift. 
+We conduct probing evaluations at various temporal intervals along the dialogue timeline to examine how performance changes as persona states accumulate and potentially drift. 
 
 ---
 
@@ -55,7 +55,7 @@ We analyze persona consistency across temporal depth and compare different model
 
 ### A. Standalone LLMs (MCQ Acc.)
 
-| Model              | Clean Single | Noise Single | Clean Multi | Noise Multi |
+| Model              | Clean, Single-Domain | Noise, Single-Domain | Clean, Multi-Domain | Noise, Multi-Domain |
 |--------------------|-------------|--------------|-------------|-------------|
 | **Reasoning Models** ||||| 
 | MiniMax-M2.5       | 0.797       | 0.797        | 0.86        | 0.866       |
@@ -74,7 +74,7 @@ We analyze persona consistency across temporal depth and compare different model
 
 #### Clean, Single-domain tasks
 
-| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token ↓ | Search Duration | Completion | User Token ↓ | Turn=1 | Turn≤2 |
+| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token ↓ | Search Duration (ms) | Completion | User Token ↓ | Turn=1 | Turn≤2 |
 |-----------------|----------|---------|--------------|------------------|-----------------|------------|---------------|--------|--------|
 | RAG (BGE-M3)    | 0.702    | 0.859   | 1.89         | 928.8            | 16.2            | 0.83       | 61.9          | 0.461  | 0.797  |
 | MemOS           | 0.811    | 0.83    | 2.27         | 709.1            | 369.1           | 0.842      | 60.7          | 0.548  | 0.801  |
@@ -86,7 +86,7 @@ We analyze persona consistency across temporal depth and compare different model
 
 #### Noise, Single-domain tasks
 
-| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token ↓ | Search Duration | Completion | User Token ↓ | Turn=1 | Turn≤2 |
+| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token ↓ | Search Duration (ms) | Completion | User Token ↓ | Turn=1 | Turn≤2 |
 |-----------------|----------|---------|--------------|------------------|-----------------|------------|---------------|--------|--------|
 | RAG (BGE-M3)    | 0.719    | 0.852   | 1.92         | 933.4            | 16.9            | 0.811      | 60.9          | 0.466  | 0.787  |
 | MemOS           | 0.853    | 0.844   | 2.38         | 1486.7           | 644.5           | 0.837      | 56.9          | 0.567  | 0.837  |
@@ -98,7 +98,7 @@ We analyze persona consistency across temporal depth and compare different model
 
 #### Clean, Multi-domain tasks
 
-| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token ↓ | Search Duration | Completion | User Token ↓ | Turn=1 | Turn≤2 |
+| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token ↓ | Search Duration (ms)| Completion | User Token ↓ | Turn=1 | Turn≤2 |
 |-----------------|----------|---------|--------------|------------------|-----------------|------------|---------------|--------|--------|
 | RAG (BGE-M3)    | 0.682    | 0.849   | 1.78         | 858.1            | 16.5            | 0.745      | 122.6         | 0.204  | 0.561  |
 | MemOS           | 0.732    | 0.819   | 2.14         | 664.7            | 364.2           | 0.643      | 113.3         | 0.306  | 0.592  |
@@ -108,7 +108,12 @@ We analyze persona consistency across temporal depth and compare different model
 | EverMemOS       | 0.713    | 0.82    | 1.98         | 3134.4           | 15847           | 0.688      | 115.2         | 0.268  | 0.573  |
 | Supermemory     | 0.656    | 0.803   | 1.72         | 92.4             | 3232.3          | 0.675      | 125.4         | 0.248  | 0.554  |
 
-MCQ accuracy across three evaluation checkpoints in the Clean setting is reported, where the dashed line denotes the baseline performance under information omission (Type 1), alongside Memory Scores evaluated across different event types.
+
+#### Temporal Depth
+Below is MCQ Acc. across three evaluation checkpoints in the single-domain, Clean setting.
+- **Type 1 (Zero-Memory)**: Evaluated at the onset of user interaction before relevant preferences are established.
+- **Type 2 (In-Time)**: Positioned immediately after all relevant sessions have occurred.
+- **Type 3 (Post-Intervention)**: Positioned after a series of sessions containing unrelated topics.
 
 <p align="center">
   <img src="figure/large_memory_opt.png" width="47%" />
