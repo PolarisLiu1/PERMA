@@ -1,6 +1,7 @@
 # PERMA: Benchmarking Personalized Memory Agents via Event-Driven Preference and Realistic Task Environments
 
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-red.svg)](https://arxiv.org/abs/2603.23231)
+[![HuggingFace Dataset](https://img.shields.io/badge/Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/ustclsc/PERMA)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
@@ -126,6 +127,7 @@ We further evaluate the MCQ Acc. performance trends of different approaches acro
 ```bash
 git clone https://github.com/PolarisLiu1/PERMA
 cd PERMA
+mkdir ./data
 pip install -r requirements.txt
 ````
 
