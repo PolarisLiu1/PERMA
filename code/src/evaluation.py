@@ -1249,7 +1249,7 @@ def run_incremental_eval(args):
                             logger.warning(f"Ingest failed: {e}")
                     # Wait for index
                     if args.mem_frame not in ["memobase", "lightmem"]:
-                        time.sleep(5) # Reduced wait time
+                        time.sleep(500) # Reduced wait time
                 
                 elif mode == "rag":
                     emb_path = os.path.join(save_dir, f"rag.npy")
