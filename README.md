@@ -137,7 +137,13 @@ pip install -r requirements.txt
 ````
 
 **2. Configure API Keys**
-Create a `.env` file in the `code/src` directory:
+Copy the template and fill your real keys in the `code/src` directory:
+
+```bash
+cp code/src/.env.example code/src/.env
+```
+
+Then edit `code/src/.env`:
 
 ```env
 # code/src/.env
@@ -221,5 +227,4 @@ python evaluation.py \
       url={https://arxiv.org/abs/2603.23231}, 
 }
 ```
-
 
