@@ -1504,7 +1504,7 @@ def main():
     parser.add_argument("--user_id_truncate", default=20, type=int, help="Number of user IDs to truncate (for debugging)")
     parser.add_argument("--output_dir", type=str, default=f"{DATA_ROOT}/evaluation", help="Output directory for evaluation results")
     parser.add_argument("--mem_frame", type=str, default="supermemory", choices=[
-        "mem0", "memos-api-online", "memobase", "memu", "supermemory", "lightmem", "evermemos"
+        "mem0", "memos-api-online", "memobase", "supermemory", "lightmem"
     ], help="Memory system framework selection, passed directly to process_user")
     parser.add_argument("--top_k", type=int, default=10, help="Number of retrieval results") # multi changed to 20
     parser.add_argument("--batch_size", type=int, default=2, help="Evaluation batch size")
