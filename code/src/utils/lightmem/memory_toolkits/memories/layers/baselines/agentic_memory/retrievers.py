@@ -1,19 +1,14 @@
 from typing import List, Dict, Any, Optional, Union
 from sentence_transformers import SentenceTransformer
 from rank_bm25 import BM25Okapi
-import nltk
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import chromadb
 from chromadb.config import Settings
 import pickle
-from nltk.tokenize import word_tokenize
 import os
 import json
 from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
-
-def simple_tokenize(text):
-    return word_tokenize(text)
 
 class ChromaRetriever:
     """Vector database retrieval using ChromaDB"""

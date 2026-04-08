@@ -31,7 +31,6 @@ from prompt import (
 )
 from util import get_client, save_json, _encode_dialog, ensure_list, _cosine_similarity, parse_date_with_period, iso_or_default
 from bert_score import score as _bert_score
-from nltk.translate.bleu_score import SmoothingFunction as _BleuSmooth, sentence_bleu as _sentence_bleu
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

@@ -13,7 +13,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 import os
 from abc import ABC, abstractmethod
 from transformers import AutoModel, AutoTokenizer
-from nltk.tokenize import word_tokenize
 import pickle
 from pathlib import Path
 from litellm import completion
