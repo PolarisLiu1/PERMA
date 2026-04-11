@@ -287,14 +287,14 @@ def evaluate(
     )
     version = "_multi" if args.multi_domain else ""
     file_name = "_c" if args.no_noise else "_n"
-    style_name = "_s" if args.style else ""
+    file_name = "_s" if args.style else file_name
     top_k_name = f"_top{args.top_k}" if args.top_k == 20 else ""
     user_llm = UserLLMStub()
     model_name = "gpt-4o-mini" if args.mode == "longcontext" else "gpt-4o-mini" # TODO change model name (longcontext reasoning model)
     for st in stage:
         logger.info(f"Start stage: {st}")
         for uid in selected_user_ids:
-            in_path = os.path.join(DATA_ROOT, "tasks", f"user{uid}", f"input_data{version}{file_name}{style_name}.json")
+            in_path = os.path.join(DATA_ROOT, "tasks", f"user{uid}", f"input_data{version}{file_name}.json")
             input_data = json.load(open(in_path, "r", encoding="utf-8"))
 
             user_profile, _, _ = _load_profile(uid)
@@ -329,7 +329,7 @@ def evaluate(
                                         end_time = time.time()
                                         duration_ms = (end_time - start_time) * 1000
 
-                                        save_json(os.path.join(out_root, "baseline" + "_" + args.mem_frame, scope + version + file_name + style_name, "search" + top_k_name, f"{task_id}_{task_type}.json"), {
+                                        save_json(os.path.join(out_root, "baseline" + "_" + args.mem_frame, scope + version + file_name, "search" + top_k_name, f"{task_id}_{task_type}.json"), {
                                             "task_id": task_id,
                                             "question": query,
                                             "question_date": qdate,
@@ -342,7 +342,7 @@ def evaluate(
                                     flag = True
                             else:
                                 event_id = idx
-                            ing_user_id = f"user_{uid}_{event_id}_{scope}{version}{file_name}{style_name}"
+                            ing_user_id = f"user_{uid}_{event_id}_{scope}{version}{file_name}"
                             client = get_client(args.mem_frame, ing_user_id)
                             for s_idx, session in enumerate(dialogs):
                                 date_dt = parse_date_with_period(session[1])
@@ -357,7 +357,7 @@ def evaluate(
                                 search_results = client.search(query, top_k=args.top_k)
                                 end_time = time.time()
                                 duration_ms = (end_time - start_time) * 1000
-                                save_json(os.path.join(out_root, "baseline" + "_" + args.mem_frame, scope + version + file_name + style_name, "search" + top_k_name, f"{task_id}_{task_type}.json"), {
+                                save_json(os.path.join(out_root, "baseline" + "_" + args.mem_frame, scope + version + file_name, "search" + top_k_name, f"{task_id}_{task_type}.json"), {
                                     "task_id": task_id,
                                     "question": query,
                                     "question_date": qdate,
@@ -367,7 +367,7 @@ def evaluate(
 
 
                         elif "rag" in mode:
-                            emb_dir = os.path.join(out_root, "embeddings", f"{scope}{version}{file_name}{style_name}")
+                            emb_dir = os.path.join(out_root, "embeddings", f"{scope}{version}{file_name}")
                             os.makedirs(emb_dir, exist_ok=True)
                             emb_path = os.path.join(emb_dir, f"{task_id}_{task_type}.npy")
                             dialogs = _flatten_context(dialogs)
@@ -385,7 +385,7 @@ def evaluate(
                         elif "longcontext" in mode:
                             ctx = _flatten_context(dialogs)
                             ctx = "\n".join([f"{m['role']}: {m['content']}" for m in ctx])
-                            save_json(os.path.join(out_root, "longcontext", scope + version + file_name + style_name, "context", f"{task_id}_{task_type}.json"), {
+                            save_json(os.path.join(out_root, "longcontext", scope + version + file_name, "context", f"{task_id}_{task_type}.json"), {
                                 "task_id": task_id,
                                 "search_context": ctx,
                             })
@@ -402,12 +402,12 @@ def evaluate(
 
                         if "baseline" in mode:
                             event_id = "ALL" if int(task_type) == 3 else idx
-                            user_key = f"user_{uid}_{event_id}_{scope}{version}{file_name}{style_name}"
+                            user_key = f"user_{uid}_{event_id}_{scope}{version}{file_name}"
                             search_results = process_user(question, args.mem_frame, user_key, args.top_k)
                             sr_list = search_results.get(user_key, [])
                             context = sr_list[0].get("search_context", "") if sr_list else ""
                             duration_ms = sr_list[0].get("search_duration_ms", 0.0) if sr_list else 0.0
-                            save_json(os.path.join(out_root, "baseline" + "_" + args.mem_frame, scope + version + file_name + style_name, "search" + top_k_name, f"{task_id}_{task_type}.json"), {
+                            save_json(os.path.join(out_root, "baseline" + "_" + args.mem_frame, scope + version + file_name, "search" + top_k_name, f"{task_id}_{task_type}.json"), {
                                 "task_id": task_id,
                                 "question": question,
                                 "question_date": question_date,
@@ -416,7 +416,7 @@ def evaluate(
                             })
 
                         elif "rag" in mode:
-                            emb_path = os.path.join(out_root, "embeddings", f"{scope}{version}{file_name}{style_name}", f"{task_id}_{task_type}.npy")
+                            emb_path = os.path.join(out_root, "embeddings", f"{scope}{version}{file_name}", f"{task_id}_{task_type}.npy")
                             try:
                                 embeddings = np.load(emb_path)
                             except Exception:
@@ -440,7 +440,7 @@ def evaluate(
                             context = "\n\n".join(ctx_parts)
                             duration_ms = (time.time() - start_time) * 1000
                             logger.info(f"User {uid} task {task_id} searches {args.top_k} chunks, time= {duration_ms:.2f} ms")
-                            save_json(os.path.join(out_root, "rag", scope + version + file_name + style_name, "search" + top_k_name, f"{task_id}_{task_type}.json"), {
+                            save_json(os.path.join(out_root, "rag", scope + version + file_name, "search" + top_k_name, f"{task_id}_{task_type}.json"), {
                                 "task_id": task_id,
                                 "question": question,
                                 "question_date": question_date,
@@ -451,14 +451,14 @@ def evaluate(
                             })
 
                         elif "longcontext" in mode:
-                            ctx_path = os.path.join(out_root, "longcontext", scope + version + file_name + style_name, "context", f"{task_id}_{task_type}.json")
+                            ctx_path = os.path.join(out_root, "longcontext", scope + version + file_name, "context", f"{task_id}_{task_type}.json")
                             try:
                                 ctx_obj = json.load(open(ctx_path, "r", encoding="utf-8"))
                                 context = ctx_obj.get("search_context", "")
                             except Exception:
                                 context = _flatten_context(ev.get("context", []))
                                 context = "\n".join([f"{m['role']}: {m['content']}" for m in context])
-                            save_json(os.path.join(out_root, "longcontext", scope + version + file_name + style_name, "search", f"{task_id}_{task_type}.json"), {
+                            save_json(os.path.join(out_root, "longcontext", scope + version + file_name, "search", f"{task_id}_{task_type}.json"), {
                                 "task_id": task_id,
                                 "question": question,
                                 "question_date": question_date,
@@ -515,7 +515,7 @@ def evaluate(
                         option_resp = meta_info["options"]
 
                         frame = ("_" + args.mem_frame) if "baseline" in mode else ""
-                        spath = os.path.join(out_root, mode + frame, scope + version + file_name + style_name, "search" + model_name.split("/")[-1] if mode == "longcontext" else "search" + top_k_name, f"{task_id}_{task_type}.json")
+                        spath = os.path.join(out_root, mode + frame, scope + version + file_name, "search" + model_name.split("/")[-1] if mode == "longcontext" else "search" + top_k_name, f"{task_id}_{task_type}.json")
 
                         try:
                             sobj = json.load(open(spath, "r", encoding="utf-8"))
@@ -563,7 +563,7 @@ def evaluate(
                             logger.error(f"User {uid} task {task_id} evaluation failed, skip")
                             answer_option = ""
                             answer_option_score = 0
-                        save_json(os.path.join(out_root, mode + frame, scope + version + file_name + style_name, "answer" + model_name.split("/")[-1] if mode == "longcontext" else "answer" + top_k_name, f"{task_id}_{task_type}.json"), {
+                        save_json(os.path.join(out_root, mode + frame, scope + version + file_name, "answer" + model_name.split("/")[-1] if mode == "longcontext" else "answer" + top_k_name, f"{task_id}_{task_type}.json"), {
                             "task_id": task_id,
                             "question": question,
                             "history": inter_res.get("history", ""),
@@ -590,7 +590,7 @@ def evaluate(
                         user_use_topic_dialog = ev.get("user_use_topic_dialog", "")
 
                         frame = ("_" + args.mem_frame) if "baseline" in mode else ""
-                        apath = os.path.join(out_root, mode + frame, scope + version + file_name + style_name, "answer" + model_name.split("/")[-1] if mode == "longcontext" else "answer" + top_k_name, f"{task_id}_{task_type}.json")
+                        apath = os.path.join(out_root, mode + frame, scope + version + file_name, "answer" + model_name.split("/")[-1] if mode == "longcontext" else "answer" + top_k_name, f"{task_id}_{task_type}.json")
                         try:
                             aobj = json.load(open(apath, "r", encoding="utf-8"))
                         except Exception:
@@ -669,7 +669,7 @@ def evaluate(
                         turns = aobj.get("turns", 0)
                         search_duration_ms = float(search_duration_ms)
                         
-                        save_json(os.path.join(out_root, mode + frame, scope + version + file_name + style_name, "eval" + model_name.split("/")[-1] if mode == "longcontext" else "eval" + top_k_name, f"{task_id}_{type_task}.json"), {
+                        save_json(os.path.join(out_root, mode + frame, scope + version + file_name, "eval" + model_name.split("/")[-1] if mode == "longcontext" else "eval" + top_k_name, f"{task_id}_{type_task}.json"), {
                             "task_id": task_id,
                             "task_type": type_task,
                             "question": question,
@@ -701,7 +701,7 @@ def summarize_eval_metrics(args, scope: str = "overall", model_name: str = "") -
     version = "_multi" if args.multi_domain else ""
     frame = ("_" + args.mem_frame) if "baseline" in args.mode else ""
     file_name = "_c" if args.no_noise else "_n"
-    style_name = "_s" if args.style else ""
+    file_name = "_s" if args.style else file_name
     top_k_name = f"_top{args.top_k}" if args.top_k == 20 else ""
     
     # Define metrics to track
@@ -753,7 +753,7 @@ def summarize_eval_metrics(args, scope: str = "overall", model_name: str = "") -
 
     for uid in USER_IDS:
         eval_subpath = "eval" + model_name.replace("/", "-") if args.mode == "longcontext" else "eval" + top_k_name
-        eval_dir = os.path.join(args.output_dir, f"user{uid}", args.mode + frame, scope + version + file_name + style_name, eval_subpath)
+        eval_dir = os.path.join(args.output_dir, f"user{uid}", args.mode + frame, scope + version + file_name, eval_subpath)
         
         if not os.path.isdir(eval_dir):
             continue
@@ -858,7 +858,7 @@ def run_incremental_eval(args):
     user_llm = UserLLMStub()
     version = "_multi" if args.multi_domain else ""
     file_name = "_c" if args.no_noise else "_n"
-    style_name = "_s" if args.style else ""
+    file_name = "_s" if args.style else file_name
 
     def _load_meta(out_root: str, scope: str, task_id: str) -> Dict[str, Any]:
         path = os.path.join(out_root, "meta", scope, f"{task_id}.json")
@@ -887,7 +887,7 @@ def run_incremental_eval(args):
         
         if dataset_type == "standard":
             # Standard incremental data loading
-            in_path = os.path.join(DATA_ROOT, f"user{uid}", f"input_data2{version}{file_name}{style_name}.json")
+            in_path = os.path.join(DATA_ROOT, f"user{uid}", f"input_data2{version}{file_name}.json")
             if not os.path.exists(in_path): return
             input_data = json.load(open(in_path, "r", encoding="utf-8"))
             
@@ -992,7 +992,7 @@ def run_incremental_eval(args):
         # 3. Processing Loop
         mem_user_key = f"user_{uid}_{dataset_type}_{version}" # Simplified key generation
         if dataset_type == "standard":
-             mem_user_key = f"user_{uid}_incremental{version}{file_name}{style_name}"
+             mem_user_key = f"user_{uid}_incremental{version}{file_name}"
         elif dataset_type in ["long", "long_multi"]:
              mem_user_key = f"user_{uid}_incremental_s_long" if is_multi else f"user_{uid}_incremental_s_long_multi"
         
@@ -1029,7 +1029,7 @@ def run_incremental_eval(args):
             
             frame = ("_" + args.mem_frame) if "baseline" in mode else ""
             save_dir_name = f"search_{percent}"
-            save_dir = os.path.join(out_root, mode + frame, scope + version + file_name + style_name, save_dir_name)
+            save_dir = os.path.join(out_root, mode + frame, scope + version + file_name, save_dir_name)
             # Adjust save_dir for long types
             if dataset_type != "standard":
                 save_dir = os.path.join(out_root, mode + frame, scope, save_dir_name)
