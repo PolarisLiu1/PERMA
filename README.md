@@ -242,7 +242,7 @@ Scripts are located in:
 - `code/scripts/run_standard_tests.sh`
 ```
 
-### Generate Dialogues (Additional)
+### 3. Generate Dialogues (Additional)
 
 PERMA is constructed based on seed datasets, making it highly extensible. If you want to expand the dataset for training purposes, such as generating more dialogue data, you can easily do so.
 
