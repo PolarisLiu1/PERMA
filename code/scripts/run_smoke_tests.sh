@@ -89,7 +89,7 @@ if should_run "4"; then
 fi
 
 # (5) incremental + dataset_type=long + interactive=false (smoke)
-# Note: long is the WildChat-filled long-context variant.
+# Note: long is the WildChat-filled, style-aligned long-context variant under a single-domain setting.
 if should_run "5"; then
   run_eval "SMOKE-5 incremental: long (WildChat long-context) non-interactive" \
     "${COMMON_ARGS[@]}" \
