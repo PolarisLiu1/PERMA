@@ -232,9 +232,12 @@ python evaluation.py \
 
 *Available `--dataset_type` options: `standard`, `long`, `long_multi`.*
 
+
+
 **Run via Bash Scripts:**
 
 Scripts are located in:
+```
 - `code/scripts/run_smoke_tests.sh`
 - `code/scripts/run_standard_tests.sh`
 ```
