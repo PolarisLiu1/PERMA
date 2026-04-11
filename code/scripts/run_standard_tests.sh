@@ -129,30 +129,6 @@ if should_run "5-clean-multi"; then
     --dataset_type standard
 fi
 
-# incremental + standard(noisy/multi-domain)
-if should_run "5-noisy-multi"; then
-  run_eval "CASE-5 incremental: standard noisy multi-domain" \
-    "${COMMON_ARGS[@]}" \
-    --multi_domain true \
-    --interactive true \
-    --no_noise false \
-    --style false \
-    --incremental true \
-    --dataset_type standard
-fi
-
-# incremental + standard(style/multi-domain)
-if should_run "5-style-multi"; then
-  run_eval "CASE-5 incremental: standard style multi-domain" \
-    "${COMMON_ARGS[@]}" \
-    --multi_domain true \
-    --interactive true \
-    --no_noise false \
-    --style true \
-    --incremental true \
-    --dataset_type standard
-fi
-
 # incremental + long (WildChat long context)
 if should_run "5-long"; then
   run_eval "CASE-5 incremental: long (WildChat long-context)" \
