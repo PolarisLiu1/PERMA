@@ -5,13 +5,19 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-Official codebase and dataset for the **PERMA benchmark**. PERMA is designed to evaluate whether memory system-based agents can identify, integrate, and maintain user preferences across long-horizon, multi-domain, and realistic interactions.
+Codebase for the **PERMA benchmark**. PERMA is designed to evaluate whether memory system-based agents can identify, integrate, and maintain user preferences across long-horizon, multi-domain, and realistic interactions.
 
 <p align="center"><img src="figure/pipeline.png" alt="PERMA pipeline" width="85%"></p>
 
 ## 🌟 Overview
 
 We propose **PERMA**, a benchmark that shifts from evaluating static retrieval to **event-driven preference evolution** in realistic task environments. By testing models through both multiple-choice and interactive tasks, we evaluate persona consistency across temporally ordered, noisy interactions. Our findings reveal that while current memory systems reduce costs, maintaining a coherent persona across temporal depth and domain shifts remains a major challenge.
+
+## 📰 News
+
+- **2026.03.24**: Our paper was released on arXiv: [PERMA](https://arxiv.org/abs/2603.23231).
+- **2026.03.28**: The PERMA dataset was released on Hugging Face: [ustclsc/PERMA](https://huggingface.co/datasets/ustclsc/PERMA).
+
 
 ## 🎯 Benchmark Highlights
 
@@ -40,7 +46,7 @@ We conduct probing evaluations at various temporal intervals along the dialogue 
 
 ## 🏆 Experimental Results
 
-The empirical performance of all evaluated approaches across single-domain and multi-domain tasks, under both Clean and Noise scenarios, is summarized below.
+The performance of all evaluated approaches across single-domain and multi-domain tasks, under both Clean and Noise scenarios, is summarized below.
 
 We analyze persona consistency across temporal depth and compare different models and memory systems from multiple perspectives, including:
 
@@ -74,7 +80,7 @@ We analyze persona consistency across temporal depth and compare different model
 
 #### Clean, Single-domain tasks
 
-| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token ↓ | Search Duration (ms) | Completion | User Token ↓ | Turn=1 | Turn≤2 |
+| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token | Search Duration | Completion | User Token | Turn=1 | Turn≤2 |
 |-----------------|----------|---------|--------------|------------------|-----------------|------------|---------------|--------|--------|
 | RAG (BGE-M3)    | 0.702    | 0.859   | 1.89         | 928.8            | 16.2            | 0.83       | 61.9          | 0.461  | 0.797  |
 | MemOS           | 0.811    | 0.83    | 2.27         | 709.1            | 369.1           | 0.842      | 60.7          | 0.548  | 0.801  |
@@ -86,7 +92,7 @@ We analyze persona consistency across temporal depth and compare different model
 
 #### Noise, Single-domain tasks
 
-| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token ↓ | Search Duration (ms) | Completion | User Token ↓ | Turn=1 | Turn≤2 |
+| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token | Search Duration | Completion | User Token | Turn=1 | Turn≤2 |
 |-----------------|----------|---------|--------------|------------------|-----------------|------------|---------------|--------|--------|
 | RAG (BGE-M3)    | 0.719    | 0.852   | 1.92         | 933.4            | 16.9            | 0.811      | 60.9          | 0.466  | 0.787  |
 | MemOS           | 0.853    | 0.844   | 2.38         | 1486.7           | 644.5           | 0.837      | 56.9          | 0.567  | 0.837  |
@@ -98,7 +104,7 @@ We analyze persona consistency across temporal depth and compare different model
 
 #### Clean, Multi-domain tasks
 
-| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token ↓ | Search Duration (ms)| Completion | User Token ↓ | Turn=1 | Turn≤2 |
+| Baseline        | MCQ Acc. | BERT-f1 | Memory Score | Context Token | Search Duration | Completion | User Token | Turn=1 | Turn≤2 |
 |-----------------|----------|---------|--------------|------------------|-----------------|------------|---------------|--------|--------|
 | RAG (BGE-M3)    | 0.682    | 0.849   | 1.78         | 858.1            | 16.5            | 0.745      | 122.6         | 0.204  | 0.561  |
 | MemOS           | 0.732    | 0.819   | 2.14         | 664.7            | 364.2           | 0.643      | 113.3         | 0.306  | 0.592  |
@@ -133,10 +139,24 @@ We further evaluate the MCQ Acc. performance trends of different approaches acro
 git clone https://github.com/PolarisLiu1/PERMA
 cd PERMA
 mkdir ./data
+
+conda create -n perma python=3.11
+conda activate perma
+
 pip install -r requirements.txt
 ````
 
-**2. Configure API Keys**
+**2. Download the PERMA dataset**
+
+```bash
+# Install Hugging Face Hub CLI if needed
+pip install -U "huggingface_hub[cli]"
+
+# Download dataset files to a local directory
+huggingface-cli download ustclsc/PERMA --repo-type dataset --local-dir ./data/PERMA --resume-download
+```
+
+**3. Configure API Keys**
 Create a `.env` file in the `code/src` directory:
 
 ```env
@@ -144,25 +164,68 @@ Create a `.env` file in the `code/src` directory:
 CHAT_MODEL=gpt-4o-mini
 CHAT_MODEL_API_KEY=your_openai_api_key
 CHAT_MODEL_BASE_URL=your_api_base_url
-MEM0_API_KEY=your_mem0_key
+MEMOS_KEY=your_memos_key
 # Add other backend keys based on the memory systems you intend to evaluate
 ```
 
 
 ## 🚀 Quick Start
 
-<details>
+### 1: Run Evaluation
 
+Evaluate a memory framework (e.g., `MemOS`) on the generated data across different temporal depths (Type 1/2/3). 
+- `--stage` argument allows you to run specific parts of the pipeline. 
+- `--multi_domain`: `True`=multi-domain, `False`=single-domain.
+- `--interactive True`: enable interactive evaluation.
+- `--no_noise`: controls noise (`True`=clean, `False`=noisy); for style alignment use `--style True`.
 
-Navigate to the source directory before running the scripts:
+**Smoke Test:**
+Use limited data for testing to ensure everything is normal. Default: 1 user, first 5 questions.
 
 ```bash
-cd code/src
+python evaluation.py \
+  --mode baseline \
+  --mem_frame memos-api-online \
+  --stage add search answer eval \
+  --smoke_test \
+  --output_dir ../../data/evaluation \
+  --top_k 10
 ```
 
-### Step 1: Generate Benchmark Dialogues
+**Standard Evaluation:**
 
-Generate the standard dataset with multi-domain topics:
+```bash
+python evaluation.py \
+  --mode baseline \
+  --mem_frame memos-api-online \
+  --stage add search answer eval \
+  --output_dir ../../data/evaluation \
+  --top_k 10
+  --multi_domain False
+  --interactive True
+  --no_noise True
+```
+
+*Available `--mode` options: `baseline`, `rag`, `longcontext`, `incremental`*
+
+**Incremental Evaluation:**
+Evaluate results at different timeline positions, including style-aligned long-context (dataset_type=long/long_multi) evaluation scripts:
+
+```bash
+python evaluation.py \
+  --mode incremental \
+  --mem_frame memos-api-online \
+  --dataset_type standard \
+  --stage add search answer eval \
+  --output_dir ../../data/evaluation
+```
+
+*Available `--dataset_type` options: `standard`, `long`, `long_multi`.*
+
+### Generate Dialogues (Additional)
+
+PERMA is constructed based on seed datasets, making it highly extensible. If you want to expand the dataset for training purposes, such as generating more dialogue data, you can easily do so.
+
 
 ```bash
 python complete_dataset_generator.py \
@@ -175,38 +238,6 @@ python complete_dataset_generator.py \
 
   - `--regenerate_no_noise`: Generate clean data without injected noise.
   - `--style_transfer --wildchat_dir WildChat-1M`: Apply WildChat conversational style.
-
-### Step 2: Run Evaluation
-
-Evaluate a memory framework (e.g., `supermemory`) on the generated data. The `--stage` argument allows you to run specific parts of the pipeline.
-
-**Standard Evaluation:**
-
-```bash
-python evaluation.py \
-  --mode baseline \
-  --mem_frame supermemory \
-  --stage add search answer eval \
-  --output_dir ../../data/evaluation \
-  --top_k 10
-```
-
-*Available `--mode` options: `baseline`, `rag`, `longcontext`, `incremental`.*
-
-**Incremental Evaluation:**
-Evaluate how systems handle progressive updates over extended timelines:
-
-```bash
-python evaluation.py \
-  --mode incremental \
-  --mem_frame supermemory \
-  --dataset_type standard \
-  --stage add search answer eval \
-  --output_dir ../../data/evaluation
-```
-
-*Available `--dataset_type` options: `standard`, `long`, `long_multi`.*
-</details>
 
 
 ## 📝 Citation
