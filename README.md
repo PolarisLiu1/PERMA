@@ -138,13 +138,12 @@ We further evaluate the MCQ Acc. performance trends of different approaches acro
 ```bash
 git clone https://github.com/PolarisLiu1/PERMA
 cd PERMA
-mkdir ./data
 
 conda create -n perma python=3.11
 conda activate perma
 
 pip install -r requirements.txt
-````
+```
 
 **2. Download the PERMA dataset**
 
@@ -152,8 +151,8 @@ pip install -r requirements.txt
 # Install Hugging Face Hub CLI if needed
 pip install -U "huggingface_hub[cli]"
 
-# Download dataset files to a local directory
-huggingface-cli download ustclsc/PERMA --repo-type dataset --local-dir ./data/PERMA --resume-download
+# Download dataset files to a temporary local directory
+huggingface-cli download ustclsc/PERMA --repo-type dataset --local-dir ./data --resume-download
 ```
 
 **3. Configure API Keys**
@@ -178,13 +177,17 @@ Evaluate a memory framework (e.g., `MemOS`) on the generated data across differe
 - `--multi_domain`: `True`=multi-domain, `False`=single-domain.
 - `--interactive True`: enable interactive evaluation.
 - `--no_noise`: controls noise (`True`=clean, `False`=noisy); for style alignment use `--style True`.
+- `--mode`: retrieval/evaluation framework selector (`baseline`, `rag`, `longcontext`).
+- `--incremental`: protocol switch (`False`=standard evaluation, `True`=incremental timeline evaluation).
 
 **Smoke Test:**
 Use limited data for testing to ensure everything is normal. Default: 1 user, first 5 questions.
 
 ```bash
+cd code/src
 python evaluation.py \
   --mode baseline \
+  --incremental false \
   --mem_frame memos-api-online \
   --stage add search answer eval \
   --smoke_test \
@@ -195,25 +198,32 @@ python evaluation.py \
 **Standard Evaluation:**
 
 ```bash
+cd code/src
 python evaluation.py \
   --mode baseline \
+  --incremental false \
   --mem_frame memos-api-online \
   --stage add search answer eval \
   --output_dir ../../data/evaluation \
-  --top_k 10
-  --multi_domain False
-  --interactive True
+  --top_k 10 \
+  --multi_domain False \
+  --interactive True \
   --no_noise True
 ```
 
-*Available `--mode` options: `baseline`, `rag`, `longcontext`, `incremental`*
+*Available `--mode` options: `baseline`, `rag`, `longcontext`.*
 
 **Incremental Evaluation:**
-Evaluate results at different timeline positions, including style-aligned long-context (dataset_type=long/long_multi) evaluation scripts:
+Set `--incremental true` to evaluate results at different timeline positions.
+In this protocol:
+- `--dataset_type standard`: standard incremental data (clean/noisy/style variants, controlled by `--no_noise` and `--style`).
+- `--dataset_type long` / `--dataset_type long_multi`: WildChat-style long-context incremental data.
 
 ```bash
+cd code/src
 python evaluation.py \
-  --mode incremental \
+  --mode baseline \
+  --incremental true \
   --mem_frame memos-api-online \
   --dataset_type standard \
   --stage add search answer eval \
@@ -222,12 +232,20 @@ python evaluation.py \
 
 *Available `--dataset_type` options: `standard`, `long`, `long_multi`.*
 
+**Run via Bash Scripts:**
+
+Scripts are located in:
+- `code/scripts/run_smoke_tests.sh`
+- `code/scripts/run_standard_tests.sh`
+```
+
 ### Generate Dialogues (Additional)
 
 PERMA is constructed based on seed datasets, making it highly extensible. If you want to expand the dataset for training purposes, such as generating more dialogue data, you can easily do so.
 
 
 ```bash
+cd code/src
 python complete_dataset_generator.py \
   --output_dir ../../data/tasks/generated_datasets \
   --topic_number 3 \
@@ -252,5 +270,3 @@ python complete_dataset_generator.py \
       url={https://arxiv.org/abs/2603.23231}, 
 }
 ```
-
-

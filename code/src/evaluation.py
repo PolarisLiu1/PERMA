@@ -35,6 +35,18 @@ from bert_score import score as _bert_score
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v is None:
+        return False
+    value = str(v).strip().lower()
+    if value in {"1", "true", "t", "yes", "y", "on"}:
+        return True
+    if value in {"0", "false", "f", "no", "n", "off"}:
+        return False
+    raise argparse.ArgumentTypeError(f"Invalid boolean value: {v}")
+
 COUNTRY = {
     "Canada": [334],
     "Mexico": [354],
@@ -51,29 +63,20 @@ COUNTRY = {
 DATA_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../data")
 token_encoding = tiktoken.get_encoding("cl100k_base")
 random.seed(42)
-count_country = COUNTRY
 USER_IDS = []
-for country, indices in count_country.items():
+for country, indices in COUNTRY.items():
     USER_IDS.extend(indices)
 
 
 def _get_task_limit(args) -> Optional[int]:
-    limit = getattr(args, "max_tasks", None)
-    if limit is None and getattr(args, "smoke_test", False):
-        limit = 5
-    if limit is None:
-        return None
-    return max(0, int(limit))
-
+    if getattr(args, "smoke_test", False):
+        return args.max_tasks
+    return None
 
 def _get_eval_user_ids(args) -> List[int]:
-    selected = USER_IDS
-    max_users = getattr(args, "max_users", None)
-    if max_users is None and getattr(args, "smoke_test", False):
-        max_users = 1
-    if max_users is not None:
-        selected = USER_IDS[: max(0, int(max_users))]
-    return selected
+    if getattr(args, "smoke_test", False):
+        return USER_IDS[:1]
+    return USER_IDS
 
 try:
     load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
@@ -311,7 +314,7 @@ def evaluate(
             # Stage ADD
             if st == "add":
                 for scope in (["overall"] if args.run_overall_eval else []):
-                    flag = False
+                    overlap = False
                     for idx, ev in tqdm(enumerate(_tasks(scope)), desc=f"Processing {scope} tasks"):
                         task_id = ev.get("task_id", "")
                         dialogs = ev.get("context", [])
@@ -322,7 +325,7 @@ def evaluate(
 
                         if "baseline" in mode:
                             if int(task_type) == 3:
-                                if flag:
+                                if overlap:
                                     if args.mem_frame == "lightmem":
                                         start_time = time.time()
                                         search_results = client.search(query, top_k=args.top_k)
@@ -339,7 +342,7 @@ def evaluate(
                                     continue
                                 else:
                                     event_id = "ALL"
-                                    flag = True
+                                    overlap = True
                             else:
                                 event_id = idx
                             ing_user_id = f"user_{uid}_{event_id}_{scope}{version}{file_name}"
@@ -475,7 +478,6 @@ def evaluate(
                         task_type = ev.get("type", "")
                         meta = _load_meta(out_root, scope, f"{task_id}_{task_type}")
                         question = meta.get("question", "")
-                        question_date = meta.get("question_date", iso_or_default(None))
                         type_task = ev.get("type", 1)
 
                         task_meta = ev.get("task", {})
@@ -491,7 +493,6 @@ def evaluate(
                             for t in affinity_types:
                                 if t in pref:
                                     user_preference_history.append(pref)
-                                    # ----------------------------------
                         task_preference = "\n".join(user_preference_history)
                         aff_links = ev.get("affinity_links", [])
                         aff_dialogs = []
@@ -538,10 +539,7 @@ def evaluate(
                                 )
                             except Exception:
                                 logger.error(f"User {uid} task {task_id} evaluation failed, skip")
-                                inter_res = {
-                                    "history": "",
-                                    "turns": 0,
-                                }
+                                inter_res = {}
                         else:
                             inter_res = {
                                 "history": "",
@@ -631,6 +629,8 @@ def evaluate(
 
                         if "longcontext" in mode or not args.interactive:
                             task_completion = ""
+                            verdict = None
+                            explanation = ""
                         else:
                             task_completion = _single_eval(task_completion_prompt, "gpt-4o")
                             verdict = _extract_verdicts(task_completion)
@@ -690,7 +690,7 @@ def evaluate(
 
             else:
                 logger.warning(f"{st}")
-        if st == "eval":
+        if st == "eval" and not args.smoke_test:
             summarize_eval_metrics(args, scope="overall", model_name=model_name)
 
 def summarize_eval_metrics(args, scope: str = "overall", model_name: str = "") -> Dict[str, Any]:
@@ -846,7 +846,7 @@ def summarize_eval_metrics(args, scope: str = "overall", model_name: str = "") -
             by_type_category_means[t_str][m] = (s / c) if c > 0 else 0.0
 
     summary = {
-        "task3_means": global_means,
+        "type3_means": global_means,
         "by_type_category_means": by_type_category_means,
     }
     logger.info(f"Summary: {summary}")
@@ -994,7 +994,8 @@ def run_incremental_eval(args):
         if dataset_type == "standard":
              mem_user_key = f"user_{uid}_incremental{version}{file_name}"
         elif dataset_type in ["long", "long_multi"]:
-             mem_user_key = f"user_{uid}_incremental_s_long" if is_multi else f"user_{uid}_incremental_s_long_multi"
+             # Keep key suffix aligned with dataset_type
+             mem_user_key = f"user_{uid}_incremental_s_long_multi" if is_multi else f"user_{uid}_incremental_s_long"
         
         client = None
         if mode == "baseline":
@@ -1300,9 +1301,9 @@ def run_incremental_eval(args):
 # ---------- CLI Entry ----------
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", type=str, default="baseline", choices=["rag", "longcontext", "baseline", "incremental"], help="Evaluation mode (no longer distinguishing single/multi)")
-    parser.add_argument("--multi_domain", default=True, help="Whether to evaluate multi-domain tasks")
-    parser.add_argument("--run_overall_eval", default=True, type=bool, help="Whether to run overall evaluation")
+    parser.add_argument("--mode", type=str, default="baseline", choices=["rag", "longcontext", "baseline"], help="Evaluation mode (no longer distinguishing single/multi)")
+    parser.add_argument("--multi_domain", default=True, type=str2bool, help="Whether to evaluate multi-domain tasks")
+    parser.add_argument("--run_overall_eval", default=True, type=str2bool, help="Whether to run overall evaluation")
     parser.add_argument("--output_dir", type=str, default=f"{DATA_ROOT}/evaluation", help="Output directory for evaluation results")
     parser.add_argument("--mem_frame", type=str, default="supermemory", choices=[
         "mem0", "memos-api-online", "memobase", "supermemory", "lightmem"
@@ -1310,9 +1311,9 @@ def main():
     parser.add_argument("--top_k", type=int, default=10, help="Number of retrieval results")
     parser.add_argument("--batch_size", type=int, default=2, help="Evaluation batch size")
     parser.add_argument("--max_turns", type=int, default=10, help="Maximum turns for multi-turn response (fixed to 1 for single mode)")
-    parser.add_argument("--no_noise", default=True, type=bool, help="Whether to exclude noise")
-    parser.add_argument("--interactive", default=False, type=bool, help="Whether to enable interactive mode")
-    parser.add_argument("--style", default=False, type=bool, help="Whether to exclude style")
+    parser.add_argument("--no_noise", default=True, type=str2bool, help="Whether to exclude noise")
+    parser.add_argument("--interactive", default=False, type=str2bool, help="Whether to enable interactive mode")
+    parser.add_argument("--style", default=False, type=str2bool, help="Whether to exclude style")
     parser.add_argument(
         "--stage",
         type=str,
@@ -1321,12 +1322,11 @@ def main():
         choices=["add", "search", "answer", "eval"],
         help="Evaluation stages (multiple allowed, executed in order)",
     )
-    parser.add_argument("--debug", default=False, type=bool, help="Whether to enable debug mode")
     parser.add_argument("--num_workers", type=int, default=2, help="Number of parallel processing threads")
     parser.add_argument("--dataset_type", type=str, default="standard", choices=["standard", "long", "long_multi"], help="Incremental dataset type")
     parser.add_argument("--smoke_test", action="store_true", help="Enable smoke test defaults (max_users=1, user_ids=5 if not explicitly set)")
-    parser.add_argument("--max_users", type=int, default=None, help="Limit number of users to evaluate")
-    parser.add_argument("--max_tasks", type=int, default=None, help="Limit number of tasks")
+    parser.add_argument("--max_tasks", type=int, default=5, help="Limit number of tasks")
+    parser.add_argument("--incremental", default=False, type=str2bool, help="Whether to enable incremental evaluation")
 
     args = parser.parse_args()
 
@@ -1337,15 +1337,15 @@ def main():
     logger.info(f"Current evaluation style: {args.style}")
     logger.info(f"Current evaluation multi_domain: {args.multi_domain}")
     # ------------stage testing------------
-    evaluate(
-        args=args,
-        mode=args.mode,
-        max_turns=max(1, args.max_turns),
-        stage=args.stage,
-    )
-
-    # summarize_eval_metrics(args, scope="overall")
-    # run_incremental_eval(args)
+    if not args.incremental:
+        evaluate(
+            args=args,
+            mode=args.mode,
+            max_turns=max(1, args.max_turns),
+            stage=args.stage,
+        )
+    else:
+        run_incremental_eval(args)
 
 
 if __name__ == "__main__":
