@@ -31,7 +31,6 @@ from prompt import (
 )
 from util import get_client, save_json, _encode_dialog, ensure_list, _cosine_similarity, parse_date_with_period, iso_or_default
 from bert_score import score as _bert_score
-from nltk.translate.bleu_score import SmoothingFunction as _BleuSmooth, sentence_bleu as _sentence_bleu
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -51,12 +50,29 @@ COUNTRY = {
 
 DATA_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../data")
 token_encoding = tiktoken.get_encoding("cl100k_base")
-prefix = "The user preferences mentioned in the conversation follow the format:"
 random.seed(42)
 count_country = COUNTRY
 USER_IDS = []
 for country, indices in count_country.items():
     USER_IDS.extend(indices)
+
+
+def _get_task_limit(args) -> Optional[int]:
+    limit = getattr(args, "max_tasks", None)
+    if limit is None and getattr(args, "smoke_test", False):
+        limit = 5
+    if limit is None:
+        return None
+    return max(0, int(limit))
+
+
+def _get_eval_user_ids(args) -> List[int]:
+    max_users = getattr(args, "max_users", None)
+    if max_users is None and getattr(args, "smoke_test", False):
+        max_users = 1
+    if max_users is not None:
+        selected = USER_IDS[: max(0, int(max_users))]
+    return selected
 
 try:
     load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
@@ -67,280 +83,6 @@ except Exception:
         pass
 
 oai_client = OpenAI(api_key=os.getenv("CHAT_MODEL_API_KEY"), base_url=os.getenv("CHAT_MODEL_BASE_URL"))
-
-def evaluate_baselines(incremental_dir=None, task_type="incremental", domain_mode="single"):
-    if incremental_dir is None:
-        incremental_dir = os.path.join(DATA_ROOT, "evaluation", "incremental")
-    if task_type not in {"incremental", "long_context", "context_aware"}:
-        raise ValueError(f"Unsupported task_type: {task_type}")
-    if domain_mode not in {"single", "multi"}:
-        raise ValueError(f"Unsupported domain_mode: {domain_mode}")
-
-    def _safe_avg(values):
-        return sum(values) / len(values) if values else 0.0
-
-    if task_type == "incremental":
-        target_folders = ["overall_c", "overall_n"]
-    else:
-        target_folders = ["overall_s_long_s"] if domain_mode == "single" else ["overall_s_long_multi_s"]
-
-    print(f"Evaluating {task_type} (Domain Mode: {domain_mode}) in folders: {target_folders}")
-    if not os.path.exists(incremental_dir):
-        print(f"Directory {incremental_dir} does not exist.")
-        return {}
-
-    user_dirs = sorted([d for d in os.listdir(incremental_dir) if os.path.isdir(os.path.join(incremental_dir, d)) and not d.startswith(".")])
-    available_context_domains = {}
-
-    if task_type == "context_aware":
-        for user_name in tqdm(user_dirs, desc="Scanning longcontext"):
-            for target_folder in target_folders:
-                longcontext_path = os.path.join(incremental_dir, user_name, "longcontext", target_folder)
-                if not os.path.exists(longcontext_path):
-                    continue
-                search_dirs = sorted([d for d in os.listdir(longcontext_path) if os.path.isdir(os.path.join(longcontext_path, d)) and d.startswith("search_")])
-                for search_dir in search_dirs:
-                    try:
-                        pos = int(search_dir.split("_")[1])
-                    except Exception:
-                        continue
-                    longcontext_file = os.path.join(longcontext_path, search_dir, f"longcontext_{pos}.json")
-                    if not os.path.exists(longcontext_file):
-                        continue
-                    try:
-                        with open(longcontext_file, "r", encoding="utf-8") as f:
-                            lc_data = json.load(f)
-                        domains = set()
-                        for item in lc_data.get("context", []):
-                            ctx_task_id = item.get("task_id")
-                            if not ctx_task_id:
-                                continue
-                            ctx_match = re.search(r"\(([^)]+)\)$", ctx_task_id)
-                            if ctx_match:
-                                domains.add(ctx_match.group(1))
-                        available_context_domains[(user_name, pos)] = domains
-                    except Exception:
-                        continue
-        print(f"Ground Truth Domains built for {len(available_context_domains)} (user, pos) pairs.")
-
-    data_store = {}
-
-    for user_name in tqdm(user_dirs, desc="Processing users"):
-        user_path = os.path.join(incremental_dir, user_name)
-        baseline_dirs = sorted([d for d in os.listdir(user_path) if os.path.isdir(os.path.join(user_path, d))])
-
-        for baseline_name in baseline_dirs:
-            if task_type == "context_aware" and baseline_name != "longcontext":
-                continue
-
-            baseline_path = os.path.join(user_path, baseline_name)
-            overall_path = None
-            for folder in target_folders:
-                candidate = os.path.join(baseline_path, folder)
-                if os.path.exists(candidate):
-                    overall_path = candidate
-                    break
-            if overall_path is None:
-                continue
-
-            if baseline_name not in data_store:
-                if task_type == "incremental":
-                    data_store[baseline_name] = {}
-                elif task_type == "long_context":
-                    data_store[baseline_name] = {
-                        "trend": {},
-                        "tasks_10_90": set(),
-                        "pos_100_subset": [],
-                        "pos_100_all": {"score": [], "bert": [], "token": [], "turn_1": [], "turn_2": [], "turn_3": [], "turn_other": [], "duration": []},
-                    }
-                else:
-                    data_store[baseline_name] = {}
-
-            search_dirs = sorted([d for d in os.listdir(overall_path) if os.path.isdir(os.path.join(overall_path, d)) and d.startswith("search_")])
-            for search_dir in search_dirs:
-                try:
-                    pos = int(search_dir.split("_")[1])
-                except Exception:
-                    continue
-
-                search_path = os.path.join(overall_path, search_dir)
-                json_files = []
-
-                if task_type == "incremental":
-                    if "longcontext" in baseline_name:
-                        check_path = os.path.join(search_path, "xopkimik25")
-                        if os.path.exists(check_path):
-                            search_path = check_path
-                    if os.path.exists(search_path):
-                        json_files = sorted([f for f in os.listdir(search_path) if f.endswith(".json")])
-                elif task_type == "context_aware":
-                    subdir_path = os.path.join(search_path, "qwen14b-1M")
-                    if os.path.exists(subdir_path):
-                        files = sorted([f for f in os.listdir(subdir_path) if f.endswith(".json")])
-                        if files:
-                            search_path = subdir_path
-                            json_files = files
-                    if not json_files and os.path.exists(search_path):
-                        json_files = sorted([f for f in os.listdir(search_path) if f.endswith(".json")])
-                else:
-                    if os.path.exists(search_path):
-                        json_files = sorted([f for f in os.listdir(search_path) if f.endswith(".json")])
-
-                if not json_files:
-                    continue
-
-                for fname in json_files:
-                    if "long_context" == task_type and fname.startswith("longcontext"):
-                        continue
-                    fpath = os.path.join(search_path, fname)
-                    try:
-                        with open(fpath, "r", encoding="utf-8") as f:
-                            data = json.load(f)
-                    except Exception:
-                        continue
-
-                    score = data.get("answer_option_score", 0)
-
-                    if task_type == "incremental":
-                        if pos not in data_store[baseline_name]:
-                            data_store[baseline_name][pos] = []
-                        data_store[baseline_name][pos].append(score)
-                        continue
-
-                    if task_type == "long_context":
-                        if pos == 100:
-                            bert = data.get("bert_f1", 0)
-                            token = data.get("tokens", 0)
-                            duration = data.get("search_duration_ms", 0)
-                            inter_res = data.get("inter_res", {})
-                            turns = inter_res.get("turns", 0) if isinstance(inter_res, dict) else 0
-
-                            stats = data_store[baseline_name]["pos_100_all"]
-                            stats["score"].append(score)
-                            stats["bert"].append(bert)
-                            stats["token"].append(token)
-                            stats["duration"].append(duration)
-
-                            if turns == 1:
-                                stats["turn_1"].append(1)
-                            if 1 <= turns <= 2:
-                                stats["turn_2"].append(1)
-                            if 1 <= turns <= 3:
-                                stats["turn_3"].append(1)
-                            else:
-                                stats["turn_other"].append(1)
-
-                            if (user_name, fname) in data_store[baseline_name]["tasks_10_90"]:
-                                data_store[baseline_name]["pos_100_subset"].append(score)
-                        else:
-                            if pos not in data_store[baseline_name]["trend"]:
-                                data_store[baseline_name]["trend"][pos] = []
-                            data_store[baseline_name]["trend"][pos].append(score)
-                            data_store[baseline_name]["tasks_10_90"].add((user_name, fname))
-                        continue
-
-                    if pos not in data_store[baseline_name]:
-                        data_store[baseline_name][pos] = {"present": [], "absent": []}
-                    task_id = data.get("task_id", "")
-                    is_present = False
-                    match = re.match(r"SD-([^-]+)-", task_id)
-                    if match:
-                        target_domain = match.group(1)
-                        if target_domain in available_context_domains.get((user_name, pos), set()):
-                            is_present = True
-                    if is_present:
-                        data_store[baseline_name][pos]["present"].append(score)
-                    else:
-                        data_store[baseline_name][pos]["absent"].append(score)
-
-    print("\n" + "=" * 100)
-    sorted_baselines = sorted(data_store.keys())
-    results = {}
-
-    if task_type == "incremental":
-        print(f"{'Baseline':<30} {'Position':<10} {'Average Score':<15} {'Count':<10}")
-        print("-" * 100)
-        for baseline in sorted_baselines:
-            results[baseline] = {}
-            for pos in sorted(data_store[baseline].keys()):
-                scores = data_store[baseline][pos]
-                avg = _safe_avg(scores)
-                results[baseline][pos] = avg
-                print(f"{baseline:<30} {pos:<10} {avg:<15.4f} {len(scores):<10}")
-
-    elif task_type == "long_context":
-        print(f"Trend Evaluation ({domain_mode}-domain)")
-        print(f"{'Baseline':<30} {'Pos':<5} {'Avg Score':<10} {'Count':<8}")
-        print("-" * 100)
-        for baseline in sorted_baselines:
-            results[baseline] = {"trend": {}, "overall_100": {}}
-            b_data = data_store[baseline]
-            for pos in sorted(b_data["trend"].keys()):
-                scores = b_data["trend"][pos]
-                avg = _safe_avg(scores)
-                print(f"{baseline:<30} {pos:<5} {avg:<10.4f} {len(scores):<8}")
-                results[baseline]["trend"][pos] = avg
-            sub_scores = b_data["pos_100_subset"]
-            sub_avg = _safe_avg(sub_scores)
-            print(f"{baseline:<30} {100:<5} {sub_avg:<10.4f} {len(sub_scores):<8} (Subset from 10-90)")
-            results[baseline]["trend"][100] = sub_avg
-
-        print("\n" + "=" * 100)
-        print(f"Overall Evaluation at Position 100 ({domain_mode}-domain)")
-        print(f"{'Baseline':<30} {'Score':<10} {'BERT F1':<10} {'Token':<10} {'Turn 1':<10} {'Turn 2':<10} {'Turn 3':<10} {'Turn Other':<10} {'Count':<8} {'Duration':<10}")
-        print("-" * 100)
-        for baseline in sorted_baselines:
-            all_d = data_store[baseline]["pos_100_all"]
-            scores = all_d["score"]
-            berts = all_d["bert"]
-            tokens = all_d["token"]
-            durations = all_d["duration"]
-            turn_1 = all_d["turn_1"]
-            turn_2 = all_d["turn_2"]
-            turn_3 = all_d["turn_3"]
-            turn_other = all_d["turn_other"]
-
-            avg_score = _safe_avg(scores)
-            avg_bert = _safe_avg(berts)
-            avg_token = _safe_avg(tokens)
-            avg_duration = _safe_avg(durations)
-            total_turns = len(turn_3) + len(turn_other)
-            avg_turn_1 = len(turn_1) / total_turns if total_turns else 0.0
-            avg_turn_2 = len(turn_2) / total_turns if total_turns else 0.0
-            avg_turn_3 = len(turn_3) / total_turns if total_turns else 0.0
-            avg_turn_other = len(turn_other) / total_turns if total_turns else 0.0
-
-            print(f"{baseline:<30} {avg_score:<10.4f} {avg_bert:<10.4f} {avg_token:<10.4f} {avg_turn_1:<10.4f} {avg_turn_2:<10.4f} {avg_turn_3:<10.4f} {avg_turn_other:<10.4f} {len(scores):<8} {avg_duration:<10.4f}")
-            results[baseline]["overall_100"] = {
-                "score": avg_score,
-                "bert_f1": avg_bert,
-                "token": avg_token,
-                "turn_1": avg_turn_1,
-                "turn_2": avg_turn_2,
-                "turn_3": avg_turn_3,
-                "turn_other": avg_turn_other,
-                "duration": avg_duration,
-                "count": len(scores),
-            }
-
-    else:
-        print(f"Context-Aware Evaluation (Context Present vs Absent) - {domain_mode}")
-        print(f"{'Baseline':<20} {'Pos':<5} | {'Present Avg':<10} {'Count':<5} | {'Absent Avg':<10} {'Count':<5}")
-        print("-" * 100)
-        for baseline in sorted_baselines:
-            results[baseline] = {}
-            for pos in sorted(data_store[baseline].keys()):
-                p = data_store[baseline][pos]["present"]
-                a = data_store[baseline][pos]["absent"]
-                p_avg = _safe_avg(p)
-                a_avg = _safe_avg(a)
-                print(f"{baseline:<20} {pos:<5} | {p_avg:<10.4f} {len(p):<5} | {a_avg:<10.4f} {len(a):<5}")
-                results[baseline][pos] = {"present": {"avg": p_avg, "count": len(p)}, "absent": {"avg": a_avg, "count": len(a)}}
-
-    print("=" * 100 + "\n")
-    return results
-
-
 
 def _load_profile(uid: int) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     ppath = os.path.join(DATA_ROOT, "profile", f"user{uid}", "profile.json")
@@ -363,14 +105,6 @@ def _get_embedding_model() -> SentenceTransformer:
     return _EMB_MODEL
 
 import tiktoken
-
-def truncate_to_limit(text, model="gpt-3.5-turbo", max_tokens=30000):
-    encoder = tiktoken.encoding_for_model(model)
-    tokens = encoder.encode(text)
-    
-    if len(tokens) > max_tokens:
-        return encoder.decode(tokens[:max_tokens])
-    return text
 
 def _metric_bert_f1(ref: str, hyp: str) -> float:
     if _bert_score is None:
@@ -403,29 +137,6 @@ class UserLLMStub:
                 time.sleep(1)
                 continue
         return "TERMINATE"
-
-    def generate_first_question(
-        self,
-        demographic_profile: str,
-        preference_str: str,
-        task_description: str,
-        relevant_domains: str,
-        task_goal: str,
-        situation: str,
-        user_use_topic_dialog: str
-    ) -> str:
-        user_prompt = USER_AGENT_QUERY_PROMPT.format(
-            demographic_profile=demographic_profile,
-            preference_str=preference_str,
-            user_use_topic_dialog=user_use_topic_dialog,
-            task_description=task_description,
-            relevant_domains=relevant_domains,
-            task_goal=task_goal,
-            situation=situation,
-        )
-        content = self._complete(user_prompt, temperature=0.5)
-        if content:
-            return content
 
     def feedback_task(
         self,
@@ -501,7 +212,7 @@ def interact(
             type_task=type_task
         )
         current_q = feedback_task
-        if "TERMINATE" in feedback_task or "TERMINATE" in answer:
+        if "TERMINATE" in feedback_task:
             break
     last["history"] = history_assistant.replace("You: ", "Assistant: ")
     last["turns"] = turns
@@ -536,7 +247,7 @@ def _single_eval(prompt_text: str, model: str) -> str:
                 model=model,
                 messages=[{"role": "user", "content": prompt_text}],
                 temperature=0.1,
-                # extra_body={"search_disable": False, "reasoning_effort": "low"},
+                # extra_body={"search_disable": False, "reasoning_effort": "low"}, # TODO for reasoning model
             )
             result = resp.choices[0].message.content
             if result:
@@ -568,16 +279,21 @@ def evaluate(
     if "rag" in mode:
         emb_model = _get_embedding_model()
 
-    scale = 1 if args.debug else 9999
+    scale = 1 if args.smoke_test else 9999
+    task_limit = _get_task_limit(args)
+    selected_user_ids = _get_eval_user_ids(args)
+    logger.info(
+        f"Evaluation users: {selected_user_ids}, task_limit_per_scope={task_limit}, smoke_test={getattr(args, 'smoke_test', False)}"
+    )
     version = "_multi" if args.multi_domain else ""
     file_name = "_c" if args.no_noise else "_n"
     style_name = "_s" if args.style else ""
     top_k_name = f"_top{args.top_k}" if args.top_k == 20 else ""
     user_llm = UserLLMStub()
-    model_name = "" if args.mode == "longcontext" else "gpt-4o-mini" # TODO change model name (longcontext reasoning model)
+    model_name = "gpt-4o-mini" if args.mode == "longcontext" else "gpt-4o-mini" # TODO change model name (longcontext reasoning model)
     for st in stage:
         logger.info(f"Start stage: {st}")
-        for uid in USER_IDS:
+        for uid in selected_user_ids:
             in_path = os.path.join(DATA_ROOT, "tasks", f"user{uid}", f"input_data{version}{file_name}{style_name}.json")
             input_data = json.load(open(in_path, "r", encoding="utf-8"))
 
@@ -589,10 +305,12 @@ def evaluate(
                 items = ensure_list(input_data.get(scope_key))
                 if args.mem_frame == "lightmem":
                     items = sorted(items, key=lambda ev: 1 if int(ev.get("type", "")) == 3 else 0)
+                if task_limit is not None:
+                    items = items[:task_limit]
                 return items
             # Stage ADD
             if st == "add":
-                for scope in (["topic"] if args.run_topic_eval else []) + (["overall"] if args.run_overall_eval else []):
+                for scope in (["overall"] if args.run_overall_eval else []):
                     flag = False
                     for idx, ev in tqdm(enumerate(_tasks(scope)[:scale]), desc=f"Processing {scope} tasks"): # enumerate
                         task_id = ev.get("task_id", "")
@@ -674,7 +392,7 @@ def evaluate(
 
             # Stage SEARCH
             elif st == "search":
-                for scope in (["topic"] if args.run_topic_eval else []) + (["overall"] if args.run_overall_eval else []):
+                for scope in (["overall"] if args.run_overall_eval else []):
                     for idx, ev in tqdm(enumerate(_tasks(scope)[:scale]), desc=f"address {scope} task"): # enumerate
                         task_id = ev.get("task_id", "")
                         task_type = ev.get("type", "")
@@ -750,7 +468,7 @@ def evaluate(
 
             # Stage ANSWER
             elif st == "answer":
-                for scope in (["topic"] if args.run_topic_eval else []) + (["overall"] if args.run_overall_eval else []):
+                for scope in (["overall"] if args.run_overall_eval else []):
                     for ev in _tasks(scope)[:scale]:
                         logger.info(f"User {uid} task {ev.get('task_id', '')} type {ev.get('type', '')}")
                         task_id = ev.get("task_id", "")
@@ -796,17 +514,19 @@ def evaluate(
                         meta_info = _load_meta(out_root, scope, f"{task_id}_{task_type}")
                         option_resp = meta_info["options"]
 
-                        if "baseline" in mode:
-                            spath = os.path.join(out_root, "baseline" + "_" + args.mem_frame, scope + version + file_name + style_name, "search" + top_k_name, f"{task_id}_{task_type}.json")
-                            try:
-                                sobj = json.load(open(spath, "r", encoding="utf-8"))
-                                context = sobj.get("search_context", "")
-                            except Exception:
-                                logger.warning(f"User {uid} task {task_id} lack search output, skip answer stage")
-                                continue
-                            if type_task == 1:
-                                context = "No memory found."
+                        frame = ("_" + args.mem_frame) if "baseline" in mode else ""
+                        spath = os.path.join(out_root, mode + frame, scope + version + file_name + style_name, "search" + model_name.split("/")[-1] if mode == "longcontext" else "search" + top_k_name, f"{task_id}_{task_type}.json")
 
+                        try:
+                            sobj = json.load(open(spath, "r", encoding="utf-8"))
+                            context = sobj.get("search_context", "")
+                        except Exception:
+                            logger.warning(f"User {uid} task {task_id} lack search output, skip answer stage")
+                            continue
+                        if type_task == 1:
+                            context = "No memory found."
+
+                        if args.interactive and mode != "longcontext":
                             try:
                                 inter_res = interact(
                                     user_llm=user_llm,
@@ -818,124 +538,46 @@ def evaluate(
                                 )
                             except Exception:
                                 logger.error(f"User {uid} task {task_id} evaluation failed, skip")
-
-                            answer_opention_prompt = ANSWER_OPTIONAL_PROMPT.format(
-                                context=context,
-                                question=question,
-                                options=option_resp,
-                            )
-                            try:
-                                answer_option = _single_eval(answer_opention_prompt, model_name)
-                                if meta_info["gold_label"] == answer_option:
-                                    answer_option_score = 1
-                                else:
-                                    answer_option_score = 0
-                            except Exception:
-                                logger.error(f"User {uid} task {task_id} evaluation failed, skip")
-                                answer_option = ""
-                                answer_option_score = 0
-                            save_json(os.path.join(out_root, "baseline" + "_" + args.mem_frame, scope + version + file_name + style_name, "answer" + top_k_name, f"{task_id}_{task_type}.json"), {
-                                "task_id": task_id,
-                                "question": question,
-                                "history": inter_res.get("history", ""),
-                                "turns": inter_res.get("turns", 1),
-                                "search_context": sobj.get("search_context", ""),
-                                "search_duration_ms": sobj.get("search_duration_ms", 0.0),
-                                "task_preference": task_preference,
-                                "answer_option_score": answer_option_score,
-                                "answer_option": answer_option,
-                                "type_task": type_task,
-                            })
-
-                        elif "rag" in mode:
-                            spath = os.path.join(out_root, "rag", scope + version + file_name + style_name, "search" + top_k_name, f"{task_id}_{task_type}.json")
-                            try:
-                                sobj = json.load(open(spath, "r", encoding="utf-8"))
-                                context = sobj.get("search_context", "")
-                            except Exception:
-                                logger.warning(f"User {uid} task {task_id} lask RAG search output, skip answer stage")
-                                continue
-                            if type_task == 1:
-                                context = "No memory found."
-                            try:
-                                inter_res = interact(
-                                    user_llm=user_llm,
-                                    question=question,
-                                    max_turns=max_turns,
-                                    search_context=context,
-                                    type_task=type_task,
-                                    **kwargs,
-                                )
-                            except Exception:
-                                logger.error(f"User {uid} task {task_id} answer evaluation failed, skipping")
                                 inter_res = {
                                     "history": "",
                                     "turns": 0,
                                 }
-                            answer_opention_prompt = ANSWER_OPTIONAL_PROMPT.format(
-                                context=context,
-                                question=question,
-                                options=option_resp,
-                            )
-                            try:
-                                answer_option = _single_eval(answer_opention_prompt, model_name)
-                                if meta_info["gold_label"] == answer_option:
-                                    answer_option_score = 1
-                                else:
-                                    answer_option_score = 0
-                            except Exception as e:
-                                logger.error(f"User task failed: {e}")
-                                answer_option_score = 0
-                                answer_option = ""
-                            save_json(os.path.join(out_root, "rag", scope + version + file_name + style_name, "answer" + top_k_name, f"{task_id}_{task_type}.json"), {
-                                "task_id": task_id,
-                                "question": question,
-                                "history": inter_res.get("history", ""),
-                                "turns": inter_res.get("turns", 1),
-                                "search_context": sobj.get("search_context", ""),
-                                "search_duration_ms": sobj.get("search_duration_ms", 0.0),
-                                "task_preference": task_preference,
-                                "answer_option_score": answer_option_score,
-                                "answer_option": answer_option,
-                                "type_task": type_task,
-                            })
+                        else:
+                            inter_res = {
+                                "history": "",
+                                "turns": 0,
+                            }
 
-                        elif "longcontext" in mode:
-                            spath = os.path.join(out_root, "longcontext", scope + version + file_name + style_name, "search", f"{task_id}_{task_type}.json")
-                            try:
-                                sobj = json.load(open(spath, "r", encoding="utf-8"))
-                                context = sobj.get("search_context", "")
-                            except Exception:
-                                context = _flatten_context(ev.get("context", []))
-                                context = "\n".join([f"{m['role']}: {m['content']}" for m in context])
-                            if type_task == 1:
-                                context = "No memory found."
-
-                            answer_opention_prompt = ANSWER_OPTIONAL_PROMPT.format(
-                                context=context,
-                                question=question,
-                                options=option_resp,
-                            )
-                            
+                        answer_opention_prompt = ANSWER_OPTIONAL_PROMPT.format(
+                            context=context,
+                            question=question,
+                            options=option_resp,
+                        )
+                        try:
                             answer_option = _single_eval(answer_opention_prompt, model_name)
                             if meta_info["gold_label"] == answer_option:
                                 answer_option_score = 1
                             else:
                                 answer_option_score = 0
-                            save_json(os.path.join(out_root, "longcontext", scope + version + file_name + style_name, "answer" + model_name.split("/")[-1], f"{task_id}_{task_type}.json"), {
-                                "task_id": task_id,
-                                "question": question,
-                                "history": "",
-                                "turns": "",
-                                "search_context": sobj.get("search_context", ""),
-                                "search_duration_ms": sobj.get("search_duration_ms", 0.0),
-                                "task_preference": task_preference,
-                                "answer_option_score": answer_option_score,
-                                "answer_option": answer_option,
-                                "type_task": type_task,
-                            })
+                        except Exception:
+                            logger.error(f"User {uid} task {task_id} evaluation failed, skip")
+                            answer_option = ""
+                            answer_option_score = 0
+                        save_json(os.path.join(out_root, mode + frame, scope + version + file_name + style_name, "answer" + model_name.split("/")[-1] if mode == "longcontext" else "answer" + top_k_name, f"{task_id}_{task_type}.json"), {
+                            "task_id": task_id,
+                            "question": question,
+                            "history": inter_res.get("history", ""),
+                            "turns": inter_res.get("turns", 1),
+                            "search_context": sobj.get("search_context", ""),
+                            "search_duration_ms": sobj.get("search_duration_ms", 0.0),
+                            "task_preference": task_preference,
+                            "answer_option_score": answer_option_score,
+                            "answer_option": answer_option,
+                            "type_task": type_task,
+                        })
+
             elif st == "eval":
-                for scope in (["topic"] if args.run_topic_eval else []) + (["overall"] if args.run_overall_eval else []):
+                for scope in (["overall"] if args.run_overall_eval else []):
                     for ev in _tasks(scope)[:scale]:
                         task_id = ev.get("task_id", "")
                         task_meta = ev.get("task", {})
@@ -969,11 +611,6 @@ def evaluate(
                         task_completion_prompt = EVAL_DIALOGUE_TASK_COMPLETION.format(conversation=conversation, goal=task_goal, question=question)
 
 
-                        if "longcontext" in mode:
-                            task_completion = ""
-                        else:
-                            task_completion = _single_eval(task_completion_prompt, "gpt-4o")
-
                         def _extract_score(text: str, label: str) -> int:
                             m = re.search(rf"{label}\s*:\s*(\d+)", text)
                             return int(m.group(1)) if m else -1
@@ -991,6 +628,13 @@ def evaluate(
                                 return (m.group(1).strip() if m else "").splitlines()[0]
                             except Exception:
                                 return ""
+
+                        if "longcontext" in mode or not args.interactive:
+                            task_completion = ""
+                        else:
+                            task_completion = _single_eval(task_completion_prompt, "gpt-4o")
+                            verdict = _extract_verdicts(task_completion)
+                            explanation = _extract_expl(task_completion)
 
                         if type_task != 1 and type_task != 0 and "longcontext" not in mode:
                             aff_links = ev.get("affinity_links", [])
@@ -1012,19 +656,14 @@ def evaluate(
                             memory_score = _extract_score(memory, "Memory Score")
 
                             bert_f1 = _metric_bert_f1(user_use_topic_dialog, situation_context)
-                            user_contents = re.findall(r"User:\s*(.*?)(?=\s*(?:Assistant:|User:|$))", conversation, re.DOTALL)
-                            result = "".join(user_contents).strip()
-                            len_user_token = len(token_encoding.encode(result))
                         else:
                             bert_f1 = -1
                             memory_score = -1
-                            user_contents = re.findall(r"User:\s*(.*?)(?=\s*(?:Assistant:|User:|$))", conversation, re.DOTALL)
-                            result = "".join(user_contents).strip()
-                            len_user_token = len(token_encoding.encode(result))
+                        user_contents = re.findall(r"User:\s*(.*?)(?=\s*(?:Assistant:|User:|$))", conversation, re.DOTALL)
+                        result = "".join(user_contents).strip()
+                        len_user_token = len(token_encoding.encode(result))
 
                         pers_score = 0
-                        verdict = _extract_verdicts(task_completion)
-                        explanation = _extract_expl(task_completion)
 
                         tokens = len(token_encoding.encode(situation_context))
                         turns = aobj.get("turns", 0)
@@ -1054,15 +693,173 @@ def evaluate(
         if st == "eval":
             summarize_eval_metrics(args, scope="overall", model_name=model_name)
 
+def summarize_eval_metrics(args, scope: str = "overall", model_name: str = "") -> Dict[str, Any]:
+    """
+    Summarizes evaluation metrics across all users and tasks.
+    Aggregates metrics globally (for type 3) and per task type.
+    """
+    version = "_multi" if args.multi_domain else ""
+    frame = ("_" + args.mem_frame) if "baseline" in args.mode else ""
+    file_name = "_c" if args.no_noise else "_n"
+    style_name = "_s" if args.style else ""
+    top_k_name = f"_top{args.top_k}" if args.top_k == 20 else ""
+    
+    # Define metrics to track
+    metrics_list = [
+        "answer_option_score", "memory_score", "context_tokens", "turns",
+        "task_completion_verdict", "search_duration_ms", "len_user_token", "bert_f1"
+    ]
+    
+    # Helper to initialize [sum, count]
+    def _metric_init(): return [0.0, 0]
+    
+    # Global aggregation (only for task_type == 3)
+    agg_global = defaultdict(_metric_init)
+    
+    # Task-specific aggregation: task_id -> task_type (int) -> metric -> [sum, count]
+    by_task_agg = defaultdict(lambda: defaultdict(lambda: defaultdict(_metric_init)))
+    
+    # Helper to update metric stats
+    def _update_stat(stats_dict, key, value):
+        if value is None: return
+        try:
+            val_float = float(value)
+            stats_dict[key][0] += val_float
+            stats_dict[key][1] += 1
+        except (ValueError, TypeError):
+            pass
+
+    # Helper to update turn buckets (cumulative logic from original)
+    def _update_turns(stats_dict, value):
+        try:
+            v_int = int(value)
+            # Counts (denominators)
+            stats_dict['turn_other'][1] += 1
+            stats_dict['turn_3'][1] += 1
+            stats_dict['turn_2'][1] += 1
+            stats_dict['turn_1'][1] += 1
+            
+            # Hits (numerators)
+            if v_int == 1:
+                stats_dict['turn_1'][0] += 1
+            if 1 <= v_int <= 2:
+                stats_dict['turn_2'][0] += 1
+            if 1 <= v_int <= 3:
+                stats_dict['turn_3'][0] += 1
+            else:
+                stats_dict['turn_other'][0] += 1
+        except (ValueError, TypeError):
+            pass
+
+    for uid in USER_IDS:
+        # Construct path
+        eval_subpath = "eval" + model_name.replace("/", "-") if args.mode == "longcontext" else "eval" + top_k_name
+        eval_dir = os.path.join(args.output_dir, f"user{uid}", args.mode + frame, scope + version + file_name + style_name, eval_subpath)
+        
+        if not os.path.isdir(eval_dir):
+            continue
+            
+        for fname in os.listdir(eval_dir):
+            if not fname.endswith(".json"): continue
+            
+            fpath = os.path.join(eval_dir, fname)
+            try:
+                with open(fpath, 'r', encoding='utf-8') as f:
+                    obj = json.load(f)
+            except Exception:
+                continue
+
+            task_id = obj.get("task_id", "")
+            try:
+                t_type = int(obj.get("task_type", -1))
+            except:
+                t_type = -1
+
+            # Validate filename matches content
+            if fname.strip(".json") != f"{task_id}_{t_type}":
+                continue
+
+            # --- Global Aggregation (Type 3) ---
+            if t_type == 3:
+                for m in metrics_list:
+                    val = obj.get(m)
+                    if m == "memory_score" and val is not None and float(val) < 0:
+                        continue
+                    
+                    if m == "turns" and args.mode != "longcontext":
+                        _update_turns(agg_global, val)
+                    
+                    _update_stat(agg_global, m, val)
+                
+                # Verdict (bool -> float)
+                verdict = obj.get("task_completion_verdict")
+                if isinstance(verdict, bool):
+                    _update_stat(agg_global, "task_completion_verdict_rate", 1.0 if verdict else 0.0)
+
+            # --- Per-Task Aggregation ---
+            if task_id:
+                task_stats = by_task_agg[task_id][t_type]
+                for m in metrics_list:
+                    val = obj.get(m)
+                    if m == "memory_score" and val is not None and float(val) < 0:
+                        continue
+                    
+                    if m == "turns" and args.mode != "longcontext":
+                        _update_turns(task_stats, val)
+                    
+                    _update_stat(task_stats, m, val)
+                
+                verdict = obj.get("task_completion_verdict")
+                if isinstance(verdict, bool):
+                     _update_stat(task_stats, "verdict", 1.0 if verdict else 0.0)
+
+    # --- Compute Means ---
+    def _compute_means(agg_dict):
+        means = {}
+        for k, (s, c) in agg_dict.items():
+            means[k] = (s / c) if c > 0 else 0.0
+        return means
+
+    global_means = _compute_means(agg_global)
+    
+    # Task-level means
+    by_task_means = {}
+    for tid, t_types in by_task_agg.items():
+        by_task_means[tid] = {}
+        for t_type, metrics in t_types.items():
+            by_task_means[tid][str(t_type)] = _compute_means(metrics)
+
+    # Category means (Common IDs present in 1, 2, and 3)
+    common_ids = [tid for tid, types in by_task_means.items() if all(k in types for k in ["1", "2", "3"])]
+    
+    by_type_category_means = {"1": {}, "2": {}, "3": {}}
+    for t_str in ["1", "2", "3"]:
+        acc = defaultdict(float)
+        cnt = defaultdict(int)
+        for tid in common_ids:
+            metrics = by_task_means[tid].get(t_str, {})
+            for m, v in metrics.items():
+                acc[m] += v
+                cnt[m] += 1
+        
+        for m, s in acc.items():
+            c = cnt[m]
+            by_type_category_means[t_str][m] = (s / c) if c > 0 else 0.0
+
+    summary = {
+        "task3_means": global_means,
+        "by_type_category_means": by_type_category_means,
+    }
+    logger.info(f"Summary: {summary}")
+    return summary
+
+
 def run_incremental_eval(args):
     mode = args.mode
     user_llm = UserLLMStub()
     version = "_multi" if args.multi_domain else ""
     file_name = "_c" if args.no_noise else "_n"
     style_name = "_s" if args.style else ""
-    random.seed(42)
-    np.random.seed(42)
-    torch.manual_seed(42)
 
     def _load_meta(out_root: str, scope: str, task_id: str) -> Dict[str, Any]:
         path = os.path.join(out_root, "meta", scope, f"{task_id}.json")
@@ -1071,9 +868,14 @@ def run_incremental_eval(args):
     if "rag" in mode:
         emb_model = _get_embedding_model()
 
-    logger.info("Starting INCREMENTAL evaluation (Parallel)...")
+    logger.info("Starting INCREMENTAL evaluation...")
+    task_limit = _get_task_limit(args)
+    selected_user_ids = _get_eval_user_ids(args)
+    logger.info(
+        f"Incremental users: {selected_user_ids}, task_limit={task_limit}, smoke_test={getattr(args, 'smoke_test', False)}"
+    )
     
-    def process_incremental_user_unified(uid, dataset_type="standard", eval_stage="search", eval_model="xopkimik25"):
+    def process_incremental_user_unified(uid, dataset_type="standard", eval_stage="search", eval_model=""):
         # Common setup
         out_root = os.path.join(args.output_dir, "incremental", f"user{uid}")
         user_profile, _, _ = _load_profile(uid)
@@ -1086,8 +888,8 @@ def run_incremental_eval(args):
         
         if dataset_type == "standard":
             # Standard incremental data loading
-            in_path = _resolve_input_data_path(uid, version, file_name, style_name)
-            if not in_path: return
+            in_path = os.path.join(DATA_ROOT, f"user{uid}", f"input_data2{version}{file_name}{style_name}.json")
+            if not os.path.exists(in_path): return
             input_data = json.load(open(in_path, "r", encoding="utf-8"))
             
             # Load dialogue and timeline
@@ -1149,10 +951,9 @@ def run_incremental_eval(args):
                 all_eval_items = []
                 all_eval_items.extend(ensure_list(input_data.get("overall", [])))
                 scope = "overall_s_long_multi"
-                start_percent = 100
             else:
                 scope = "overall_s_long"
-                start_percent = 100 if eval_stage == "answer_eval" else 10
+            start_percent = 100
         
         # 2. Task Filtering Logic
         task_groups = {}
@@ -1185,17 +986,20 @@ def run_incremental_eval(args):
 
         # Log findings
         logger.info(f"User {uid}: Found {len(selected_events)} valid tasks, {len(final_test_event)} final test tasks.")
+        if task_limit is not None:
+            selected_events = selected_events[:task_limit]
+            final_test_event = final_test_event[:task_limit]
         
         # 3. Processing Loop
         mem_user_key = f"user_{uid}_{dataset_type}_{version}" # Simplified key generation
         if dataset_type == "standard":
              mem_user_key = f"user_{uid}_incremental{version}{file_name}{style_name}"
         elif dataset_type in ["long", "long_multi"]:
-             mem_user_key = f"user_{uid}_incremental_s_long"
+             mem_user_key = f"user_{uid}_incremental_s_long" if is_multi else f"user_{uid}_incremental_s_long_multi"
         
         client = None
-        if eval_stage == "search" and mode == "baseline":
-             client = get_client(args.mem_frame, mem_user_key)
+        if mode == "baseline":
+            client = get_client(args.mem_frame, mem_user_key)
 
         total_sessions = len(all_sessions)
         current_idx = 0
@@ -1208,7 +1012,7 @@ def run_incremental_eval(args):
                         model=model,
                         messages=[{"role": "user", "content": prompt_text}],
                         temperature=0.1,
-                        extra_body={"search_disable": False, "reasoning_effort": "low"},
+                        # extra_body={"search_disable": False, "reasoning_effort": "low"}, # TODO for reasoning model
                     )
                     result = resp.choices[0].message.content
                     if result:
@@ -1229,7 +1033,7 @@ def run_incremental_eval(args):
             save_dir = os.path.join(out_root, mode + frame, scope + version + file_name + style_name, save_dir_name)
             # Adjust save_dir for long types
             if dataset_type != "standard":
-                 save_dir = os.path.join(out_root, mode + frame, scope, save_dir_name)
+                save_dir = os.path.join(out_root, mode + frame, scope, save_dir_name)
 
             if eval_stage == "search":
                 logger.info(f"User {uid} [Progress {percent}%]: Ingesting {len(new_batch)} sessions...")
@@ -1431,7 +1235,7 @@ def run_incremental_eval(args):
                          }
                          
                          inter_res = {"history": "", "turns": 0}
-                         if mode != "longcontext":
+                         if mode != "longcontext" and args.interactive:
                             try:
                                 inter_res = interact(
                                     user_llm=user_llm,
@@ -1484,7 +1288,7 @@ def run_incremental_eval(args):
     for eval_stage in stage_plan:
         with ThreadPoolExecutor(max_workers=args.num_workers) as executor:
             futures = []
-            for uid in sorted(USER_IDS):
+            for uid in selected_user_ids:
                 futures.append(executor.submit(process_incremental_user_unified, uid, dataset_type, eval_stage))
             
             for future in as_completed(futures):
@@ -1499,9 +1303,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", type=str, default="baseline", choices=["rag", "longcontext", "baseline", "incremental"], help="Evaluation mode (no longer distinguishing single/multi)")
     parser.add_argument("--multi_domain", default=True, help="Whether to evaluate multi-domain tasks")
-    parser.add_argument("--run_topic_eval", default=False, type=bool, help="Whether to run topic-level evaluation")
     parser.add_argument("--run_overall_eval", default=True, type=bool, help="Whether to run overall evaluation")
-    parser.add_argument("--user_id_truncate", default=20, type=int, help="Number of user IDs to truncate (for debugging)")
     parser.add_argument("--output_dir", type=str, default=f"{DATA_ROOT}/evaluation", help="Output directory for evaluation results")
     parser.add_argument("--mem_frame", type=str, default="supermemory", choices=[
         "mem0", "memos-api-online", "memobase", "supermemory", "lightmem"
@@ -1510,8 +1312,8 @@ def main():
     parser.add_argument("--batch_size", type=int, default=2, help="Evaluation batch size")
     parser.add_argument("--max_turns", type=int, default=10, help="Maximum turns for multi-turn response (fixed to 1 for single mode)")
     parser.add_argument("--no_noise", default=False, type=bool, help="Whether to exclude noise")
+    parser.add_argument("--interactive", default=False, type=bool, help="Whether to enable interactive mode")
     parser.add_argument("--style", default=False, type=bool, help="Whether to exclude style")
-    parser.add_argument("--only_option", default=False, type=bool, help="Whether to evaluate only options")
     parser.add_argument(
         "--stage",
         type=str,
@@ -1523,6 +1325,9 @@ def main():
     parser.add_argument("--debug", default=False, type=bool, help="Whether to enable debug mode")
     parser.add_argument("--num_workers", type=int, default=2, help="Number of parallel processing threads")
     parser.add_argument("--dataset_type", type=str, default="standard", choices=["standard", "long", "long_multi"], help="Incremental dataset type")
+    parser.add_argument("--smoke_test", action="store_true", help="Enable smoke test defaults (max_users=1, user_ids=5 if not explicitly set)")
+    parser.add_argument("--max_users", type=int, default=None, help="Limit number of users to evaluate")
+    parser.add_argument("--max_tasks", type=int, default=None, help="Limit number of tasks")
 
     args = parser.parse_args()
 
@@ -1542,173 +1347,6 @@ def main():
 
     # summarize_eval_metrics(args, scope="overall")
     # run_incremental_eval(args)
-    
-    # Unified Evaluation Usage:
-    # evaluate_baselines(task_type="incremental")
-    # evaluate_baselines(task_type="long_context", domain_mode="single")
-    # evaluate_baselines(task_type="long_context", domain_mode="multi")
-    # evaluate_baselines(task_type="context_aware", domain_mode="single")
-
-
-def summarize_eval_metrics(args, scope: str = "overall", model_name: str = "Qwen/Qwen2.5-72B-Instruct") -> Dict[str, Any]:
-    """
-    Summarizes evaluation metrics across all users and tasks.
-    Aggregates metrics globally (for type 3) and per task type.
-    """
-    version = "_multi" if args.multi_domain else ""
-    frame = ("_" + args.mem_frame) if "baseline" in args.mode else ""
-    file_name = "_c" if args.no_noise else "_n"
-    style_name = "_s" if args.style else ""
-    top_k_name = f"_top{args.top_k}" if args.top_k == 20 else ""
-    
-    # Define metrics to track
-    metrics_list = [
-        "answer_option_score", "memory_score", "context_tokens", "turns",
-        "task_completion_verdict", "search_duration_ms", "len_user_token", "bert_f1"
-    ]
-    
-    # Helper to initialize [sum, count]
-    def _metric_init(): return [0.0, 0]
-    
-    # Global aggregation (only for task_type == 3)
-    agg_global = defaultdict(_metric_init)
-    
-    # Task-specific aggregation: task_id -> task_type (int) -> metric -> [sum, count]
-    by_task_agg = defaultdict(lambda: defaultdict(lambda: defaultdict(_metric_init)))
-    
-    # Helper to update metric stats
-    def _update_stat(stats_dict, key, value):
-        if value is None: return
-        try:
-            val_float = float(value)
-            stats_dict[key][0] += val_float
-            stats_dict[key][1] += 1
-        except (ValueError, TypeError):
-            pass
-
-    # Helper to update turn buckets (cumulative logic from original)
-    def _update_turns(stats_dict, value):
-        try:
-            v_int = int(value)
-            # Counts (denominators)
-            stats_dict['turn_other'][1] += 1
-            stats_dict['turn_3'][1] += 1
-            stats_dict['turn_2'][1] += 1
-            stats_dict['turn_1'][1] += 1
-            
-            # Hits (numerators)
-            if v_int == 1:
-                stats_dict['turn_1'][0] += 1
-            if 1 <= v_int <= 2:
-                stats_dict['turn_2'][0] += 1
-            if 1 <= v_int <= 3:
-                stats_dict['turn_3'][0] += 1
-            else:
-                stats_dict['turn_other'][0] += 1
-        except (ValueError, TypeError):
-            pass
-
-    for uid in USER_IDS:
-        # Construct path
-        eval_subpath = "eval" + model_name.replace("/", "-") if args.mode == "longcontext" else "eval" + top_k_name
-        eval_dir = os.path.join(args.output_dir, f"user{uid}", args.mode + frame, scope + version + file_name + style_name, eval_subpath)
-        
-        if not os.path.isdir(eval_dir):
-            continue
-            
-        for fname in os.listdir(eval_dir):
-            if not fname.endswith(".json"): continue
-            
-            fpath = os.path.join(eval_dir, fname)
-            try:
-                with open(fpath, 'r', encoding='utf-8') as f:
-                    obj = json.load(f)
-            except Exception:
-                continue
-
-            task_id = obj.get("task_id", "")
-            try:
-                t_type = int(obj.get("task_type", -1))
-            except:
-                t_type = -1
-
-            # Validate filename matches content
-            if fname.strip(".json") != f"{task_id}_{t_type}":
-                continue
-
-            # --- Global Aggregation (Type 3) ---
-            if t_type == 3:
-                for m in metrics_list:
-                    val = obj.get(m)
-                    if m == "memory_score" and val is not None and float(val) < 0:
-                        continue
-                    
-                    if m == "turns" and args.mode != "longcontext":
-                        _update_turns(agg_global, val)
-                    
-                    _update_stat(agg_global, m, val)
-                
-                # Verdict (bool -> float)
-                verdict = obj.get("task_completion_verdict")
-                if isinstance(verdict, bool):
-                    _update_stat(agg_global, "task_completion_verdict_rate", 1.0 if verdict else 0.0)
-
-            # --- Per-Task Aggregation ---
-            if task_id:
-                task_stats = by_task_agg[task_id][t_type]
-                for m in metrics_list:
-                    val = obj.get(m)
-                    if m == "memory_score" and val is not None and float(val) < 0:
-                        continue
-                    
-                    if m == "turns" and args.mode != "longcontext":
-                        _update_turns(task_stats, val)
-                    
-                    _update_stat(task_stats, m, val)
-                
-                verdict = obj.get("task_completion_verdict")
-                if isinstance(verdict, bool):
-                     _update_stat(task_stats, "verdict", 1.0 if verdict else 0.0)
-
-    # --- Compute Means ---
-    def _compute_means(agg_dict):
-        means = {}
-        for k, (s, c) in agg_dict.items():
-            means[k] = (s / c) if c > 0 else 0.0
-        return means
-
-    global_means = _compute_means(agg_global)
-    
-    # Task-level means
-    by_task_means = {}
-    for tid, t_types in by_task_agg.items():
-        by_task_means[tid] = {}
-        for t_type, metrics in t_types.items():
-            by_task_means[tid][str(t_type)] = _compute_means(metrics)
-
-    # Category means (Common IDs present in 1, 2, and 3)
-    common_ids = [tid for tid, types in by_task_means.items() if all(k in types for k in ["1", "2", "3"])]
-    
-    by_type_category_means = {"1": {}, "2": {}, "3": {}}
-    for t_str in ["1", "2", "3"]:
-        acc = defaultdict(float)
-        cnt = defaultdict(int)
-        for tid in common_ids:
-            metrics = by_task_means[tid].get(t_str, {})
-            for m, v in metrics.items():
-                acc[m] += v
-                cnt[m] += 1
-        
-        for m, s in acc.items():
-            c = cnt[m]
-            by_type_category_means[t_str][m] = (s / c) if c > 0 else 0.0
-
-    summary = {
-        "task3_means": global_means,
-        "by_type_category_means": by_type_category_means,
-    }
-    logger.info(f"Summary: {summary}")
-    return summary
 
 
 if __name__ == "__main__":
