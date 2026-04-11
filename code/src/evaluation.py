@@ -279,7 +279,6 @@ def evaluate(
     if "rag" in mode:
         emb_model = _get_embedding_model()
 
-    scale = 1 if args.smoke_test else 9999
     task_limit = _get_task_limit(args)
     selected_user_ids = _get_eval_user_ids(args)
     logger.info(
@@ -312,7 +311,7 @@ def evaluate(
             if st == "add":
                 for scope in (["overall"] if args.run_overall_eval else []):
                     flag = False
-                    for idx, ev in tqdm(enumerate(_tasks(scope)[:scale]), desc=f"Processing {scope} tasks"): # enumerate
+                    for idx, ev in tqdm(enumerate(_tasks(scope)), desc=f"Processing {scope} tasks"): # enumerate
                         task_id = ev.get("task_id", "")
                         dialogs = ev.get("context", [])
                         task_type = ev.get("type", "")
@@ -393,7 +392,7 @@ def evaluate(
             # Stage SEARCH
             elif st == "search":
                 for scope in (["overall"] if args.run_overall_eval else []):
-                    for idx, ev in tqdm(enumerate(_tasks(scope)[:scale]), desc=f"address {scope} task"): # enumerate
+                    for idx, ev in tqdm(enumerate(_tasks(scope)), desc=f"address {scope} task"): # enumerate
                         task_id = ev.get("task_id", "")
                         task_type = ev.get("type", "")
                         meta = _load_meta(out_root, scope, f"{task_id}_{task_type}")
@@ -469,7 +468,7 @@ def evaluate(
             # Stage ANSWER
             elif st == "answer":
                 for scope in (["overall"] if args.run_overall_eval else []):
-                    for ev in _tasks(scope)[:scale]:
+                    for ev in _tasks(scope):
                         logger.info(f"User {uid} task {ev.get('task_id', '')} type {ev.get('type', '')}")
                         task_id = ev.get("task_id", "")
                         task_type = ev.get("type", "")
@@ -578,7 +577,7 @@ def evaluate(
 
             elif st == "eval":
                 for scope in (["overall"] if args.run_overall_eval else []):
-                    for ev in _tasks(scope)[:scale]:
+                    for ev in _tasks(scope):
                         task_id = ev.get("task_id", "")
                         task_meta = ev.get("task", {})
                         task_desc = task_meta.get("description", "")
@@ -1327,7 +1326,7 @@ def main():
     parser.add_argument("--dataset_type", type=str, default="standard", choices=["standard", "long", "long_multi"], help="Incremental dataset type")
     parser.add_argument("--smoke_test", action="store_true", help="Enable smoke test defaults (max_users=1, user_ids=5 if not explicitly set)")
     parser.add_argument("--max_users", type=int, default=None, help="Limit number of users to evaluate")
-    parser.add_argument("--max_tasks", type=int, default=None, help="Limit number of tasks")
+    parser.add_argument("--max_tasks", type=int, default=5, help="Limit number of tasks")
 
     args = parser.parse_args()
 
