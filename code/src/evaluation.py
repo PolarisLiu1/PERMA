@@ -67,6 +67,7 @@ def _get_task_limit(args) -> Optional[int]:
 
 
 def _get_eval_user_ids(args) -> List[int]:
+    selected = USER_IDS
     max_users = getattr(args, "max_users", None)
     if max_users is None and getattr(args, "smoke_test", False):
         max_users = 1
@@ -311,7 +312,7 @@ def evaluate(
             if st == "add":
                 for scope in (["overall"] if args.run_overall_eval else []):
                     flag = False
-                    for idx, ev in tqdm(enumerate(_tasks(scope)), desc=f"Processing {scope} tasks"): # enumerate
+                    for idx, ev in tqdm(enumerate(_tasks(scope)), desc=f"Processing {scope} tasks"):
                         task_id = ev.get("task_id", "")
                         dialogs = ev.get("context", [])
                         task_type = ev.get("type", "")
@@ -392,7 +393,7 @@ def evaluate(
             # Stage SEARCH
             elif st == "search":
                 for scope in (["overall"] if args.run_overall_eval else []):
-                    for idx, ev in tqdm(enumerate(_tasks(scope)), desc=f"address {scope} task"): # enumerate
+                    for idx, ev in tqdm(enumerate(_tasks(scope)), desc=f"address {scope} task"):
                         task_id = ev.get("task_id", "")
                         task_type = ev.get("type", "")
                         meta = _load_meta(out_root, scope, f"{task_id}_{task_type}")
@@ -751,7 +752,6 @@ def summarize_eval_metrics(args, scope: str = "overall", model_name: str = "") -
             pass
 
     for uid in USER_IDS:
-        # Construct path
         eval_subpath = "eval" + model_name.replace("/", "-") if args.mode == "longcontext" else "eval" + top_k_name
         eval_dir = os.path.join(args.output_dir, f"user{uid}", args.mode + frame, scope + version + file_name + style_name, eval_subpath)
         
@@ -1307,10 +1307,10 @@ def main():
     parser.add_argument("--mem_frame", type=str, default="supermemory", choices=[
         "mem0", "memos-api-online", "memobase", "supermemory", "lightmem"
     ], help="Memory system framework selection, passed directly to process_user")
-    parser.add_argument("--top_k", type=int, default=10, help="Number of retrieval results") # multi changed to 20
+    parser.add_argument("--top_k", type=int, default=10, help="Number of retrieval results")
     parser.add_argument("--batch_size", type=int, default=2, help="Evaluation batch size")
     parser.add_argument("--max_turns", type=int, default=10, help="Maximum turns for multi-turn response (fixed to 1 for single mode)")
-    parser.add_argument("--no_noise", default=False, type=bool, help="Whether to exclude noise")
+    parser.add_argument("--no_noise", default=True, type=bool, help="Whether to exclude noise")
     parser.add_argument("--interactive", default=False, type=bool, help="Whether to enable interactive mode")
     parser.add_argument("--style", default=False, type=bool, help="Whether to exclude style")
     parser.add_argument(
@@ -1326,7 +1326,7 @@ def main():
     parser.add_argument("--dataset_type", type=str, default="standard", choices=["standard", "long", "long_multi"], help="Incremental dataset type")
     parser.add_argument("--smoke_test", action="store_true", help="Enable smoke test defaults (max_users=1, user_ids=5 if not explicitly set)")
     parser.add_argument("--max_users", type=int, default=None, help="Limit number of users to evaluate")
-    parser.add_argument("--max_tasks", type=int, default=5, help="Limit number of tasks")
+    parser.add_argument("--max_tasks", type=int, default=None, help="Limit number of tasks")
 
     args = parser.parse_args()
 
