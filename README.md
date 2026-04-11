@@ -234,7 +234,7 @@ python evaluation.py \
 
 
 
-**Run via Bash Scripts:**
+### 2. Run via Bash Scripts:
 
 Scripts are located in:
 ```
