@@ -257,8 +257,8 @@ python complete_dataset_generator.py \
 
 *Optional generation modes:*
 
-  - `--regenerate_no_noise`: Generate clean data without injected noise.
-  - `--style_transfer --wildchat_dir WildChat-1M`: Apply WildChat conversational style.
+- `--regenerate_clean`: Generate clean data without injected noise.
+- `--style_transfer --wildchat_dir WildChat-1M`: Apply WildChat conversational style.
 
 
 ## 📝 Citation
