@@ -180,7 +180,7 @@ Evaluate a memory framework (e.g., `MemOS`) on the generated data across differe
 - `--mode`: retrieval/evaluation framework selector (`memory`, `rag`, `standalone`).
 - `--incremental`: protocol switch (`False`=standard evaluation, `True`=incremental timeline evaluation).
 
->>> Note: `--stage add` can run separately from `--stage search answer eval`. Ingestion may take time depending on your memory system provider, check the indexing status before proceeding, as querying too soon may return empty results.
+> Note: `--stage add` can run separately from `--stage search answer eval`. Ingestion may take time depending on your memory system provider, check the indexing status before proceeding, as querying too soon may return empty results.
 
 **Smoke Test:**
 Use limited data for testing to ensure everything is normal. Default: 1 user, first 5 questions.
