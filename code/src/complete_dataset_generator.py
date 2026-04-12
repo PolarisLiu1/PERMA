@@ -12,6 +12,7 @@ import re
 import json5 as jsonc
 from tqdm import tqdm
 import copy
+from dotenv import load_dotenv
 
 from prompt import PREFERENCE_EMERGENCE_PROMPT, PREFERENCE_UPDATE_PROMPT, FIRST_TIMELINE_SINGLE_TOPIC
 import random
@@ -22,9 +23,11 @@ logger = logging.getLogger(__name__)
 
 CHOSEN_NUMBER = 3
 MULTI_CHOSEN_NUMBER = 6
-MODEL_NAME = "gpt-4o"
-API_KEY = "sk-"
-BASE_URL = ""
+# Load .env in code/src by default; externally exported env vars keep higher priority.
+load_dotenv(Path(__file__).resolve().parent / ".env")
+MODEL_NAME = os.getenv("CHAT_MODEL", "gpt-4o-mini")
+API_KEY = os.getenv("CHAT_MODEL_API_KEY", "")
+BASE_URL = os.getenv("CHAT_MODEL_BASE_URL", None)
 
 COUNTRY = {
     "Canada": [334],
@@ -1010,7 +1013,7 @@ Return the rewritten dialogue as a **JSON array with the same structure** as the
             logger.info(f"Rewritten dialog saved for {user_dir.name} -> {output_file}")
 
 
-def run_generation_task(output_dir: str, topic_number: int, multi_domain: bool, regenerate_no_noise: bool = False, style_transfer: bool = False, wildchat_dir: str = "WildChat-1M", **kwargs):
+def run_generation_task(output_dir: str, topic_number: int, multi_domain: bool, regenerate_clean: bool = False, style_transfer: bool = False, wildchat_dir: str = "WildChat-1M", **kwargs):
     src_dir = Path(__file__).resolve().parent
     output_dir = str((src_dir / output_dir).resolve()) if not os.path.isabs(output_dir) else output_dir
     wildchat_dir = str((src_dir / wildchat_dir).resolve()) if not os.path.isabs(wildchat_dir) else wildchat_dir
@@ -1020,6 +1023,8 @@ def run_generation_task(output_dir: str, topic_number: int, multi_domain: bool, 
         USER_IDS.extend(indices)
     USER_IDS = USER_IDS[:10]
     os.makedirs(output_dir, exist_ok=True)
+    if not API_KEY:
+        raise ValueError("Missing `CHAT_MODEL_API_KEY`. Please set it in environment or code/src/.env.")
     
     generator = CompleteDatasetGenerator(
         openai_api_key=API_KEY,
@@ -1027,7 +1032,7 @@ def run_generation_task(output_dir: str, topic_number: int, multi_domain: bool, 
         model=MODEL_NAME
     )
     
-    if regenerate_no_noise:
+    if regenerate_clean:
         for user_id in USER_IDS:
             logger.info(f"Start regenerating noise-free dialogues for user {user_id}")
             base_dir = os.path.join(output_dir, f"user{user_id}")
@@ -1249,7 +1254,7 @@ if __name__ == "__main__":
     parser.add_argument("--topic_number", type=int, default=3, help="Number of topics selected per dialogue round")
     parser.add_argument("--multi_domain", default=True, help="Whether it is a multi-domain task")
     parser.add_argument("--test", action="store_true", help="Whether it is test mode")
-    parser.add_argument("--regenerate_no_noise", action="store_true", help="Whether to regenerate noise-free dialogues")
+    parser.add_argument("--regenerate_clean", action="store_true", help="Whether to regenerate noise-free dialogues")
     parser.add_argument("--style_transfer", action="store_true", help="Whether to perform style transfer")
     parser.add_argument("--wildchat_dir", type=str, default="WildChat-1M", help="Directory of WildChat double-checked data")
     args = parser.parse_args()
@@ -1258,7 +1263,7 @@ if __name__ == "__main__":
         output_dir=args.output_dir,
         topic_number=args.topic_number,
         multi_domain=args.multi_domain,
-        regenerate_no_noise=args.regenerate_no_noise,
+        regenerate_clean=args.regenerate_clean,
         style_transfer=args.style_transfer,
         wildchat_dir=args.wildchat_dir
     )
