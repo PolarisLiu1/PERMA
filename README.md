@@ -173,12 +173,14 @@ MEMOS_KEY=your_memos_key
 ### 1: Run Evaluation
 
 Evaluate a memory framework (e.g., `MemOS`) on the generated data across different temporal depths (Type 1/2/3). 
-- `--stage` argument allows you to run specific parts of the pipeline. 
+- `--stage` argument allows you to run specific parts of the pipeline.
 - `--multi_domain`: `True`=multi-domain, `False`=single-domain.
 - `--interactive True`: enable interactive evaluation.
 - `--no_noise`: controls noise (`True`=clean, `False`=noisy); for style alignment use `--style True`.
 - `--mode`: retrieval/evaluation framework selector (`memory`, `rag`, `standalone`).
 - `--incremental`: protocol switch (`False`=standard evaluation, `True`=incremental timeline evaluation).
+
+>>> Note: `--stage add` can run separately from `--stage search answer eval`. Ingestion may take time depending on your memory system provider, check the indexing status before proceeding, as querying too soon may return empty results.
 
 **Smoke Test:**
 Use limited data for testing to ensure everything is normal. Default: 1 user, first 5 questions.
