@@ -44,7 +44,7 @@ run_eval() {
 }
 
 COMMON_ARGS=(
-  --mode baseline
+  --mode memory
   --mem_frame "$MEM_FRAME"
   --stage add search answer eval
   --output_dir "$OUTPUT_DIR"

@@ -177,7 +177,7 @@ Evaluate a memory framework (e.g., `MemOS`) on the generated data across differe
 - `--multi_domain`: `True`=multi-domain, `False`=single-domain.
 - `--interactive True`: enable interactive evaluation.
 - `--no_noise`: controls noise (`True`=clean, `False`=noisy); for style alignment use `--style True`.
-- `--mode`: retrieval/evaluation framework selector (`baseline`, `rag`, `longcontext`).
+- `--mode`: retrieval/evaluation framework selector (`memory`, `rag`, `standalone`).
 - `--incremental`: protocol switch (`False`=standard evaluation, `True`=incremental timeline evaluation).
 
 **Smoke Test:**
@@ -186,7 +186,7 @@ Use limited data for testing to ensure everything is normal. Default: 1 user, fi
 ```bash
 cd code/src
 python evaluation.py \
-  --mode baseline \
+  --mode memory \
   --incremental false \
   --mem_frame memos-api-online \
   --stage add search answer eval \
@@ -200,7 +200,7 @@ python evaluation.py \
 ```bash
 cd code/src
 python evaluation.py \
-  --mode baseline \
+  --mode memory \
   --incremental false \
   --mem_frame memos-api-online \
   --stage add search answer eval \
@@ -211,7 +211,7 @@ python evaluation.py \
   --no_noise True
 ```
 
-*Available `--mode` options: `baseline`, `rag`, `longcontext`.*
+*Available `--mode` options: `memory`, `rag`, `standalone`.*
 
 **Incremental Evaluation:**
 Set `--incremental true` to evaluate results at different timeline positions.
@@ -222,7 +222,7 @@ In this protocol:
 ```bash
 cd code/src
 python evaluation.py \
-  --mode baseline \
+  --mode memory \
   --incremental true \
   --mem_frame memos-api-online \
   --dataset_type standard \
